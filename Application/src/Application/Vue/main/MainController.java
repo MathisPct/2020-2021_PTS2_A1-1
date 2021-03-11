@@ -103,4 +103,15 @@ public class MainController implements Initializable {
         Prototype.switchScene(scene);
         */
     }
+    
+    @FXML
+    public void loadSceneTechs() throws IOException {
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Application/Vue/techsScene/sceneTechs.fxml"));
+            Pane tempPane = fxmlLoader.load();
+            container.setCenter(tempPane);
+        } catch (IOException e){
+            e.printStackTrace();         
+        }
+    }
 }

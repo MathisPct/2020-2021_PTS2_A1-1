@@ -20,7 +20,7 @@ public class Main extends javafx.application.Application {
         stage = stage;
         Scene scene = new Scene(root);
 
-        stage.setTitle("Prototype avancé");
+        stage.setTitle("Application techApp");
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
