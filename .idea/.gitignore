@@ -6,3 +6,25 @@
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
+##########################
+## NetBeans
+##########################
+
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+##########################
+## IntelliJ
+##########################
+
+*.iml
+.idea/
+*.ipr
+*.iws
+out/
+.idea_modules/
