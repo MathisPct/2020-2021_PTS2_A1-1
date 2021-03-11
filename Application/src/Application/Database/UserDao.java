@@ -1,20 +1,23 @@
 package Application.Database;
 
-import Application.Metier.User;
-import Application.Metier.Tech;
-
 import com.mysql.jdbc.Connection;
+import Application.Metier.Tech;
+import Application.Metier.User;
+
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import java.util.ArrayList;
 
 /**
  * Gère l'accès des utilisateurs aux données
+ * @author Mathis Poncet
  */
 public class UserDao {
+    /**
+     * Attribut privée qui est la variable gérant la connexion avec la bdd
+     */
     private Connection con;
 
     /**
@@ -23,36 +26,31 @@ public class UserDao {
      * @throws SQLException
      */
     public UserDao()throws ClassNotFoundException, SQLException {
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:mysql://127.0.0.1:3306/mydb";
-            String login = "root";
-            String password = "";
-            this.con = (Connection) DriverManager.getConnection(url, login, password);
-        } catch (Exception e) {
-            System.err.println(e);
-        }
+        /*Chargement du driver JDBC pour mysql */
+        this.con = DatabaseConnection.getCon();
     }
 
     /**
      * Lit un utilisateur depuis la BD. En cas d'erreur, lève une exception.
-     * Si aucun utilisateur est trouvé, la valeur de retour est null
      * @param aLogin login de l'utilisateur cherché
      * @param aPassHash valeur de hachage du mot de passe de l'utilisateur cherché
      * @return L'utilisateur chargé depuis la BD.
      */
-    public User Read(String aLogin, String aPassHash) throws DaoError, SQLException {
+    public User Read(String aLogin, String aPassHash) throws Application.Database.DaoError, SQLException {
         User user = null;
         Statement stmt = con.createStatement();
-        String reqGetUser = "SELECT * FROM utilisateurs WHERE login = " + aLogin + "AND password = " + aPassHash;
+        String reqGetUser = "SELECT * FROM utilisateur WHERE login='" + aLogin + "' AND password='" + aPassHash +"'";
         ResultSet rSet = stmt.executeQuery(reqGetUser);
-        //parcours du rSet qui contient les résultats de reqGetUser
-        while (rSet.next()){
-            //si un user est trouvé avec le login et le password passé en paramètre
-            if (!rSet.wasNull()){
-                user = createUser(rSet.getInt("ID"), rSet);
+        try{
+            //parcours du rSet qui contient les résultats de la requête
+            while (rSet.next()){
+                user = new User(rSet.getInt("id"));
             }
+        }catch(SQLException sqlE){ //exception levé si aucun user trouvé
+            sqlE.printStackTrace();
+            System.out.println("Aucun user trouvé");
         }
+        rSet.close();
         return user;
     }
 
@@ -64,6 +62,7 @@ public class UserDao {
      */
     private User createUser(int id, ResultSet rSet){
         User user = null;
+
         return user;
     }
 
