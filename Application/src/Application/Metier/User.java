@@ -34,7 +34,7 @@ public class User {
 	private boolean isChief = false;
 
 	public User(int id) {
-		throw new UnsupportedOperationException();
+		this.ID = id;
 	}
 
 	/**
