@@ -4,6 +4,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -42,24 +44,45 @@
                      </VBox.margin>
                   </Label>
                   <AnchorPane prefHeight="113.0" prefWidth="415.0" VBox.vgrow="ALWAYS" />
-                  <TextField prefHeight="47.0" prefWidth="321.0" promptText="Identifiant">
-                     <font>
-                        <Font name="Carlito Italic" size="19.0" />
-                     </font>
+                  <HBox alignment="CENTER">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
-                  </TextField>
+                     <children>
+                        <ImageView fitHeight="64.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/Icons_divers/badge_1.png" />
+                           </image>
+                        </ImageView>
+                        <TextField prefHeight="22.0" prefWidth="357.0" promptText="Identifiant" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font name="Carlito Italic" size="19.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" top="15.0" />
+                           </padding>
+                        </TextField>
+                     </children>
+                  </HBox>
                   <AnchorPane prefHeight="97.0" prefWidth="415.0" />
-                  <TextField prefHeight="47.0" prefWidth="321.0" promptText="Mot de passe">
-                     <font>
-                        <Font name="Carlito Italic" size="19.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="10.0" top="5.0" />
-                     </VBox.margin>
-                  </TextField>
-                  <Text fill="#e11c1c" strokeType="OUTSIDE" strokeWidth="0.0" text="Message d'erreur en cas d'erreur de connexion" textAlignment="CENTER" wrappingWidth="414.13671875" VBox.vgrow="ALWAYS">
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="243.0">
+                     <children>
+                        <ImageView fitHeight="64.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/Icons_divers/badge_2.png" />
+                           </image>
+                        </ImageView>
+                        <TextField prefHeight="22.0" prefWidth="357.0" promptText="Mot de passe" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font name="Carlito Italic" size="19.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" top="15.0" />
+                           </padding>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <Text fill="#e11c1c" strokeType="OUTSIDE" strokeWidth="0.0" text="Message d'erreur en cas d'erreur de connexion" textAlignment="CENTER" visible="false" wrappingWidth="414.13671875" VBox.vgrow="ALWAYS">
                      <font>
                         <Font name="System Italic" size="17.0" />
                      </font>
