@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Slider1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Application/dist/Slider.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
