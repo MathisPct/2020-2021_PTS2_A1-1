@@ -10,7 +10,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox prefHeight="14.0" prefWidth="1129.0" style="-fx-background-color: #3F4B6C;">
@@ -30,17 +29,19 @@
       </HBox>
       <HBox prefHeight="574.0" prefWidth="1129.0">
          <children>
-            <AnchorPane prefHeight="336.0" prefWidth="331.0" HBox.hgrow="ALWAYS" />
+            <AnchorPane prefWidth="400.0" HBox.hgrow="ALWAYS" />
             <VBox alignment="CENTER" prefWidth="415.0" HBox.hgrow="NEVER">
                <children>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
                   <Label alignment="CENTER" prefHeight="80.0" prefWidth="415.0" text="Connectez-vous" textFill="#3f4b6c">
                      <font>
                         <Font name="Carlito Bold" size="54.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="35.0" />
+                        <Insets bottom="5.0" />
                      </VBox.margin>
                   </Label>
+                  <AnchorPane prefHeight="113.0" prefWidth="415.0" VBox.vgrow="ALWAYS" />
                   <TextField prefHeight="47.0" prefWidth="321.0" promptText="Identifiant">
                      <font>
                         <Font name="Carlito Italic" size="19.0" />
@@ -49,12 +50,13 @@
                         <Insets />
                      </VBox.margin>
                   </TextField>
+                  <AnchorPane prefHeight="97.0" prefWidth="415.0" />
                   <TextField prefHeight="47.0" prefWidth="321.0" promptText="Mot de passe">
                      <font>
                         <Font name="Carlito Italic" size="19.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="10.0" top="35.0" />
+                        <Insets bottom="10.0" top="5.0" />
                      </VBox.margin>
                   </TextField>
                   <Text fill="#e11c1c" strokeType="OUTSIDE" strokeWidth="0.0" text="Message d'erreur en cas d'erreur de connexion" textAlignment="CENTER" wrappingWidth="414.13671875" VBox.vgrow="ALWAYS">
@@ -70,12 +72,13 @@
                         <Insets top="15.0" />
                      </VBox.margin>
                   </JFXButton>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
                </children>
                <HBox.margin>
                   <Insets />
                </HBox.margin>
             </VBox>
-            <AnchorPane prefHeight="336.0" prefWidth="382.0" HBox.hgrow="ALWAYS" />
+            <AnchorPane prefHeight="0.0" prefWidth="400.0" HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
    </children>
