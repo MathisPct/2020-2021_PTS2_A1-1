@@ -72,9 +72,9 @@
                         <Font size="18.0" />
                      </font>
                      <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../images/techno.png" />
+                              <Image url="@../../../images/Icons/Icon_00036.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -116,9 +116,9 @@
                         <Font size="18.0" />
                      </font>
                      <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="30.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../images/techno.png" />
+                              <Image url="@../../../images/Icons/Icon_00035.png" />
                            </image>
                         </ImageView>
                      </graphic>
