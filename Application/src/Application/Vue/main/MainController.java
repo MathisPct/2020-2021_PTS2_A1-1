@@ -114,4 +114,15 @@ public class MainController implements Initializable {
             e.printStackTrace();         
         }
     }
+    
+    @FXML
+    public void loadSceneProfile() throws IOException{
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Application/Vue/profilScene/sceneProfil.fxml"));
+            Pane tempPane = fxmlLoader.load();
+            container.setCenter(tempPane);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 }
