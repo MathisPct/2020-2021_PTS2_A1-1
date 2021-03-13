@@ -8,6 +8,7 @@ package Application.Vue.Login;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 /**
@@ -19,6 +20,16 @@ public class SceneLoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("SceneLogin");
-    } 
-    
+    }
+
+    /**
+     * l'utilisateur valide la saisie du login/du mot de passe (bouton Connexion)
+     */
+    @FXML
+    public void connect(){
+        System.out.println("Connexion");
+        /**
+         * A compléter
+         */
+    }
 }
