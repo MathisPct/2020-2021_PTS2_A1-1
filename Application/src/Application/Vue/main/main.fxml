@@ -47,7 +47,7 @@
                         </ImageView>
                         <Label graphicTextGap="10.0" prefHeight="23.0" text="prénom nom," textFill="WHITE" HBox.hgrow="SOMETIMES">
                            <font>
-                              <Font name="Carlito" size="20.0" />
+                              <Font name="Carlito" size="18.0" />
                            </font>
                            <HBox.margin>
                               <Insets left="10.0" />
@@ -55,7 +55,7 @@
                         </Label>
                         <Label graphicTextGap="10.0" text="rôle de l'employé" textFill="WHITE" HBox.hgrow="SOMETIMES">
                            <font>
-                              <Font name="Carlito Italic" size="20.0" />
+                              <Font name="Carlito Italic" size="18.0" />
                            </font>
                            <HBox.margin>
                               <Insets left="3.0" />
@@ -69,12 +69,12 @@
                                     <Image url="@../../../images/Icons_divers/Icons_divers_00000.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fitHeight="41.0" fitWidth="35.0" layoutX="52.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="41.0" fitWidth="35.0" layoutX="52.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="46.0">
                                  <image>
                                     <Image url="@../../../images/Icons_divers/Icons_divers_00001.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fitHeight="41.0" fitWidth="35.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="41.0" fitWidth="35.0" layoutX="28.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="89.0">
                                  <image>
                                     <Image url="@../../../images/Icons_divers/Icons_divers_00002.png" />
                                  </image>
@@ -143,7 +143,7 @@
                   </VBox>
                   <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                      <children>
-                        <JFXButton fx:id="profileWindow" alignment="BASELINE_LEFT" graphicTextGap="14.0" prefWidth="233.0" text="Mon profil" textFill="WHITE" VBox.vgrow="ALWAYS">
+                        <JFXButton fx:id="profileWindow" alignment="BASELINE_LEFT" graphicTextGap="14.0" onAction="#loadSceneProfile" prefWidth="233.0" text="Mon profil" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>

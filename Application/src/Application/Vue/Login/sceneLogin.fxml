@@ -49,7 +49,7 @@
                         <Insets />
                      </VBox.margin>
                      <children>
-                        <ImageView fitHeight="64.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../images/Icons_divers/badge_1.png" />
                            </image>
@@ -67,7 +67,7 @@
                   <AnchorPane prefHeight="97.0" prefWidth="415.0" />
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="243.0">
                      <children>
-                        <ImageView fitHeight="64.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="52.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../images/Icons_divers/badge_2.png" />
                            </image>
@@ -87,7 +87,7 @@
                         <Font name="System Italic" size="17.0" />
                      </font>
                   </Text>
-                  <JFXButton contentDisplay="CENTER" prefHeight="47.0" prefWidth="184.0" style="-fx-background-color: #FF8E34;" text="Connexion">
+                  <JFXButton contentDisplay="CENTER" prefHeight="44.0" prefWidth="160.0" style="-fx-background-color: #FF8E34;" text="Connexion">
                      <font>
                         <Font name="Carlito Bold" size="24.0" />
                      </font>
