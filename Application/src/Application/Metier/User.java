@@ -96,7 +96,7 @@ public class User {
 		this.isConnected = aIsConnected;
 	}
 
-	public boolean isIsConnected() {
+	public boolean isConnected() {
 		return this.isConnected;
 	}
 
@@ -104,7 +104,7 @@ public class User {
 		this.isChief = aIsChief;
 	}
 
-	public boolean isIsChief() {
+	public boolean isChief() {
 		return this.isChief;
 	}
 }
