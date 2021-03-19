@@ -49,7 +49,7 @@ public class User {
 	 * Efface les champs de l'utilisateur et passe à faux l'état "connecté"
 	 */
 	public void Disconnect() {
-		throw new UnsupportedOperationException();
+		System.out.println("Deconnexion");
 	}
 
 	public void setID(int aID) {
