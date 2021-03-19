@@ -91,7 +91,7 @@
                <children>
                   <VBox AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <JFXButton fx:id="projectsWindow" alignment="BASELINE_LEFT" graphicTextGap="14.0" onAction="#loadSceneProjects" prefHeight="52.0" prefWidth="232.0" text="Projets" textFill="WHITE" VBox.vgrow="NEVER">
+                        <JFXButton fx:id="projectsWindow" alignment="BASELINE_LEFT" graphicTextGap="14.0" onAction="#projects" prefHeight="52.0" prefWidth="232.0" text="Projets" textFill="WHITE" VBox.vgrow="NEVER">
                            <font>
                               <Font name="Carlito" size="21.0" />
                            </font>
@@ -115,7 +115,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton fx:id="techsWindow" alignment="BASELINE_LEFT" graphicTextGap="14.0" layoutX="10.0" layoutY="36.0" onAction="#loadSceneTechs" prefHeight="52.0" prefWidth="232.0" text="Techniciens" textFill="WHITE" VBox.vgrow="NEVER">
+                        <JFXButton fx:id="techsWindow" alignment="BASELINE_LEFT" graphicTextGap="14.0" layoutX="10.0" layoutY="36.0" onAction="#viewTechs" prefHeight="52.0" prefWidth="232.0" text="Techniciens" textFill="WHITE" VBox.vgrow="NEVER">
                            <font>
                               <Font name="Carlito" size="21.0" />
                            </font>
@@ -143,7 +143,7 @@
                   </VBox>
                   <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                      <children>
-                        <JFXButton fx:id="profileWindow" alignment="BASELINE_LEFT" graphicTextGap="14.0" onAction="#loadSceneProfile" prefWidth="233.0" text="Mon profil" textFill="WHITE" VBox.vgrow="ALWAYS">
+                        <JFXButton fx:id="profileWindow" alignment="BASELINE_LEFT" graphicTextGap="14.0" onAction="#editProfile" prefWidth="233.0" text="Mon profil" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
@@ -158,7 +158,19 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton fx:id="deconnectionButton" alignment="BASELINE_LEFT" graphicTextGap="14.0" layoutX="10.0" layoutY="10.0" onAction="#loadSceneLogin" prefHeight="60.0" prefWidth="233.0" text="Déconnexion" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
+                        <JFXButton fx:id="connectionButton" alignment="BASELINE_LEFT" graphicTextGap="14.0" layoutX="10.0" layoutY="63.0" onAction="#connect" prefHeight="60.0" prefWidth="233.0" text="Connexion" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="Carlito" size="21.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="38.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../images/Icons/Icon_00002.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="deconnectionButton" alignment="BASELINE_LEFT" graphicTextGap="14.0" layoutX="10.0" layoutY="10.0" onAction="#disconnect" prefHeight="60.0" prefWidth="233.0" text="Déconnexion" textAlignment="CENTER" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <font>
                               <Font name="Carlito" size="21.0" />
                            </font>
