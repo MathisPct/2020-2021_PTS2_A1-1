@@ -139,6 +139,14 @@ public class MainController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Application/Vue/Login/sceneLogin.fxml"));
                 Pane tempPane = fxmlLoader.load();
                 container.setCenter(tempPane);
+                SceneLoginController sceneLoginController = fxmlLoader.getController();
+                sceneLoginController.setUserConnected(currentUser);
+                //redirection si l'user est connecté
+                if (currentUser.isConnected()) {
+                    FXMLLoader loaderProjects = new FXMLLoader(getClass().getResource("/Application/Vue/projectsScene/sceneProjects.fxml"));
+                    Pane projectsPane = loaderProjects.load();
+                    container.setCenter(projectsPane);
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
