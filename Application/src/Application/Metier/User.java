@@ -50,6 +50,13 @@ public class User {
 	 */
 	public void Disconnect() {
 		System.out.println("Deconnexion");
+		this.isConnected = false; //champs connecté à faux
+		this.login = null;
+		this.ID = 0;
+		this.lastName = null;
+		this.firstName = null;
+		this.isChief = false;
+		this.passwordHash = null;
 	}
 
 	public void setID(int aID) {
