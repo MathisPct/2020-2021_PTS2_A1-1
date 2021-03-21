@@ -42,7 +42,13 @@ public class User {
 	 * @param user l'utilisateur à recopier
 	 */
 	public void Copy(User user) {
-		throw new UnsupportedOperationException();
+		this.ID = user.getID();
+		this.login = user.getLogin();
+		this.lastName = user.getLastName();
+		this.firstName = user.getFirstName();
+		this.isConnected = user.isConnected();
+		this.isChief = user.isChief();
+		this.passwordHash = user.getPasswordHash();
 	}
 
 	/**
