@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 
 import Application.Database.BadUserError;
 import Application.Metier.User;
+import Application.Vue.Login.SceneLoginController;
 import Application.Vue.UtilsIHM;
 import javafx.fxml.Initializable;
 import com.jfoenix.controls.JFXButton;
@@ -19,6 +20,7 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
@@ -29,6 +31,12 @@ import javafx.scene.layout.Pane;
  */
 public class MainController implements Initializable {
     
+    @FXML
+    private Label roleEmployee;
+
+    @FXML
+    private Label namesEmployee;
+
     @FXML
     private JFXButton projectsWindow;
 
@@ -57,12 +65,12 @@ public class MainController implements Initializable {
      * Utilisateur courant avec un id par défaut à 0. Par défaut lors de l'arrivé sur l'application l'user est déconnecté
      * Son id lui sera attribué lors de la connexion suivant l'user qui se connecte (id récupéré dans la bdd)
      */
-    User currentUser = new User(0);
+    private User currentUser = new User(0);
 
     /**
      * Attribut qui permet d'utiliser les méthodes (messages pop-up, erreur etc) de la classe Vue.utils
      */
-    UtilsIHM utilsIHM = new UtilsIHM();
+    private UtilsIHM utilsIHM = new UtilsIHM();
     
     /**
      * Initializes the controller class.
@@ -91,13 +99,13 @@ public class MainController implements Initializable {
 
     /**
      * Evenement déclenchée lorsque l'utilisateur demande à voir les projets
-     * Il doit être connecté et être chef de projet sinon une exception de type badUserErr est levée
+     * Il doit être connecté sinon une exception de type badUserErr est levée
      * @throws IOException
      */
     @FXML
     public void projects() throws IOException{
         try{
-            if (!currentUser.isConnected() || !currentUser.isChief()){
+            if (!currentUser.isConnected()){
                 BadUserError badUserErr = new BadUserError();
                 utilsIHM.afficherErreur(badUserErr.getMessage());
                 throw badUserErr;
