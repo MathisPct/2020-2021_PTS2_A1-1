@@ -4,6 +4,7 @@ import com.mysql.jdbc.Connection;
 import Application.Metier.Tech;
 import Application.Metier.User;
 
+import javax.swing.plaf.nimbus.State;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -59,15 +60,17 @@ public class UserDao {
     }
 
     /**
-     * Fonction qui crée une instance de personne à partir des données de la table
-     * @param id valeur entière qui est la clé primaire de l'utilisateur
-     * @param rSet contient les données de la table Utilisateurs
-     * @return une instance de Utilisateurs
+     * Fonction qui retourne une instance complète de Tech crée à partir de l'ID d'un technicien 
+     * @param idTech valeur entière qui est la clé primaire du technicien
+     * @param rSet contient les données de la table Technicien
+     * @return une instance complète de Technicien
      */
-    private User createUser(int id, ResultSet rSet){
-        User user = null;
-
-        return user;
+    private Tech createTechFromId(int idTech, ResultSet rSet) throws SQLException {
+        Tech tech = new Tech(idTech);
+        tech.setLastName(rSet.getString("nom"));
+        tech.setFirstName(rSet.getString("prenom"));
+        tech.setIsChief(false);
+        return tech;
     }
 
     /**
@@ -82,7 +85,15 @@ public class UserDao {
      * Liste les techniciens
      * @return un ensemble d'utilisateurs qui sont des techniciens
      */
-    public ArrayList<Tech> ListTechs() {
-        throw new UnsupportedOperationException();
+    public ArrayList<Tech> ListTechs() throws SQLException {
+        ArrayList<Tech> listTech = new ArrayList<>();
+        Statement stmt = con.createStatement();
+        String reqShTechs = "SELECT * FROM technicien";
+        ResultSet rSet = stmt.executeQuery(reqShTechs);
+        //tant que des techniciens sont trouvées
+        while (rSet.next()){
+            listTech.add( createTechFromId(rSet.getInt("id"),rSet) );
+        }
+        return listTech;
     }
 }

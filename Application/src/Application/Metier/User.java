@@ -120,4 +120,16 @@ public class User {
 	public boolean isChief() {
 		return this.isChief;
 	}
+
+	/**
+	 * Fonction qui retourne l'user de la forme NOM Prenom
+	 * @return chaine de caractère NOM Prénom
+	 * @autor Mathis Poncet
+	 */
+	public String toString(){
+		String res = "";
+		res += this.lastName.toUpperCase();
+		res += " " + this.firstName;
+		return res;
+	}
 }

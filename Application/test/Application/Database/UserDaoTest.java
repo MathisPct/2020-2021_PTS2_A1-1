@@ -5,8 +5,13 @@
  */
 package Application.Database;
 
+import Application.Metier.Tech;
 import Application.Metier.User;
 import org.junit.Test;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 /**
@@ -55,7 +60,28 @@ public class UserDaoTest {
      * Test of ListTechs method, of class UserDao.
      */
     @Test
-    public void testListTechs() {
+    public void testListTechs() throws SQLException, ClassNotFoundException {
+        UserDao con = new UserDao();
+        Tech tech1 = new Tech(1); //Pierre dans la table technicien de la BDD
+        Tech tech2 = new Tech(2); //Charles dans la table utilisateur de la BDD
+        Tech tech3 = new Tech(3); //Yasmina dans la table utilisateur de la BDD
+        Tech tech4 = new Tech(4); //Sarah dans la table utilisateur de la BDD
+        Tech tech5 = new Tech(5); //Sabri dans la table utilisateur de la BDD
+        tech1.setFirstName("Pierre");
+        tech2.setFirstName("Charles");
+        tech3.setFirstName("Yasmina");
+        tech4.setFirstName("Sarah");
+        tech5.setFirstName("Sabri");
+        ArrayList<Tech> listTestTech = new ArrayList<>();
+        listTestTech.add(tech1);
+        listTestTech.add(tech2);
+        listTestTech.add(tech3);
+        listTestTech.add(tech4);
+        listTestTech.add(tech5);
+        //parcours des listes, on vérifie que les techniciens des 2 listes correspondent bien
+        for (int i = 0; i < 5; i++) {
+            assertEquals(listTestTech.get(i).getFirstName(), con.ListTechs().get(i).getFirstName());
+        }
     }
     
 }

@@ -4,6 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
@@ -66,6 +67,9 @@
                      <VBox.margin>
                         <Insets bottom="20.0" />
                      </VBox.margin>
+                     <content>
+                        <ListView fx:id="listViewTechs" prefHeight="759.0" prefWidth="1472.0" />
+                     </content>
                   </ScrollPane>
                   <JFXButton buttonType="RAISED" graphicTextGap="15.0" style="-fx-background-color: #BCBECE;" text="Ajouter un technicien" textFill="#3f4b6c" textOverrun="LEADING_WORD_ELLIPSIS" VBox.vgrow="NEVER">
                      <font>
