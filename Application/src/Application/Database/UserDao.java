@@ -72,9 +72,12 @@ public class UserDao {
     /**
      * Met à jour l'utilisateur dans la BD
      * @param aUser L'utilisateur à mettre à jour
+     * @author Lucas Moniot
      */
-    public void Update(User aUser) {
-        throw new UnsupportedOperationException();
+    public void Update(User aUser) throws SQLException {
+        Statement stmt = con.createStatement();
+        String reqUpdateUser = "UPDATE utilisateur SET login='"+ aUser.getLogin() +"', passwordHash='"+ aUser.getPasswordHash()+"',lastName='"+ aUser.getLastName()+"', firstName='"+aUser.getFirstName() +"' , isConnected='"+aUser.isIsConnected() +"', isChief ='"+aUser.isIsChief()+"' WHERE id =' "+ aUser.getID()+"'";         
+        stmt.executeUpdate(reqUpdateUser);
     }
 
     /**
