@@ -32,7 +32,7 @@ public class UserDao {
     }
 
     /**
-     * Lit un utilisateur depuis la BD. En cas d'erreur, lève une exception.
+     * Lit un utilisateur depuis la BD. En cas d'erreur, lève une exception de type DaoError.
      * @param aLogin login de l'utilisateur cherché
      * @param aPassHash valeur de hachage du mot de passe de l'utilisateur cherché
      * @return L'utilisateur chargé depuis la BD.
@@ -52,6 +52,10 @@ public class UserDao {
             System.out.println("Aucun user trouvé");
         }
         rSet.close();
+        //si aucun user n'a été trouvé on lève une exception
+        if (user == null){
+            throw new DaoError("Aucun utilisateur n'a été trouvé");
+        }
         return user;
     }
 
