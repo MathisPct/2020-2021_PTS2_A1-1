@@ -42,14 +42,27 @@ public class User {
 	 * @param user l'utilisateur à recopier
 	 */
 	public void Copy(User user) {
-		throw new UnsupportedOperationException();
+		this.ID = user.getID();
+		this.login = user.getLogin();
+		this.lastName = user.getLastName();
+		this.firstName = user.getFirstName();
+		this.isConnected = user.isConnected();
+		this.isChief = user.isChief();
+		this.passwordHash = user.getPasswordHash();
 	}
 
 	/**
 	 * Efface les champs de l'utilisateur et passe à faux l'état "connecté"
 	 */
 	public void Disconnect() {
-		throw new UnsupportedOperationException();
+		System.out.println("Deconnexion");
+		this.isConnected = false; //champs connecté à faux
+		this.login = null;
+		this.ID = 0;
+		this.lastName = null;
+		this.firstName = null;
+		this.isChief = false;
+		this.passwordHash = null;
 	}
 
 	public void setID(int aID) {
@@ -96,7 +109,7 @@ public class User {
 		this.isConnected = aIsConnected;
 	}
 
-	public boolean isIsConnected() {
+	public boolean isConnected() {
 		return this.isConnected;
 	}
 
@@ -104,7 +117,7 @@ public class User {
 		this.isChief = aIsChief;
 	}
 
-	public boolean isIsChief() {
+	public boolean isChief() {
 		return this.isChief;
 	}
 
