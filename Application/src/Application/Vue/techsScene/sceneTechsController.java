@@ -7,38 +7,54 @@ package Application.Vue.techsScene;
 
 import Application.Database.UserDao;
 import Application.Metier.Tech;
+import Application.Vue.customBox.MyScrollPane;
+import Application.Vue.customBox.MyStyle;
 import com.jfoenix.controls.JFXButton;
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.geometry.Insets;
 import javafx.scene.control.ListView;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+
 
 /**
  *
  * @author David
  */
 public class sceneTechsController implements Initializable{
-    @FXML
-    private ListView<Tech> listViewTechs;
 
     private UserDao dao; //DAO
     private ArrayList<Tech> listTechs; // liste contenant les techniciens récupérés depuis la dao
+    @FXML
+    private VBox scrollTechParent;
+
+    @FXML
+    private HBox titleBoxScrollTech;
+
+    @FXML
+    private JFXButton addTechButton;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("SceneTechs");
+        MyStyle style = new MyStyle("ORANGE", "Carlito");
+        MyScrollPane scrollTech = new MyScrollPane(style);
         try {
-            viewTech();
+            scrollTechParent.getChildren().clear();
+            scrollTechParent.getChildren().add(titleBoxScrollTech);
+            initData();
+            scrollTech.initScrollPaneTech(listTechs);
+            scrollTechParent.getChildren().add(scrollTech);
+            scrollTechParent.getChildren().add(addTechButton);
+            VBox.setMargin(addTechButton, new Insets(15,0,0,0)); //Top, Right, bottom, left
+            
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -70,7 +86,6 @@ public class sceneTechsController implements Initializable{
      */
     public void viewTech() throws SQLException, ClassNotFoundException {
         initData();
-        listViewTechs.getItems().addAll(listTechs);
     }
 
     
