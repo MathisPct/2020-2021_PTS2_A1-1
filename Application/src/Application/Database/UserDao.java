@@ -36,26 +36,36 @@ public class UserDao {
      * @param aLogin login de l'utilisateur cherché
      * @param aPassHash valeur de hachage du mot de passe de l'utilisateur cherché
      * @return L'utilisateur chargé depuis la BD.
+     * @exception Exception DaoError levée si aucun utilisateur n'est trouvé dans la bdd
      */
     public User Read(String aLogin, String aPassHash) throws Application.Database.DaoError, SQLException {
-        User user = null;
+        User user = new User(0);
         Statement stmt = con.createStatement();
+        String typeUser = "";
         String reqGetUser = "SELECT * FROM utilisateur WHERE login='" + aLogin + "' AND password='" + aPassHash +"'";
         ResultSet rSet = stmt.executeQuery(reqGetUser);
         try{
             //parcours du rSet qui contient les résultats de la requête
             while (rSet.next()){
-                user = new User(rSet.getInt("id"));
+                user.setID(rSet.getInt("id"));
+                user.setLogin(rSet.getString("LOGIN"));
+                user.setPasswordHash(rSet.getString("PASSWORD"));
+                typeUser = rSet.getString("TYPE_UTILISATEUR");
+            }
+            //si aucun user n'a été trouvé on lève une exception
+            if (user.getID() == 0){
+                throw new DaoError("Aucun utilisateur n'a été trouvé");
+            }
+            String reqGetInfoUser = "SELECT * FROM utilisateur NATURAL JOIN " + typeUser + " WHERE id='" + user.getID() + "'";
+            rSet = stmt.executeQuery(reqGetInfoUser);
+            while (rSet.next()){
+                user.setFirstName(rSet.getString("nom"));
+                user.setLastName(rSet.getString("prenom"));
             }
         }catch(SQLException sqlE){ //exception levé si aucun user trouvé
             sqlE.printStackTrace();
-            System.out.println("Aucun user trouvé");
         }
         rSet.close();
-        //si aucun user n'a été trouvé on lève une exception
-        if (user == null){
-            throw new DaoError("Aucun utilisateur n'a été trouvé");
-        }
         return user;
     }
 
