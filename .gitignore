@@ -81,3 +81,5 @@ nb-configuration.xml
 ## OS X
 ##############################
 .DS_Store
+Application/nbproject/private/private.xml
+Application/nbproject/private/private.properties
