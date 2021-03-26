@@ -24,24 +24,36 @@ public class MyRowBox extends HBox{
     private Label title;
     private MyStyle style;
     private AnchorPane boxBar;
+    private Label label1;
     //private String boxBarColor;
     
     public MyRowBox(String name, MyStyle style) {
         this.style = style;
         this.title = new Label(name);
         this.boxBar = null;
+        this.label1 = null; 
     }
-    
-    public MyRowBox(String label, String value) {
+  
+    public MyRowBox(String label, String label1, MyStyle style) {
         this.title = new Label(label);
-        this.style = null;
+        this.label1 = new Label(label1);
+        this.style = style;
         this.boxBar = null;
     }
     
     public void generateLineBoxRow() {
         setBar();
-        setTitleBasic();
+        setTitleBasic(title);
         this.getChildren().addAll(this.boxBar, this.title);
+        this.setStyle("-fx-background-color: " + style.getColorBase());   
+    }
+    
+    public void generateLineBoxTwoText() {
+        setBar();
+        setTitleBasic(this.title);
+        setTitleBasic(this.label1);
+        this.getChildren().addAll(this.boxBar, this.title, addSpacer(),this.label1);
+        
         this.setStyle("-fx-background-color: " + style.getColorBase());   
     }
     
@@ -68,20 +80,20 @@ public class MyRowBox extends HBox{
         this.getChildren().add(btnIB);
     }
     
-    public void setTitleSelected() {
-        this.title.setFont(javafx.scene.text.Font.font(this.style.getFont(), FontWeight.BOLD, FontPosture.REGULAR, style.getFontSize()*1.1));
-        this.title.setStyle("-fx-text-fill: " + style.getColorTitleSelected());
+    public void setTitleSelected(Label label) {
+        label.setFont(javafx.scene.text.Font.font(this.style.getFont(), FontWeight.BOLD, FontPosture.REGULAR, style.getFontSize()*1.1));
+        label.setStyle("-fx-text-fill: " + style.getColorTitleSelected());
         int pV = this.style.getTitlePaddingV();
         int pH = this.style.getTitlePaddingH();
-        this.title.setPadding(new Insets(pV*1.1,pH,pV*1.1,pH+5)); //top, right, bottom, left 
+        label.setPadding(new Insets(pV*1.1,pH,pV*1.1,pH+5)); //top, right, bottom, left 
     }
     
-    public void setTitleBasic() {
-        this.title.setFont(javafx.scene.text.Font.font(this.style.getFont(), FontWeight.NORMAL, FontPosture.REGULAR, style.getFontSize()));
-        this.title.setStyle("-fx-text-fill: " + style.getColorTitle());
+    public void setTitleBasic(Label label) {
+        label.setFont(javafx.scene.text.Font.font(this.style.getFont(), FontWeight.NORMAL, FontPosture.REGULAR, style.getFontSize()));
+        label.setStyle("-fx-text-fill: " + style.getColorTitle());
         int pV = this.style.getTitlePaddingV();
         int pH = this.style.getTitlePaddingH();
-        this.title.setPadding(new Insets(pV,pH,pV,pH)); //top, right, bottom, left
+        label.setPadding(new Insets(pV,pH,pV,pH)); //top, right, bottom, left
     }
     
     public void setBar() {
@@ -101,7 +113,21 @@ public class MyRowBox extends HBox{
         this.setStyle("-fx-background-color: " + color);
     }
             
-   
+    public AnchorPane addSpacer() {
+        AnchorPane spacer = new AnchorPane();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+        return spacer;
+    }
+
+    public Label getTitle() {
+        return title;
+    }
+
+    public Label getLabel1() {
+        return label1;
+    }
+    
+    
     
 
 }

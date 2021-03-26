@@ -5,6 +5,7 @@
  */
 package Application.Vue.customBox;
 
+import Application.Metier.Tech;
 import java.util.ArrayList;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -19,13 +20,15 @@ public class MyCustomBox extends VBox {
     private ArrayList<MyRowBox> rowBoxList;
     private boolean isOpen;
     private MyScrollPane parent;
+    private Tech tech;
     
-    public MyCustomBox(MyScrollPane parent, MyStyle style) {
+    public MyCustomBox(MyScrollPane parent, Tech tech, MyStyle style) {
         this.style = style;
         this.Vcontainer = new VBox();
         this.rowBoxList = new ArrayList();
         this.isOpen = false;
         this.parent = parent;
+        this.tech = tech;
     }
     
     public void initBox() {
@@ -59,7 +62,7 @@ public class MyCustomBox extends VBox {
             this.Vcontainer.getChildren().remove(this.rowBoxList.get(i));
             System.out.println("fermeture sous-boite n°"+i);
             }
-        this.rowBoxList.get(0).setTitleBasic();
+        this.rowBoxList.get(0).setTitleBasic(this.rowBoxList.get(0).getTitle());
         rowBoxList.get(0).setBoxBarColor(this.style.getColorBaseBar());
         rowBoxList.get(0).setBoxColor(this.style.getColorBase());    
     }
@@ -71,9 +74,13 @@ public class MyCustomBox extends VBox {
             
             System.out.println("ajout sous-boite n°"+i);
             }
-        this.rowBoxList.get(0).setTitleSelected();
+        this.rowBoxList.get(0).setTitleSelected(this.rowBoxList.get(0).getTitle());
         rowBoxList.get(0).setBoxBarColor(this.style.getColorSelected());
         rowBoxList.get(0).setBoxColor(this.style.getColorSelected());
+    }
+    
+    public Tech GetTech() {
+        return this.tech;
     }
     
     //public void openBox() {

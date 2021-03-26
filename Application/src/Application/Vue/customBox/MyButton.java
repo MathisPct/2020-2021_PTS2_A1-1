@@ -54,6 +54,9 @@ public class MyButton extends Button{
             case "CRAYON":
                 res = "images/Icons black/Icons_black_00011.png";
             break;
+            case "LOUPE":
+                res = "images/Icons black/Icons_black_00020.png";
+            break;
         }
         return res;
     }

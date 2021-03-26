@@ -44,7 +44,7 @@ public class MyStyle {
                 this.colorSelected = "#FF8E34";
                 this.colorSelectedLight = "#FFE4CA";
                 this.colorTitle = "#475975";
-                this.colorTitleSelected = "##212939";
+                this.colorTitleSelected = "#212939";
                 this.colorLabel = "#212939";
                 this.colorSelectedLabel = "#212939";
             break;
