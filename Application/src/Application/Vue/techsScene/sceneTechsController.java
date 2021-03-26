@@ -7,43 +7,33 @@ package Application.Vue.techsScene;
 
 import Application.Database.UserDao;
 import Application.Metier.Tech;
-import com.jfoenix.controls.JFXButton;
-import java.io.IOException;
+import Application.Vue.customBox.MyScrollPane;
+import Application.Vue.customBox.MyStyle;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+
 
 /**
  *
  * @author David
  */
 public class sceneTechsController implements Initializable{
-    @FXML
-    private ListView<Tech> listViewTechs;
 
     private UserDao dao; //DAO
     private ArrayList<Tech> listTechs; // liste contenant les techniciens récupérés depuis la dao
-
+    
+    @FXML
+    private VBox containerTech;
+     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("SceneTechs");
-        try {
-            viewTech();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        scrollPaneTech();
+        //scrollPaneSkill();
     }
 
     /**
@@ -62,16 +52,33 @@ public class sceneTechsController implements Initializable{
         }
     }
 
-    /**
-     * Procédure qui initialise la listView pour afficher les techniciens
-     * @throws SQLException
-     * @throws ClassNotFoundException
-     * @autor David Golay & Mathis Poncet
-     */
-    public void viewTech() throws SQLException, ClassNotFoundException {
-        initData();
-        listViewTechs.getItems().addAll(listTechs);
+    public void scrollPaneTech() {
+        try {        
+            initData();
+            System.out.println("SceneTechs");
+            MyStyle style = new MyStyle("ORANGE", "Carlito");
+            MyScrollPane scrollTech = new MyScrollPane(style);
+            scrollTech.initScrollPaneTech(listTechs);
+            this.containerTech.getChildren().add(scrollTech);
+            
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
-    
+    public void scrollPaneSkill(Tech tech) {
+        try {
+            initData();
+            System.out.println("SceneSkill");
+            MyStyle style = new MyStyle("ORANGE", "Carlito");
+            MyScrollPane scrollSkill = new MyScrollPane(style);
+            
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    } 
 }
