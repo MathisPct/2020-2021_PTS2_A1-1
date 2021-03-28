@@ -45,20 +45,12 @@
                               <Insets />
                            </HBox.margin>
                         </ImageView>
-                        <Label graphicTextGap="10.0" prefHeight="23.0" text="prénom nom," textFill="WHITE" HBox.hgrow="SOMETIMES">
+                        <Label fx:id="namesEmployee" graphicTextGap="10.0" prefHeight="23.0" text="prénom nom" textFill="WHITE" HBox.hgrow="SOMETIMES">
                            <font>
                               <Font name="Carlito" size="18.0" />
                            </font>
                            <HBox.margin>
                               <Insets left="10.0" />
-                           </HBox.margin>
-                        </Label>
-                        <Label graphicTextGap="10.0" text="rôle de l'employé" textFill="WHITE" HBox.hgrow="SOMETIMES">
-                           <font>
-                              <Font name="Carlito Italic" size="18.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="3.0" />
                            </HBox.margin>
                         </Label>
                         <AnchorPane layoutX="211.0" layoutY="10.0" prefHeight="53.0" prefWidth="419.0" />
