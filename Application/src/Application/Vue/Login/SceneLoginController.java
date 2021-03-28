@@ -76,13 +76,24 @@ public class SceneLoginController implements Initializable {
 
     /**
      * l'utilisateur valide la saisie du login/du mot de passe (bouton Connexion)
+     * Si la connexion est valide, il est redirigé vers la scène des projets
      */
     @FXML
-    public void connect(){
-        System.out.println("Connexion");
-        /**
-         * A compléter
-         */
+    public void connect() throws SQLException, IOException{
+        try{
+            User user;
+            System.out.println("Connexion");
+            user = dao.Read(idLabel.getText(), passwordLabel.getText());
+            user.setIsConnected(true);
+            this.userConnected.Copy(user);
+            //dès que l'utilisateur est connecté
+            this.mainController.initFieldsUser();
+            mainController.enableButtons();
+            this.mainController.projects(); 
+        }catch(DaoError e){
+            e.printStackTrace();
+            utils.afficherErreur(e.getLocalizedMessage());
+        }
     }
     
     public void setMainController(MainController mainController){
