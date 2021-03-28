@@ -119,7 +119,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton fx:id="techWindow" alignment="BASELINE_LEFT" graphicTextGap="14.0" layoutX="10.0" layoutY="63.0" prefHeight="51.0" prefWidth="233.0" text="Matériel" textFill="WHITE" VBox.vgrow="NEVER">
+                        <JFXButton fx:id="toolsWindow" alignment="BASELINE_LEFT" graphicTextGap="14.0" layoutX="10.0" layoutY="63.0" prefHeight="51.0" prefWidth="233.0" text="Matériel" textFill="WHITE" VBox.vgrow="NEVER">
                            <font>
                               <Font name="Carlito" size="21.0" />
                            </font>
