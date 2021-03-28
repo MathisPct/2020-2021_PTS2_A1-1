@@ -45,18 +45,21 @@ public class SceneLoginController implements Initializable {
      * Utilisateur crée lors de la recherche d'un user dans la BDD avec read(login,mdp)
      */
     private User userConnected;
-
-
+    
+    
+    public SceneLoginController(User user) throws ClassNotFoundException, SQLException{
+        this.userConnected = user;
+        try{
+            this.dao = new UserDao();
+        }catch(SQLException eSQL){
+            eSQL.printStackTrace();
+            this.utils.afficherErreur(eSQL.getLocalizedMessage());
+        }
+    }
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("SceneLogin");
-        try {
-            dao = new UserDao();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
     }
 
     /**
@@ -68,7 +71,7 @@ public class SceneLoginController implements Initializable {
         /**
          * A compléter
          */
-    }
+    } 
 
     public void setUserConnected(User user){
         this.userConnected = user;
