@@ -33,6 +33,8 @@ public class UserDaoTest {
     public void testRead() throws Exception {
         UserDao con = new UserDao();
         User sdjamel = new User(5); //user avec l'id 5 dans la table utilisateur
+        sdjamel.setFirstName("Djamel");
+        sdjamel.setLastName("Sabri");
         User pmartin = new User(1); //user avec l'id 1 dans la table utilisateur
         User gdespierres2 = new User(24); //user avec l'id 24 dans la table utilisateur
         /**
@@ -41,7 +43,8 @@ public class UserDaoTest {
         assertEquals(sdjamel.getID(),con.Read("sdjamel", "746F746F").getID());
         assertEquals(pmartin.getID(),con.Read("pmartin", "746F746F").getID());
         assertEquals(gdespierres2.getID(),con.Read("gdespierres2", "746F746F").getID());
-        
+        assertEquals(sdjamel.getFirstName(), con.Read("sdjamel", "746F746F").getFirstName());
+        assertEquals(sdjamel.getLastName(), con.Read("sdjamel", "746F746F").getLastName());
         /**
          * L'utilisateur cherché avec la fonction Read correspond à l'user
          * avec l'id 1 dans la table. u1 a un id de 5. Les 2 ne doivent pas être
