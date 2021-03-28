@@ -50,6 +50,9 @@ public class MainController implements Initializable {
 
     @FXML
     private JFXButton techWindow;
+    
+    @FXML
+    private JFXButton toolsWindow;
 
     @FXML
     private JFXButton profileWindow;
@@ -253,6 +256,7 @@ public class MainController implements Initializable {
             techsWindow.setVisible(false);
             deconnectionButton.setVisible(false);
             profileWindow.setVisible(false);
+            toolsWindow.setVisible(false);
             customers.setVisible(false);
             projectsWindow.setVisible(false);
             connectionButton.setVisible(true);
@@ -269,6 +273,7 @@ public class MainController implements Initializable {
             techsWindow.setVisible(true);
             deconnectionButton.setVisible(true);
             profileWindow.setVisible(true);
+            toolsWindow.setVisible(true);
             customers.setVisible(true);
             projectsWindow.setVisible(true);
             connectionButton.setVisible(false);
