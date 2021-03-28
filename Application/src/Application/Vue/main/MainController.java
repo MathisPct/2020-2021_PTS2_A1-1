@@ -86,6 +86,7 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             disableButtons();
+            initFieldsUser();
             connect();
         } catch (IOException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
