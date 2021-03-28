@@ -12,9 +12,11 @@ import Application.Database.BadUserError;
 import Application.Metier.User;
 import Application.Vue.Login.SceneLoginController;
 import Application.Vue.UtilsIHM;
+import Application.Vue.profilScene.SceneProfileController;
 import javafx.fxml.Initializable;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -80,10 +82,27 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
+            disableButtons();
             connect();
         } catch (IOException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    /**
+     * Initialise les champs informations "nom et rôle" de l'utilisateur qui 
+     * s'est connecté
+     */
+    public void initFieldsUser(){
+        String res = "Vous n'êtes pas connecté";
+        if (currentUser.isConnected()){
+            res = currentUser.getFirstName() + " " + currentUser.getLastName();
+        }
+        namesEmployee.setText(res);
     }
     
     @FXML
@@ -129,7 +148,7 @@ public class MainController implements Initializable {
      * @autor David Golay
      */
     @FXML
-    public void connect() throws IOException{
+    public void connect() throws IOException, ClassNotFoundException, SQLException{
         if (currentUser.isConnected()){
             Exception e = new Exception("Utilisateur déjà connecté");
             utilsIHM.afficherErreur("Vous êtes déjà connecté!");
@@ -137,16 +156,11 @@ public class MainController implements Initializable {
         else {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Application/Vue/Login/sceneLogin.fxml"));
+                SceneLoginController controller = new SceneLoginController(currentUser);
+                fxmlLoader.setController(controller);
                 Pane tempPane = fxmlLoader.load();
                 container.setCenter(tempPane);
-                SceneLoginController sceneLoginController = fxmlLoader.getController();
-                sceneLoginController.setUserConnected(currentUser);
-                //redirection si l'user est connecté
-                if (currentUser.isConnected()) {
-                    FXMLLoader loaderProjects = new FXMLLoader(getClass().getResource("/Application/Vue/projectsScene/sceneProjects.fxml"));
-                    Pane projectsPane = loaderProjects.load();
-                    container.setCenter(projectsPane);
-                }
+                controller.setMainController(this);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -162,7 +176,7 @@ public class MainController implements Initializable {
      * @throws IOException
      */
     @FXML
-    public void disconnect() throws IOException{
+    public void disconnect() throws IOException, ClassNotFoundException, SQLException{
         if (!currentUser.isConnected()) {
             BadUserError badUserErr = new BadUserError("Vous devez être connecté afin de vous déconnecter");
             utilsIHM.afficherErreur(badUserErr.getMessage());
@@ -171,9 +185,9 @@ public class MainController implements Initializable {
             currentUser.Disconnect();
             //redirection var la page de login
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Application/Vue/Login/sceneLogin.fxml"));
-                Pane tempPane = fxmlLoader.load();
-                container.setCenter(tempPane);
+                disableButtons();
+                namesEmployee.setText("Vous n'êtes pas connecté");
+                connect();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -188,7 +202,7 @@ public class MainController implements Initializable {
     @FXML
     public void viewTechs() throws IOException {
         try {
-            if (!currentUser.isConnected() || !currentUser.isChief()) {
+            if (!currentUser.isConnected()) {
                 BadUserError badUserErr = new BadUserError();
                 utilsIHM.afficherErreur(badUserErr.getMessage());
                 throw new BadUserError();
@@ -226,6 +240,38 @@ public class MainController implements Initializable {
                 utilsIHM.afficherErreur("Impossible de charger la page monProfil");
                 e.printStackTrace();
             }
+        }
+    }
+    
+    /**
+     * Quand l'utilisateur est pas connecté il y a que la connexion qui est
+     * visible
+     */
+    public void disableButtons(){
+        if (!currentUser.isConnected()){
+            profileWindow.setVisible(false);
+            techsWindow.setVisible(false);
+            deconnectionButton.setVisible(false);
+            profileWindow.setVisible(false);
+            customers.setVisible(false);
+            projectsWindow.setVisible(false);
+            connectionButton.setVisible(true);
+        }
+    }
+    
+        /**
+     * Quand l'utilisateur est connecté les boutons deviennent visibles
+     * visible
+     */
+    public void enableButtons(){
+        if (currentUser.isConnected()){
+            profileWindow.setVisible(true);
+            techsWindow.setVisible(true);
+            deconnectionButton.setVisible(true);
+            profileWindow.setVisible(true);
+            customers.setVisible(true);
+            projectsWindow.setVisible(true);
+            connectionButton.setVisible(false);
         }
     }
 }
