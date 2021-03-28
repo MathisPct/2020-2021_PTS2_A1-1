@@ -1,5 +1,6 @@
 package Application.Database;
 
+import Application.Metier.Skill;
 import com.mysql.jdbc.Connection;
 import Application.Metier.Tech;
 import Application.Metier.User;
@@ -32,7 +33,7 @@ public class UserDao {
     }
 
     /**
-     * Lit un utilisateur depuis la BD. En cas d'erreur, lève une exception de type DaoError.
+     * Lit un utilisateur depuis la BD. En cas d'erreur, lève une exception.
      * @param aLogin login de l'utilisateur cherché
      * @param aPassHash valeur de hachage du mot de passe de l'utilisateur cherché
      * @return L'utilisateur chargé depuis la BD.
@@ -84,6 +85,19 @@ public class UserDao {
     }
 
     /**
+     * Methode qui crée une instance de Skill suivant les données de la BDD
+     * @param rSet résultat qui permet d'accéder au nom du skill et le leve
+     * @return
+     * @throws SQLException
+     */
+    private Skill createSkill(ResultSet rSet) throws SQLException {
+        Skill skill = new Skill();
+        skill.setName(rSet.getString("nom"));
+        skill.setLevel(rSet.getString("niveau"));
+        return skill;
+    }
+
+    /**
      * Met à jour l'utilisateur dans la BD
      * @param aUser L'utilisateur à mettre à jour
      */
@@ -103,6 +117,14 @@ public class UserDao {
         //tant que des techniciens sont trouvées
         while (rSet.next()){
             listTech.add( createTechFromId(rSet.getInt("id"),rSet) );
+        }
+        //remplissage des skills
+        String reqShSkills = "SELECT * FROM possede INNER JOIN competence on possede.competenceID = competence.ID";
+        ResultSet rSkillsSet = stmt.executeQuery(reqShSkills);
+        //tant que des skils sont trouvées
+        while (rSkillsSet.next()){
+            Skill tempSkill = createSkill(rSkillsSet);
+            listTech.get(rSkillsSet.getInt("technicienID")-1).AddSkill(tempSkill);
         }
         return listTech;
     }

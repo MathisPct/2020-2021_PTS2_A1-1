@@ -24,16 +24,23 @@ public class Tech extends User{
 	public Tech(int id) {
 		super(id);
 	}
-
+        
+        
+        /**
+	 * Ajoute une compétence à la liste de compétence d'un techniciens 
+         * @param s, une compétence contenant un nom et un niveau
+         * @author Lucas
+	 */
 	public void AddSkill(Skill s){
-		throw new UnsupportedOperationException();
+            skills.add(s);
 	}
 
 	/**
 	 * Demande la liste des compétences d'un techniciens, avec leur niveau
 	 * @return un ensemble de compétences
+         * @author Lucas
 	 */
 	public ArrayList<Skill> GetSkills() {
-		throw new UnsupportedOperationException();
-	}
+            return skills;
+        }
 }

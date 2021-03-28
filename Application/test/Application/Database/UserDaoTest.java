@@ -5,6 +5,7 @@
  */
 package Application.Database;
 
+import Application.Metier.Skill;
 import Application.Metier.Tech;
 import Application.Metier.User;
 import org.junit.Test;
@@ -75,6 +76,14 @@ public class UserDaoTest {
         tech3.setFirstName("Yasmina");
         tech4.setFirstName("Sarah");
         tech5.setFirstName("Sabri");
+        
+        //test skills d'un user => Pierre (technicien de la BDD qui possède la compétence "développement C/C++/C#" de niveau simple)
+        Skill skill = new Skill();
+        skill.setLevel("simple");
+        skill.setName("développement C/C++/C#");
+        tech1.AddSkill(skill);
+        assertEquals(tech1.GetSkills().toString(), con.ListTechs().get(0).GetSkills().toString());
+        
         ArrayList<Tech> listTestTech = new ArrayList<>();
         listTestTech.add(tech1);
         listTestTech.add(tech2);
