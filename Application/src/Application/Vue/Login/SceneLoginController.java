@@ -16,9 +16,16 @@ import Application.Metier.User;
 import Application.Vue.UtilsIHM;
 import Application.Vue.main.MainController;
 import com.jfoenix.controls.JFXButton;
+import java.io.IOException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  *
@@ -46,6 +53,11 @@ public class SceneLoginController implements Initializable {
      */
     private User userConnected;
     
+    /**
+     * Attribut qui permet d'accèder au MainControler pour appeler des méthodes
+     * de celui-ci
+     */
+    private MainController mainController;
     
     public SceneLoginController(User user) throws ClassNotFoundException, SQLException{
         this.userConnected = user;
@@ -71,10 +83,10 @@ public class SceneLoginController implements Initializable {
         /**
          * A compléter
          */
-    } 
-
-    public void setUserConnected(User user){
-        this.userConnected = user;
+    }
+    
+    public void setMainController(MainController mainController){
+        this.mainController = mainController;
     }
 
 }
