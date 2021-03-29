@@ -7,7 +7,7 @@ package Application.Vue.customBox;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 
@@ -15,18 +15,18 @@ import javafx.scene.text.FontWeight;
  *
  * @author David
  */
-public class ItemBox extends VBox {
+public class ItemHBox extends HBox {
     private String name;
     private String value;
     private MyStyle style;
     
-    public ItemBox(String name, String value, MyStyle style) {
+    public ItemHBox(String name, String value, MyStyle style) {
         this.name = name;
         this.value = value;
         this.style = style;
     }
     
-    public ItemBox(MyStyle style) {
+    public ItemHBox(MyStyle style) {
         this.name = "";
         this.value = "";
         this.style = style;
@@ -46,7 +46,7 @@ public class ItemBox extends VBox {
         labelName.setFont(javafx.scene.text.Font.font(this.style.getFont(), FontWeight.BOLD, FontPosture.REGULAR, style.getFontSize()*0.9));
         labelValue.setFont(javafx.scene.text.Font.font(this.style.getFont(), FontWeight.NORMAL, FontPosture.ITALIC, style.getFontSize()*0.7));
         this.getChildren().addAll(labelName, labelValue);
-        this.setAlignment(Pos.CENTER);
+        this.setAlignment(Pos.CENTER_LEFT);
         this.setSpacing(this.style.getItemSpacing());
         int padding = this.style.getItemPadding();
         this.setPadding(new javafx.geometry.Insets(padding,padding,padding,padding*3)); //top, right, bottom, left

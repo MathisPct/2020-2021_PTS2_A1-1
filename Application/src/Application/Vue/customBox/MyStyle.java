@@ -48,6 +48,16 @@ public class MyStyle {
                 this.colorLabel = "#212939";
                 this.colorSelectedLabel = "#212939";
             break;
+            case "BLEU":
+                this.colorBase = "#FFFFFF";
+                this.colorBaseBar = "#BCBECE";
+                this.colorSelected = "#FF8E34";
+                this.colorSelectedLight = "#FFE4CA";
+                this.colorTitle = "#475975";
+                this.colorTitleSelected = "#212939";
+                this.colorLabel = "#212939";
+                this.colorSelectedLabel = "#212939";
+            break;
         }
                 
         this.font = fontName;

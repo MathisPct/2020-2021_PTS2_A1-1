@@ -5,12 +5,20 @@
  */
 package Application.Vue.customBox;
 
+import Application.Metier.Skill;
+import Application.Metier.Tech;
 import java.util.ArrayList;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -57,7 +65,7 @@ public class MyRowBox extends HBox{
         this.setStyle("-fx-background-color: " + style.getColorBase());   
     }
     
-    public void generateItemBoxRow(ArrayList<ItemBox> itemBoxList, Priority priorityFirst) {
+    public void generateItemVBoxRow(ArrayList<ItemVBox> itemBoxList, Priority priorityFirst) {
         setBar();
         this.getChildren().addAll(this.boxBar);      
         for (int i = 0; i<itemBoxList.size(); i++) {
@@ -73,9 +81,77 @@ public class MyRowBox extends HBox{
         }    
     }
     
+    public void generateItemHBoxRow(ArrayList<ItemHBox> itemBoxList, Priority priorityFirst) {
+        setBar();
+        this.getChildren().addAll(this.boxBar);      
+        for (int i = 0; i<itemBoxList.size(); i++) {
+            if (i == 0) {
+                HBox.setHgrow(itemBoxList.get(i), priorityFirst);
+            }
+            else {
+                HBox.setHgrow(itemBoxList.get(i), Priority.ALWAYS);
+            }
+            itemBoxList.get(i).initItemBox();
+            this.getChildren().add(itemBoxList.get(i));
+            
+        }    
+    }
+    
+    public void generateSkillGridPane(Tech tech, Skill skill) {
+        
+        setBar();
+        GridPane gridpane = new GridPane();
+        Label skillName = new Label(skill.getName());
+        skillName.setStyle("-fx-text-fill: " + this.style.getColorTitle());
+        skillName.setFont(javafx.scene.text.Font.font(this.style.getFont(), FontWeight.NORMAL, FontPosture.REGULAR, style.getFontSize()));
+        gridpane.add(skillName, 0, 0);  // column=0 row=0
+        skillName.setPadding(new Insets(0, 0, 0, 5)); // T/R/B/L
+        
+        Label level = new Label("Niveau: ");
+        level.setStyle("-fx-text-fill: " + this.style.getColorTitle());
+        level.setFont(javafx.scene.text.Font.font(this.style.getFont(), FontWeight.BOLD, FontPosture.REGULAR, style.getFontSize()*0.9));
+        Label levelValue = new Label(skill.getLevel());
+        levelValue.setFont(javafx.scene.text.Font.font(this.style.getFont(), FontWeight.NORMAL, FontPosture.ITALIC, style.getFontSize()*0.8));
+
+        levelValue.setStyle("-fx-text-fill: " + this.style.getColorTitle());
+        HBox hboxLevel = new HBox(level, levelValue);
+        hboxLevel.setAlignment(Pos.CENTER_LEFT);
+        gridpane.add(hboxLevel, 1, 0);  // column=1 row=0
+        
+        MyButtonSkill btn = new MyButtonSkill("Modifier", tech, skill, this.style);
+        btn.setButton();
+        btn.addIconButton("MODIFIER");
+        btn.setAlignment(Pos.CENTER);
+        btn.setStyle("-fx-background-color: " + this.style.getColorBaseBar());
+        GridPane.setMargin(btn, new Insets(5, 0, 5, 0));
+        GridPane.setHgrow(btn, Priority.ALWAYS);
+        gridpane.add(btn, 2, 0); // column=2 row=0
+        gridpane.setPadding(new Insets(3, 3, 3, 3));
+        //gridpane.setHgap(25);
+        //gridpane.setVgap(8);
+        //gridpane.setGridLinesVisible( true );
+        
+        ColumnConstraints col1 = new ColumnConstraints();
+        ColumnConstraints col2 = new ColumnConstraints();
+        ColumnConstraints col3 = new ColumnConstraints();
+        col1.setPrefWidth(800);     
+        col2.setPrefWidth(200);      
+        col3.setPrefWidth(200);
+        
+        col1.setPercentWidth(50);     
+        col2.setPercentWidth(30);      
+        col3.setPercentWidth(20);
+        col2.setHalignment(HPos.RIGHT);
+        col3.setHalignment(HPos.RIGHT);
+        gridpane.getColumnConstraints().addAll(col1, col2, col3);
+
+        this.getChildren().addAll(this.boxBar, gridpane);
+        this.setStyle("-fx-background-color: " + style.getColorBase());
+    }
+    
     public void addButtonToRowBox(MyButton btn) {
         btn.setButton();
-        ItemBox btnIB = new ItemBox(this.style);
+        ItemVBox btnIB = new ItemVBox(this.style);
         btnIB.initItemButtonBox(btn); // initialisation de la boite bouton
         this.getChildren().add(btnIB);
     }

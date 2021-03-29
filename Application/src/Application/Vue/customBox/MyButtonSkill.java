@@ -5,27 +5,29 @@
  */
 package Application.Vue.customBox;
 
+import Application.Metier.Skill;
 import Application.Metier.Tech;
-
-
 
 /**
  *
  * @author David
  */
-public class MyButtonTech extends MyButton{
+public class MyButtonSkill extends MyButton {
     private Tech tech;
+    private Skill skill;
     
-    public MyButtonTech(String name, Tech tech, MyStyle style) {
+    public MyButtonSkill(String name, Tech tech, Skill skill, MyStyle style) {
         super(name, style);
         this.tech = tech;
+        this.skill = skill;
     }
     
     @Override
     public void setButton() {
         this.setOnAction((event) -> {
-            String txtTech = "Action sur " + this.tech.getFirstName() + " " + this.tech.getLastName();
-            System.out.println(txtTech);
+            String txtBtn = "Action sur " + this.tech.getFirstName() + " " + this.tech.getLastName() + ": " + this.skill.getName() + " "+ this.skill.getLevel();
+            System.out.println(txtBtn);
         });
     }
+    
 }

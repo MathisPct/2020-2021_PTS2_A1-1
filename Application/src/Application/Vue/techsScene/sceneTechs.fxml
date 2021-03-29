@@ -4,7 +4,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -42,7 +41,7 @@
             </Label>
          </children>
       </HBox>
-      <SplitPane dividerPositions="0.6" prefHeight="994.0" prefWidth="1495.0" style="-fx-background-color: #E6E6E6;">
+      <SplitPane dividerPositions="0.5" prefHeight="994.0" prefWidth="1495.0" style="-fx-background-color: #E6E6E6;">
         <items>
             <VBox fx:id="scrollTechParent">
                <children>
@@ -64,7 +63,7 @@
                         </ComboBox>
                      </children>
                   </HBox>
-                  <VBox fx:id="containerTech" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS" />
+                  <VBox fx:id="containerTech" />
                   <JFXButton fx:id="addTechButton" buttonType="RAISED" graphicTextGap="15.0" style="-fx-background-color: #BCBECE;" text="Ajouter un technicien" textFill="#3f4b6c" textOverrun="LEADING_WORD_ELLIPSIS" VBox.vgrow="NEVER">
                      <font>
                         <Font size="18.0" />
@@ -89,12 +88,12 @@
                <children>
                   <HBox prefWidth="1294.0" style="-fx-background-color: #BCBECE;">
                      <children>
-                        <Label prefHeight="33.0" text="Compétences de " textFill="#3f4b6c">
+                        <Label fx:id="skillTechInfo" prefHeight="33.0" text="Compétences de " textFill="#3f4b6c">
                            <font>
                               <Font size="18.0" />
                            </font>
                            <HBox.margin>
-                              <Insets left="5.0" />
+                              <Insets left="10.0" />
                            </HBox.margin>
                         </Label>
                         <Label fx:id="skillTechName" layoutX="15.0" layoutY="10.0" prefHeight="33.0" text="&lt;prénom nom&gt;" textFill="#3f4b6c">
@@ -104,11 +103,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <ScrollPane prefHeight="660.0" prefWidth="574.0" VBox.vgrow="ALWAYS">
-                     <VBox.margin>
-                        <Insets bottom="20.0" />
-                     </VBox.margin>
-                  </ScrollPane>
+                  <VBox fx:id="containerSkills" />
                   <JFXButton fx:id="addSkillButton" buttonType="RAISED" graphicTextGap="15.0" style="-fx-background-color: #BCBECE;" text="Ajouter une compétence" textFill="#3f4b6c" textOverrun="LEADING_WORD_ELLIPSIS" VBox.vgrow="NEVER">
                      <font>
                         <Font size="18.0" />
@@ -121,7 +116,7 @@
                         </ImageView>
                      </graphic>
                      <VBox.margin>
-                        <Insets bottom="15.0" left="15.0" />
+                        <Insets bottom="15.0" left="15.0" top="15.0" />
                      </VBox.margin>
                   </JFXButton>
                </children>
