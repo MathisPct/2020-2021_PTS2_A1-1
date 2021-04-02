@@ -81,7 +81,7 @@
          <left>
             <AnchorPane focusTraversable="true" minWidth="180.0" style="-fx-background-color: #343E4C;" BorderPane.alignment="CENTER">
                <children>
-                  <VBox AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <VBox fx:id="boxMenu1" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <JFXButton fx:id="projectsWindow" alignment="BASELINE_LEFT" graphicTextGap="14.0" onAction="#projects" prefHeight="52.0" prefWidth="232.0" text="Projets" textFill="WHITE" VBox.vgrow="NEVER">
                            <font>
@@ -133,7 +133,7 @@
                         </JFXButton>
                      </children>
                   </VBox>
-                  <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+                  <VBox fx:id="boxMenu2" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                      <children>
                         <JFXButton fx:id="profileWindow" alignment="BASELINE_LEFT" graphicTextGap="14.0" onAction="#editProfile" prefWidth="233.0" text="Mon profil" textFill="WHITE" VBox.vgrow="ALWAYS">
                            <VBox.margin>

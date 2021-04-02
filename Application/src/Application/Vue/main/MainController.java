@@ -25,6 +25,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
@@ -65,6 +66,21 @@ public class MainController implements Initializable {
     
     @FXML 
     private BorderPane container;
+    
+    
+    /**
+     * Boîte contenant les boutons Projets, Clients et Techniciens
+     */
+    @FXML
+    private VBox boxMenu1;
+    
+    /**
+     * Boîte contenant les boutons MonProfil, Connexion et deconnexion
+     */
+    @FXML
+    private VBox boxMenu2;
+    
+    
 
     /**
      * Utilisateur courant avec un id par défaut à 0. Par défaut lors de l'arrivé sur l'application l'user est déconnecté
@@ -86,6 +102,7 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             disableButtons();
+            initFieldsUser();
             connect();
         } catch (IOException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
@@ -252,14 +269,9 @@ public class MainController implements Initializable {
      */
     public void disableButtons(){
         if (!currentUser.isConnected()){
-            profileWindow.setVisible(false);
-            techsWindow.setVisible(false);
-            deconnectionButton.setVisible(false);
-            profileWindow.setVisible(false);
-            toolsWindow.setVisible(false);
-            customers.setVisible(false);
-            projectsWindow.setVisible(false);
-            connectionButton.setVisible(true);
+            boxMenu2.getChildren().clear();
+            boxMenu1.getChildren().clear();
+            boxMenu1.getChildren().addAll(connectionButton);
         }
     }
     
@@ -269,14 +281,10 @@ public class MainController implements Initializable {
      */
     public void enableButtons(){
         if (currentUser.isConnected()){
-            profileWindow.setVisible(true);
-            techsWindow.setVisible(true);
-            deconnectionButton.setVisible(true);
-            profileWindow.setVisible(true);
-            toolsWindow.setVisible(true);
-            customers.setVisible(true);
-            projectsWindow.setVisible(true);
-            connectionButton.setVisible(false);
+            boxMenu1.getChildren().clear();
+            boxMenu1.getChildren().addAll(projectsWindow,customers,techsWindow,toolsWindow);
+            boxMenu2.getChildren().clear();
+            boxMenu2.getChildren().addAll(profileWindow, deconnectionButton);
         }
     }
 }
