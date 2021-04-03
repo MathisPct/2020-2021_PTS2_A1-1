@@ -5,6 +5,7 @@
  */
 package Application.Vue.customBox;
 
+import Application.Metier.Project;
 import Application.Metier.Tech;
 import java.util.ArrayList;
 import javafx.scene.layout.Priority;
@@ -21,6 +22,7 @@ public class MyCustomBox extends VBox {
     private boolean isOpen;
     private MyScrollPane parent;
     private Tech tech;
+    private Project project;
     
     public MyCustomBox(MyScrollPane parent, Tech tech, MyStyle style) {
         this.style = style;
@@ -29,6 +31,17 @@ public class MyCustomBox extends VBox {
         this.isOpen = false;
         this.parent = parent;
         this.tech = tech;
+        this.project = null;
+    }
+    
+    public MyCustomBox(MyScrollPane parent, Project project, MyStyle style) {
+        this.style = style;
+        this.Vcontainer = new VBox();
+        this.rowBoxList = new ArrayList();
+        this.isOpen = false;
+        this.parent = parent;
+        this.tech = null;
+        this.project = project;
     }
     
     public void initBox() {

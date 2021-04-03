@@ -60,8 +60,7 @@ public class MyRowBox extends HBox{
         setBar();
         setTitleBasic(this.title);
         setTitleBasic(this.label1);
-        this.getChildren().addAll(this.boxBar, this.title, addSpacer(),this.label1);
-        
+        this.getChildren().addAll(this.boxBar, this.title, addSpacer(),this.label1);       
         this.setStyle("-fx-background-color: " + style.getColorBase());   
     }
     
@@ -76,6 +75,21 @@ public class MyRowBox extends HBox{
                 HBox.setHgrow(itemBoxList.get(i), Priority.ALWAYS);
             }
             itemBoxList.get(i).initItemBox();
+            this.getChildren().add(itemBoxList.get(i));
+            this.setStyle("-fx-background-color: " + style.getColorSelectedLight());
+        }    
+    }
+    
+    public void addSubItemBox(ArrayList<ItemVBox> itemBoxList) {
+        //setBar();
+        //this.getChildren().addAll(this.boxBar);      
+        for (int i = 0; i<itemBoxList.size(); i++) {
+            if (i == 0) {
+                itemBoxList.get(i).initSubItem("LARGE", "NORMAL");
+            }
+            else {
+                itemBoxList.get(i).initSubItem("MEDIUM", "IMPORTANT");
+            }          
             this.getChildren().add(itemBoxList.get(i));
             this.setStyle("-fx-background-color: " + style.getColorSelectedLight());
         }    

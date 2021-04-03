@@ -61,7 +61,7 @@ public class MyStyle {
         }
                 
         this.font = fontName;
-        this.fontSize = 20;
+        this.fontSize = 23;
         this.btnFontSize = 18;
         this.widthBar = 5;
         this.boxSpacing = 15;
