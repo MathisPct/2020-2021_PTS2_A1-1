@@ -75,11 +75,39 @@ public class UserDao {
      * @author Lucas Moniot
      */
     public void Update(User aUser) throws SQLException {
-        Statement stmt = con.createStatement();
-        String reqUpdateUser = "UPDATE utilisateur SET login='"+ aUser.getLogin() +"', passwordHash='"+ aUser.getPasswordHash()+"',lastName='"+ aUser.getLastName()+"', firstName='"+aUser.getFirstName() +"' , isConnected='"+aUser.isIsConnected() +"', isChief ='"+aUser.isIsChief()+"' WHERE id =' "+ aUser.getID()+"'";         
-        stmt.executeUpdate(reqUpdateUser);
+        
+        Statement stmt = null;
+        Connection conn = null;
+        
+        try{
+            stmt = con.createStatement();
+            //On update le login, le mdp, le nom et le prénom
+            String reqUpdateUser = "UPDATE utilisateur SET login='"+ aUser.getLogin() +"', passwordHash='"+ aUser.getPasswordHash()+"',lastName='"+ aUser.getLastName()+"', firstName='"+aUser.getFirstName() +"' WHERE id =' "+ aUser.getID()+"'";         
+            stmt.executeUpdate(reqUpdateUser);
+    
+        }
+        catch(SQLException se)
+        {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        }catch(Exception e){
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        }finally{
+            //finally block used to close resources
+            try{
+               if(stmt !=null)
+                  conn.close();
+            }catch(SQLException se){
+            }// do nothing
+            try{
+               if(conn!=null)
+                  conn.close();
+            }catch(SQLException se){
+               se.printStackTrace();
+            }//end finally try
+         }//end try
     }
-
     /**
      * Liste les techniciens
      * @return un ensemble d'utilisateurs qui sont des techniciens
