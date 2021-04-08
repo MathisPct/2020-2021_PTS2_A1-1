@@ -13,6 +13,16 @@ public class Tech extends User{
 	 *  * /
 	 */
 	private ArrayList<Skill> skills = new ArrayList<>();
+        
+        /**
+         * cout horaire du technicien à l'heure
+         */
+        private float coutHoraire;
+        
+        /**
+         * grade du technicien (junior, partner, senior)
+         */
+        private String grade;
 
 	/**
 	 * /**
@@ -43,4 +53,20 @@ public class Tech extends User{
 	public ArrayList<Skill> GetSkills() {
             return skills;
         }
+        
+        public float getCoutHoraire() {
+            return coutHoraire;
+        }
+
+        public void setCoutHoraire(float coutHoraire) {
+            this.coutHoraire = coutHoraire;
+        }
+
+        public String getGrade() {
+            return grade;
+        }
+
+        public void setGrade(String grade) {
+            this.grade = grade;
+        }  
 }

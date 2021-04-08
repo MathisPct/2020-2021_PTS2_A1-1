@@ -80,7 +80,8 @@ public class UserDao {
         Tech tech = new Tech(idTech);
         tech.setLastName(rSet.getString("nom"));
         tech.setFirstName(rSet.getString("prenom"));
-        tech.setIsChief(false);
+        tech.setCoutHoraire(rSet.getFloat("coutHoraire"));
+        tech.setGrade(rSet.getString("grade"));
         return tech;
     }
 

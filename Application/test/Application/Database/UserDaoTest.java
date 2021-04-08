@@ -84,6 +84,12 @@ public class UserDaoTest {
         tech1.AddSkill(skill);
         assertEquals(tech1.GetSkills().toString(), con.ListTechs().get(0).GetSkills().toString());
         
+        //test coutHoraire
+        assertEquals(30.0f, con.ListTechs().get(0).getCoutHoraire(), 0.01);
+        
+        //test grade d'un tech
+        assertEquals("junior", con.ListTechs().get(0).getGrade());
+        
         ArrayList<Tech> listTestTech = new ArrayList<>();
         listTestTech.add(tech1);
         listTestTech.add(tech2);
