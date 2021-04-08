@@ -55,9 +55,10 @@ public class MyScrollPane extends ScrollPane{
         MyRowBox itemTechRow = new MyRowBox("", this.style);
 
         // Génération des Item de la boite
-        String totalSkills = "<< 0 >>";
-        String grade = "<< grade >>";
-        String cout = "<< 0 " + Character.toString ((char) 8364) + " / h >>";;
+        String totalSkills = String.valueOf(tech.GetSkills().size());
+        String grade = tech.getGrade();
+        String euro = Character.toString ((char) 8364);
+        String cout = tech.getCoutHoraire() + euro + " /h";
         ArrayList<ItemVBox> itemBoxList = new ArrayList();         
         ItemVBox i1 = new ItemVBox("Compétences", totalSkills, this.style);
         ItemVBox i2 = new ItemVBox("Grade", grade , this.style);
