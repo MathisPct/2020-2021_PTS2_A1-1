@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -63,6 +64,12 @@ public class MainController implements Initializable {
 
     @FXML
     private JFXButton connectionButton;
+    
+    /**
+     * espacement item menu
+     */
+    @FXML
+    private AnchorPane spacerMenu; 
     
     @FXML 
     private BorderPane container;
@@ -131,6 +138,7 @@ public class MainController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Application/Vue/customersScene/sceneCustomers.fxml"));
             Pane tempPane = fxmlLoader.load();
             container.setCenter(tempPane);
+            setBtnMenuIsActive(customers); //colorie le bouton actif
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -153,6 +161,7 @@ public class MainController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Application/Vue/projectsScene/sceneProjects.fxml"));
                 Pane tempPane = fxmlLoader.load();
                 container.setCenter(tempPane);
+                setBtnMenuIsActive(projectsWindow);//colorie le bouton actif
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -181,6 +190,7 @@ public class MainController implements Initializable {
                 Pane tempPane = fxmlLoader.load();
                 container.setCenter(tempPane);
                 controller.setMainController(this);
+                setBtnMenuIsActive(connectionButton); //colorie le bouton actif
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -232,6 +242,7 @@ public class MainController implements Initializable {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClass().getResource("/Application/Vue/techsScene/sceneTechs.fxml"));
                     Pane tempPane = fxmlLoader.load();
                     container.setCenter(tempPane);
+                    setBtnMenuIsActive(techsWindow); //colorie le bouton actif
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -256,6 +267,7 @@ public class MainController implements Initializable {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Application/Vue/profilScene/sceneProfil.fxml"));
                 Pane tempPane = fxmlLoader.load();
                 container.setCenter(tempPane);
+                setBtnMenuIsActive(profileWindow); //colorie le bouton actif
             } catch (IOException e) {
                 utilsIHM.afficherErreur("Impossible de charger la page monProfil");
                 e.printStackTrace();
@@ -269,22 +281,35 @@ public class MainController implements Initializable {
      */
     public void disableButtons(){
         if (!currentUser.isConnected()){
-            boxMenu2.getChildren().clear();
             boxMenu1.getChildren().clear();
             boxMenu1.getChildren().addAll(connectionButton);
         }
     }
     
-        /**
+    /**
      * Quand l'utilisateur est connecté les boutons deviennent visibles
      * visible
      */
     public void enableButtons(){
         if (currentUser.isConnected()){
             boxMenu1.getChildren().clear();
-            boxMenu1.getChildren().addAll(projectsWindow,customers,techsWindow,toolsWindow);
-            boxMenu2.getChildren().clear();
-            boxMenu2.getChildren().addAll(profileWindow, deconnectionButton);
+            boxMenu1.getChildren().addAll(projectsWindow, customers, techsWindow, toolsWindow, spacerMenu, profileWindow, deconnectionButton);
         }
+    }
+    
+    /**
+     * Permet de colorier le bouton actif du menu 
+     * décolorie tous les boutons du menu non-actifs
+     * @param button bouton du menu qui est pressé
+     */
+    private void setBtnMenuIsActive(JFXButton button){
+        for (int i = 0; i < boxMenu1.getChildren().size(); i++) {
+            if(button == boxMenu1.getChildren().get(i)){
+                button.setStyle("-fx-background-color: #14202B");
+            }
+            else{
+                boxMenu1.getChildren().get(i).setStyle("");
+            }
+        }   
     }
 }
