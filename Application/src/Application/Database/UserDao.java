@@ -55,7 +55,7 @@ public class UserDao {
             }
             //si aucun user n'a été trouvé on lève une exception
             if (user.getID() == 0){
-                throw new DaoError("Aucun utilisateur n'a été trouvé");
+                throw new DaoError("Mauvais utilisateur ou mauvais mot de passe entré");
             }
             String reqGetInfoUser = "SELECT * FROM utilisateur NATURAL JOIN " + typeUser + " WHERE id='" + user.getID() + "'";
             rSet = stmt.executeQuery(reqGetInfoUser);
