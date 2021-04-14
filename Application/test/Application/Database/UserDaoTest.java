@@ -84,7 +84,7 @@ public class UserDaoTest {
         
         //si le test a été validé on reset le login et mdp par défaut
         pmartin.setLogin("pmartin");
-        pmartin.setLogin("746F746F");
+        pmartin.setPasswordHash("746F746F");
         userDao.Update(pmartin); //update de l'user dans la BDD
     }
 
