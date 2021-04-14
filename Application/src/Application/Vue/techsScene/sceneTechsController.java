@@ -6,6 +6,7 @@
 package Application.Vue.techsScene;
 
 import Application.Database.UserDao;
+import Application.Metier.Skill;
 import Application.Metier.Tech;
 import Application.Vue.customBox.ItemHBox;
 import Application.Vue.customBox.MyButton;
@@ -21,6 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -44,6 +46,9 @@ public class sceneTechsController implements Initializable{
     private Label skillTechName;
     @FXML
     private Label skillTechInfo;
+    
+    @FXML
+    private PieChart chartSkills = new PieChart();
     
     public void setTech(Tech tech) {
         this.tech = tech;
@@ -179,12 +184,20 @@ public class sceneTechsController implements Initializable{
         this.scrollSkills.setContent(vboxLayout);   
         this.scrollSkills.setFitToWidth(true);
         this.containerSkills.getChildren().add(this.scrollSkills);
-        
-
+        initChart(tech);
     }
 
     public void setTechLabelName(Tech tech) {
         String techName = tech.getFirstName() + " " + tech.getLastName();
         this.skillTechName.setText(techName);
+    }
+    
+    private void initChart(Tech tech){
+        chartSkills.setVisible(true);
+        chartSkills.setTitle("Graphique des skills de " + tech.toString());
+        chartSkills.getData().clear();
+        for (int i = 0; i < tech.GetSkills().size(); i++) {
+            chartSkills.getData().add(new PieChart.Data(tech.GetSkills().get(i).getName(), 1.0d));
+        }
     }
 }
