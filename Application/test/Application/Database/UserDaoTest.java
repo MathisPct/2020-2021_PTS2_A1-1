@@ -7,9 +7,12 @@ package Application.Database;
 
 import Application.Metier.Tech;
 import Application.Metier.User;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import org.junit.Test;
 
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
@@ -53,7 +56,36 @@ public class UserDaoTest {
      * Test of Update method, of class UserDao.
      */
     @Test
-    public void testUpdate() {
+    public void testUpdate() throws ClassNotFoundException, SQLException {
+        UserDao userDao = new UserDao();
+        User pmartinUpdate = new User(1); //user pmartin récupéré lors de la maj de la BDD
+        
+        User pmartin = new User(1); //user pmartin dans la BDD
+        pmartin.setPasswordHash("746F746F"); //info par défaut
+        pmartin.setLogin("pmartin"); //info par défaut
+        
+        pmartin.setLogin("pmarc"); //changement du pseudo de pmartin pour pmarc
+        pmartin.setPasswordHash("toto"); //changement du mdp de pmartin pour toto
+        //update de pmartin dans la BDD . Son pseudo ne devra plus être pmartin mais pmarc
+        // et son mot de passe devra être toto
+        userDao.Update(pmartin); 
+        
+        Connection con = DatabaseConnection.getCon();
+        Statement stmt = con.createStatement();
+        ResultSet rSet = stmt.executeQuery("SELECT * FROM utilisateur WHERE ID=1;");
+        //on récupère les nouvelles données mises à jour de l'user pmartin dans la BDD 
+        while(rSet.next()){
+            pmartinUpdate.setLogin(rSet.getString("LOGIN")); 
+            pmartinUpdate.setPasswordHash(rSet.getString("PASSWORD"));
+        }
+        //on vérifie que le pseudo/mdp a changé suite à l'update de l'user dans la BDD
+        assertEquals("pmarc", pmartinUpdate.getLogin()); 
+        assertEquals("toto", pmartinUpdate.getPasswordHash());
+        
+        //si le test a été validé on reset le login et mdp par défaut
+        pmartin.setLogin("pmartin");
+        pmartin.setLogin("746F746F");
+        userDao.Update(pmartin); //update de l'user dans la BDD
     }
 
     /**
