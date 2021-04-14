@@ -82,7 +82,7 @@ public class UserDao {
         try{
             stmt = con.createStatement();
             //On update le login, le mdp, le nom et le prénom
-            String reqUpdateUser = "UPDATE utilisateur SET login='"+ aUser.getLogin() +"', passwordHash='"+ aUser.getPasswordHash()+"',lastName='"+ aUser.getLastName()+"', firstName='"+aUser.getFirstName() +"' WHERE id =' "+ aUser.getID()+"'";         
+            String reqUpdateUser = "UPDATE utilisateur SET login='"+ aUser.getLogin() +"', password='"+ aUser.getPasswordHash() + "' WHERE id ="+ aUser.getID();         
             stmt.executeUpdate(reqUpdateUser);
     
         }
@@ -96,13 +96,8 @@ public class UserDao {
         }finally{
             //finally block used to close resources
             try{
-               if(stmt !=null)
-                  conn.close();
-            }catch(SQLException se){
-            }// do nothing
-            try{
                if(conn!=null)
-                  conn.close();
+                  con.close();
             }catch(SQLException se){
                se.printStackTrace();
             }//end finally try
