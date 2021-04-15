@@ -101,11 +101,37 @@ public class UserDao {
     /**
      * Met à jour l'utilisateur dans la BD
      * @param aUser L'utilisateur à mettre à jour
+     * @author Lucas Moniot
      */
-    public void Update(User aUser) {
-        throw new UnsupportedOperationException();
+    public void Update(User aUser) throws SQLException {
+        
+        Statement stmt = null;
+        Connection conn = null;
+        
+        try{
+            stmt = con.createStatement();
+            //On update le login, le mdp, le nom et le prénom
+            String reqUpdateUser = "UPDATE utilisateur SET login='"+ aUser.getLogin() +"', password='"+ aUser.getPasswordHash() + "' WHERE id ="+ aUser.getID();         
+            stmt.executeUpdate(reqUpdateUser);
+    
+        }
+        catch(SQLException se)
+        {
+            //Handle errors for JDBC
+            se.printStackTrace();
+        }catch(Exception e){
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        }finally{
+            //finally block used to close resources
+            try{
+               if(conn!=null)
+                  con.close();
+            }catch(SQLException se){
+               se.printStackTrace();
+            }//end finally try
+         }//end try
     }
-
     /**
      * Liste les techniciens
      * @return un ensemble d'utilisateurs qui sont des techniciens
