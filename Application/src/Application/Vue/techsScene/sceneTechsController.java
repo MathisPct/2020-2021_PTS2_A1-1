@@ -49,6 +49,13 @@ public class sceneTechsController implements Initializable{
      */
     @FXML
     private ComboBox<String> comboBoxSkills = new ComboBox<>();
+    
+    /**
+     * Label qui indique le nombre de techniciens à l'utilisateur
+     */
+    @FXML
+    private Label totalTechs;
+    
     @FXML
     private Label skillTechName;
     @FXML
@@ -86,6 +93,7 @@ public class sceneTechsController implements Initializable{
         this.listTechs = new ArrayList<>();
         try {
             this.listTechs.addAll(this.dao.ListTechs(""));
+            initNbTechs(); 
             initComboBox();
         }catch (Exception e){
             e.printStackTrace();
@@ -108,6 +116,13 @@ public class sceneTechsController implements Initializable{
     }
     
     /**
+     * Initialise le champ totalTechs qui indique le nombre de techniciens
+     */
+    private void initNbTechs(){
+        this.totalTechs.setText(String.valueOf(this.listTechs.size()));
+    }
+    
+    /**
      * Lance la recherche par skill lorsqu'un élément est choisi dans 
      * comboBoxSkills
      */
@@ -122,6 +137,7 @@ public class sceneTechsController implements Initializable{
         try{
             this.listTechs.clear();
             this.listTechs.addAll(dao.ListTechs(skillChoice));
+            initNbTechs(); //initialise le nombre de techniciens trouvés
             this.containerTech.getChildren().clear();
             this.containerSkills.getChildren().clear();
             scrollPaneTech();
