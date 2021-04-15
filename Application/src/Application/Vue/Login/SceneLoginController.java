@@ -46,8 +46,6 @@ public class SceneLoginController implements Initializable {
 
     private UserDao dao;
 
-    private UtilsIHM utils = new UtilsIHM();
-
     /**
      * Utilisateur crée lors de la recherche d'un user dans la BDD avec read(login,mdp)
      */
@@ -65,7 +63,7 @@ public class SceneLoginController implements Initializable {
             this.dao = new UserDao();
         }catch(SQLException eSQL){
             eSQL.printStackTrace();
-            this.utils.afficherErreur(eSQL.getLocalizedMessage());
+            UtilsIHM.afficherErreur(eSQL.getLocalizedMessage());
         }
     }
     
@@ -92,7 +90,7 @@ public class SceneLoginController implements Initializable {
             this.mainController.projects(); 
         }catch(DaoError e){
             e.printStackTrace();
-            utils.afficherErreur(e.getLocalizedMessage());
+            UtilsIHM.afficherErreur(e.getLocalizedMessage());
         }
     }
     
