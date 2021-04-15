@@ -23,7 +23,6 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -74,28 +73,6 @@ public class MainController implements Initializable {
     
     @FXML 
     private BorderPane container;
-
-    // Icon bouton menu 
-    @FXML
-    private ImageView imgProjects;
-  
-    @FXML
-    private ImageView imgClients;
-
-    @FXML
-    private ImageView imgTechs;
-
-    @FXML
-    private ImageView imgMateriel;
-
-    @FXML
-    private ImageView imgProfil;
-
-    @FXML
-    private ImageView imgConect;
-
-    @FXML
-    private ImageView imgDisconect;
     
     
     /**
@@ -334,5 +311,5 @@ public class MainController implements Initializable {
                 boxMenu1.getChildren().get(i).setStyle("");
             }
         }   
-    }    
+    }
 }

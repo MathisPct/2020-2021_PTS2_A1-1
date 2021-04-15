@@ -88,7 +88,7 @@
                               <Font name="Carlito" size="21.0" />
                            </font>
                            <graphic>
-                              <ImageView fx:id="imgProjects" fitHeight="46.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="46.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../../images/Icons/Icon_00025.png" />
                                  </image>
@@ -100,7 +100,7 @@
                               <Font name="Carlito" size="21.0" />
                            </font>
                            <graphic>
-                              <ImageView fx:id="imgClients" fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../../images/Icons/Icon_00001.png" />
                                  </image>
@@ -112,7 +112,7 @@
                               <Font name="Carlito" size="21.0" />
                            </font>
                            <graphic>
-                              <ImageView fx:id="imgTechs" fitHeight="38.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="38.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../../images/Icons/Icon_00000.png" />
                                  </image>
@@ -124,7 +124,7 @@
                               <Font name="Carlito" size="21.0" />
                            </font>
                            <graphic>
-                              <ImageView fx:id="imgMateriel" fitHeight="38.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="38.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../../images/Icons/Icon_00024.png" />
                                  </image>
@@ -137,7 +137,7 @@
                               <Font name="Carlito" size="21.0" />
                            </font>
                            <graphic>
-                              <ImageView fx:id="imgProfil" fitHeight="39.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="39.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../../images/Icons/Icon_00007.png" />
                                  </image>
@@ -149,7 +149,7 @@
                               <Font name="Carlito" size="21.0" />
                            </font>
                            <graphic>
-                              <ImageView fx:id="imgConect" fitHeight="38.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="38.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../../images/Icons/Icon_00002.png" />
                                  </image>
@@ -161,7 +161,7 @@
                               <Font name="Carlito" size="21.0" />
                            </font>
                            <graphic>
-                              <ImageView fx:id="imgDisconect" fitHeight="38.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="38.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../../images/Icons/Icon_00002.png" />
                                  </image>
