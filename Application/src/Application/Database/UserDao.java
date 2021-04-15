@@ -71,34 +71,6 @@ public class UserDao {
     }
 
     /**
-     * Fonction qui retourne une instance complète de Tech crée à partir de l'ID d'un technicien 
-     * @param idTech valeur entière qui est la clé primaire du technicien
-     * @param rSet contient les données de la table Technicien
-     * @return une instance complète de Technicien
-     */
-    private Tech createTechFromId(int idTech, ResultSet rSet) throws SQLException {
-        Tech tech = new Tech(idTech);
-        tech.setLastName(rSet.getString("nom"));
-        tech.setFirstName(rSet.getString("prenom"));
-        tech.setCoutHoraire(rSet.getFloat("coutHoraire"));
-        tech.setGrade(rSet.getString("grade"));
-        return tech;
-    }
-
-    /**
-     * Methode qui crée une instance de Skill suivant les données de la BDD
-     * @param rSet résultat qui permet d'accéder au nom du skill et le leve
-     * @return
-     * @throws SQLException
-     */
-    private Skill createSkill(ResultSet rSet) throws SQLException {
-        Skill skill = new Skill();
-        skill.setName(rSet.getString("nom"));
-        skill.setLevel(rSet.getString("niveau"));
-        return skill;
-    }
-
-    /**
      * Met à jour l'utilisateur dans la BD
      * @param aUser L'utilisateur à mettre à jour
      * @author Lucas Moniot
@@ -132,27 +104,90 @@ public class UserDao {
             }//end finally try
          }//end try
     }
+    
+        /**
+     * Fonction qui retourne une instance complète de Tech crée à partir de l'ID d'un technicien 
+     * @param idTech valeur entière qui est la clé primaire du technicien
+     * @param rSet contient les données de la table Technicien
+     * @return une instance complète de Technicien
+     */
+    private Tech createTechFromId(int idTech, ResultSet rSet) throws SQLException {
+        Tech tech = new Tech(idTech);
+        tech.setLastName(rSet.getString("nom"));
+        tech.setFirstName(rSet.getString("prenom"));
+        tech.setCoutHoraire(rSet.getFloat("coutHoraire"));
+        tech.setGrade(rSet.getString("grade"));
+        createTechSkill(tech);
+        return tech;
+    }
+
+    /**
+     * Methode qui crée une instance de Skill suivant les données de la BDD
+     * @param rSet résultat qui permet d'accéder au nom du skill et le leve
+     * @return
+     * @throws SQLException
+     */
+    private Skill createSkill(ResultSet rSet) throws SQLException {
+        Skill skill = new Skill();
+        skill.setName(rSet.getString("nom"));
+        skill.setLevel(rSet.getString("niveau"));
+        return skill;
+    }
+   
+    /**
+     * Remplie la liste des compétences d'un technicien passé en paramètre
+     * @param tech technicien dont la liste des compétences va être remplie
+     * @throws SQLException 
+     */
+    private void createTechSkill(Tech tech) throws SQLException{
+        Statement stmt = con.createStatement();
+        String reqGetSkillTech = "SELECT * FROM possede INNER JOIN competence on possede.competenceID = competence.ID WHERE technicienID = " + tech.getID();
+        ResultSet rSet = stmt.executeQuery(reqGetSkillTech);
+        while (rSet.next()){
+            Skill skill = createSkill(rSet);
+            tech.AddSkill(skill);
+        }
+    }
+    
     /**
      * Liste les techniciens
      * @return un ensemble d'utilisateurs qui sont des techniciens
      */
-    public ArrayList<Tech> ListTechs() throws SQLException {
+    public ArrayList<Tech> ListTechs(String skill) throws SQLException, DaoError {
         ArrayList<Tech> listTech = new ArrayList<>();
         Statement stmt = con.createStatement();
         String reqShTechs = "SELECT * FROM technicien";
+        if (!"".equals(skill)){
+            reqShTechs = "SELECT * FROM technicien WHERE technicien.id IN (SELECT technicienID FROM possede INNER JOIN competence on possede.competenceID = competence.ID WHERE competence.nom ='" + skill + "');";
+        }
         ResultSet rSet = stmt.executeQuery(reqShTechs);
         //tant que des techniciens sont trouvées
         while (rSet.next()){
             listTech.add( createTechFromId(rSet.getInt("id"),rSet) );
         }
-        //remplissage des skills
-        String reqShSkills = "SELECT * FROM possede INNER JOIN competence on possede.competenceID = competence.ID";
-        ResultSet rSkillsSet = stmt.executeQuery(reqShSkills);
-        //tant que des skils sont trouvées
-        while (rSkillsSet.next()){
-            Skill tempSkill = createSkill(rSkillsSet);
-            listTech.get(rSkillsSet.getInt("technicienID")-1).AddSkill(tempSkill);
+        //si aucun techniciens n'a été trouvé
+        if (listTech.size() == 0){
+            throw new DaoError("Aucuns techniciens trouvé");
         }
         return listTech;
+    }
+    
+    /**
+     * Liste les compétences que peuvent avoir les techniciens
+     * @return un ensemble de compétences de techniciens
+     */
+    public ArrayList<String> ListSkills() throws SQLException, DaoError{
+        ArrayList<String> competences = new ArrayList<>();
+        Statement stmt = con.createStatement();
+        String reqLsComp = "SELECT DISTINCT nom FROM competence;";
+        ResultSet rSet = stmt.executeQuery(reqLsComp);
+        //on parcours le tableau de résultat
+        while (rSet.next()){
+            competences.add(rSet.getString("nom")); //on récupère
+        }
+        if(competences.size() == 0){
+            throw new DaoError("Aucunes compétences trouvées");
+        }
+        return competences;
     }
 }
