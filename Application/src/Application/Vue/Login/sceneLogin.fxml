@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -72,14 +73,7 @@
                               <Image url="@../../../images/Icons_divers/badge_2.png" />
                            </image>
                         </ImageView>
-                        <TextField fx:id="passwordLabel" prefHeight="22.0" prefWidth="357.0" promptText="Mot de passe" text="746F746F" HBox.hgrow="ALWAYS">
-                           <font>
-                              <Font name="Carlito Italic" size="19.0" />
-                           </font>
-                           <padding>
-                              <Insets bottom="15.0" left="15.0" top="15.0" />
-                           </padding>
-                        </TextField>
+                        <PasswordField fx:id="passwordLabel" prefHeight="66.0" prefWidth="391.0" text="toto" />
                      </children>
                   </HBox>
                   <Text fill="#e11c1c" strokeType="OUTSIDE" strokeWidth="0.0" text="Message d'erreur en cas d'erreur de connexion" textAlignment="CENTER" visible="false" wrappingWidth="414.13671875" VBox.vgrow="ALWAYS">
