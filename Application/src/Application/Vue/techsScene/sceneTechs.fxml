@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -82,50 +83,83 @@
                   </JFXButton>
                </children>
                <padding>
-                  <Insets bottom="20.0" left="20.0" right="10.0" top="20.0" />
+                  <Insets bottom="20.0" left="20.0" right="10.0" top="10.0" />
                </padding>
             </VBox>
-            <VBox fx:id="scrollSkillParent" layoutX="10.0" layoutY="10.0">
-               <children>
-                  <HBox prefWidth="1294.0" style="-fx-background-color: #BCBECE;">
+            <SplitPane dividerPositions="0.5" orientation="VERTICAL">
+               <items>
+                  <VBox fx:id="scrollSkillParent">
                      <children>
-                        <Label fx:id="skillTechInfo" prefHeight="33.0" text="Compétences de " textFill="#3f4b6c">
+                        <HBox prefWidth="1294.0" style="-fx-background-color: #BCBECE;">
+                           <children>
+                              <Label fx:id="skillTechInfo" prefHeight="33.0" text="Compétences de " textFill="#3f4b6c">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Label fx:id="skillTechName" layoutX="15.0" layoutY="10.0" prefHeight="33.0" text="&lt;prénom nom&gt;" textFill="#3f4b6c">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <VBox fx:id="containerSkills" />
+                        <JFXButton fx:id="addSkillButton" buttonType="RAISED" graphicTextGap="15.0" style="-fx-background-color: #BCBECE;" text="Ajouter une compétence" textFill="#3f4b6c" textOverrun="LEADING_WORD_ELLIPSIS" VBox.vgrow="NEVER">
                            <font>
                               <Font size="18.0" />
                            </font>
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                        </Label>
-                        <Label fx:id="skillTechName" layoutX="15.0" layoutY="10.0" prefHeight="33.0" text="&lt;prénom nom&gt;" textFill="#3f4b6c">
-                           <font>
-                              <Font name="System Bold" size="18.0" />
-                           </font>
-                        </Label>
+                           <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../images/Icons/Icon_00035.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="15.0" left="15.0" top="15.0" />
+                           </VBox.margin>
+                        </JFXButton>
                      </children>
-                  </HBox>
-                  <VBox fx:id="containerSkills" />
-                  <JFXButton fx:id="addSkillButton" buttonType="RAISED" graphicTextGap="15.0" style="-fx-background-color: #BCBECE;" text="Ajouter une compétence" textFill="#3f4b6c" textOverrun="LEADING_WORD_ELLIPSIS" VBox.vgrow="NEVER">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../images/Icons/Icon_00035.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <VBox.margin>
-                        <Insets bottom="15.0" left="15.0" top="15.0" />
-                     </VBox.margin>
-                  </JFXButton>
-                  <PieChart fx:id="chartSkills" startAngle="42.7" title="Chart" visible="false" />
-               </children>
-               <padding>
-                  <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
-               </padding>
-            </VBox>
+                     <padding>
+                        <Insets bottom="20.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+                  <VBox>
+                     <children>
+                        <VBox fx:id="containerSkills1">
+                           <children>
+                              <HBox prefWidth="1294.0" style="-fx-background-color: #BCBECE;">
+                                 <children>
+                                    <Label fx:id="skillTechInfo1" prefHeight="33.0" text="Graphique de compétences de " textFill="#3f4b6c">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <Label fx:id="GraphskillTechName" layoutX="15.0" layoutY="10.0" prefHeight="33.0" text="&lt;prénom nom&gt;" textFill="#3f4b6c">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <PieChart fx:id="chartSkills" startAngle="42.7" visible="false">
+                                 <effect>
+                                    <DropShadow color="#00000027" height="28.0" offsetX="7.0" offsetY="7.0" radius="13.5" width="28.0" />
+                                 </effect>
+                              </PieChart>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </items>
+            </SplitPane>
         </items>
       </SplitPane>
    </children>

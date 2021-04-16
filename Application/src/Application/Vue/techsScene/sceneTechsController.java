@@ -45,6 +45,8 @@ public class sceneTechsController implements Initializable{
     @FXML
     private Label skillTechName;
     @FXML
+    private Label GraphskillTechName;
+    @FXML
     private Label skillTechInfo;
     
     @FXML
@@ -85,7 +87,11 @@ public class sceneTechsController implements Initializable{
             e.printStackTrace();
         }
     }
-
+    
+    /**
+     * Cette fonction créé le scrollpane des techniciens en lui assignant un style et en définissant sa boite parente
+     * à savoir containerTech.
+     */
     public void scrollPaneTech() {
             System.out.println("SceneTechs");
             MyStyle style = new MyStyle("ORANGE", "Carlito");
@@ -96,6 +102,12 @@ public class sceneTechsController implements Initializable{
             //this.vboxLayoutSkills = new VBox(scrollTech.getSPStyle().getBoxSpacing());
     }
     
+    /**
+     * Cette fonction génère les box de techniciens dans le scrollPane des techniciens à partir d'une liste de technicien
+     * @param listTech liste de technicien dont il faudra générer les box
+     * @param SP scrollPane qui contient les boites 
+     * @param boxSkills utile pour définir l'action de clic sur une boite
+     */
     public void initScrollPaneTech(ArrayList<Tech> listTech, MyScrollPane SP, VBox boxSkills) {        
         VBox vboxLayout = new VBox(SP.getSPStyle().getBoxSpacing());
         for (int i = 0; i < listTech.size(); i++) {         
@@ -111,7 +123,14 @@ public class sceneTechsController implements Initializable{
         SP.setContent(vboxLayout);
         SP.setFitToWidth(true);
     }   
-       
+    
+    /**
+     * Cette fonction défini l'action à effectuer quand une boite de technicien est cliqué
+     * @param SP
+     * @param boxTech
+     * @param tech
+     * @param containerSkills 
+     */
     public void setActionBoxTech(MyScrollPane SP, MyCustomBox boxTech, Tech tech, VBox containerSkills) {
         boxTech.setOnMouseClicked((event) -> {
             System.out.println("Instance clicked");
@@ -125,6 +144,11 @@ public class sceneTechsController implements Initializable{
         });
     }
     
+    /**
+     * Cette fonction créé le scrollpane des skills en lui assignant un style et en définissant sa boite parente
+     * à savoir containerSkill.
+     * @param tech 
+     */
     public void scrollPaneSkill(Tech tech) {
         try {
             initData();
@@ -141,41 +165,15 @@ public class sceneTechsController implements Initializable{
         }
     } 
 
+    /**
+     * Cette fonction génère les box de skills d'un technicien passé en paramètre dans le scrollPane de skills
+     * @param tech 
+     */
     public void initScrollPaneSkill(Tech tech) {
         this.containerSkills.getChildren().clear();
         this.scrollSkills.setContent(null);
         
-        VBox vboxLayout = new VBox(this.scrollSkills.getSPStyle().getBoxSpacing());
-        
-        /*
-        for (int i = 0; i < tech.GetSkills().size(); i++) {          
-            //création de la boite principale
-            MyCustomBox boxSkill = new MyCustomBox(this.scrollSkills, tech, this.scrollSkills.getSPStyle());       
-            // Génération de la ligne du nom du technicien
-            String skillName = tech.GetSkills().get(i).getName();
-            String skillLevel = tech.GetSkills().get(i).getLevel();
-            ArrayList<ItemHBox> itemList = new ArrayList();
-            ItemHBox itemName = new ItemHBox(skillName, "", this.scrollSkills.getSPStyle());
-            ItemHBox itemLevel = new ItemHBox("Niveau: ",skillLevel, this.scrollSkills.getSPStyle());
-            itemList.add(itemName);
-            itemList.add(itemLevel);
-            MyRowBox mainSkillRow = new MyRowBox("", "", this.scrollSkills.getSPStyle());
-            mainSkillRow.setStyle("-fx-background-color: " + this.scrollSkills.getSPStyle().getColorBase());
-            mainSkillRow.generateItemHBoxRow(itemList, Priority.ALWAYS);
-            MyButton btn = new MyButton("Modifier", this.scrollSkills.getSPStyle());
-            btn.addIconButton("MODIFIER");
-            mainSkillRow.addButtonToRowBox(btn);
-            // ajout des boites secondaires à la boite principale
-            boxSkill.addRowBoxListItem(mainSkillRow); //ajout de la bôite de titre
-            boxSkill.initBox(); // initialisation de la boite principale      
-            MyCustomBox.setVgrow(boxSkill, Priority.ALWAYS);
-            vboxLayout.getChildren().add(boxSkill);      
-        }
-        this.scrollSkills.setContent(vboxLayout);   
-        this.scrollSkills.setFitToWidth(true);
-        this.containerSkills.getChildren().add(this.scrollSkills);
-        */
-        
+        VBox vboxLayout = new VBox(this.scrollSkills.getSPStyle().getBoxSpacing());         
         for (int i = 0; i < tech.GetSkills().size(); i++) {
             MyRowBox skillRow = new MyRowBox("", "", this.scrollSkills.getSPStyle());
             skillRow.generateSkillGridPane(tech, tech.GetSkills().get(i));
@@ -186,15 +184,20 @@ public class sceneTechsController implements Initializable{
         this.containerSkills.getChildren().add(this.scrollSkills);
         initChart(tech);
     }
-
+    
+    /**
+     * Cette fonction sert à définir le nom de technicien à afficher.
+     * @param tech le technicien à afficher dasn le label
+     */
     public void setTechLabelName(Tech tech) {
         String techName = tech.getFirstName() + " " + tech.getLastName();
         this.skillTechName.setText(techName);
+        this.GraphskillTechName.setText(techName);
     }
     
     private void initChart(Tech tech){
         chartSkills.setVisible(true);
-        chartSkills.setTitle("Graphique des skills de " + tech.toString());
+        //chartSkills.setTitle("Compétences de " + tech.toString());
         chartSkills.getData().clear();
         for (int i = 0; i < tech.GetSkills().size(); i++) {
             chartSkills.getData().add(new PieChart.Data(tech.GetSkills().get(i).getName(), 1.0d));
