@@ -22,8 +22,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Side;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
@@ -199,8 +202,28 @@ public class sceneTechsController implements Initializable{
         chartSkills.setVisible(true);
         //chartSkills.setTitle("Compétences de " + tech.toString());
         chartSkills.getData().clear();
+        chartSkills.setLabelLineLength(20);
+        //chartSkills.setStartAngle(0);
+        chartSkills.setLegendSide(Side.BOTTOM);
+        int idNiveau = 0;
         for (int i = 0; i < tech.GetSkills().size(); i++) {
-            chartSkills.getData().add(new PieChart.Data(tech.GetSkills().get(i).getName(), 1.0d));
+            String niveau = tech.GetSkills().get(i).getLevel();
+            idNiveau = 1;
+            switch (niveau) {
+                case "simple" : idNiveau = 1;
+                break;
+                case "intermédiaire" : idNiveau = 2;
+                break;
+                case "avancé" : idNiveau = 3;
+                break;
+
+            }
+
+            String nameTech = tech.GetSkills().get(i).getName();
+            Data data = new PieChart.Data(nameTech, 1.0d*idNiveau); 
+            chartSkills.getData().add(data);
         }
+
+
     }
 }
