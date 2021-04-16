@@ -86,7 +86,7 @@
                   <Insets bottom="20.0" left="20.0" right="10.0" top="10.0" />
                </padding>
             </VBox>
-            <SplitPane dividerPositions="0.5" orientation="VERTICAL">
+            <SplitPane dividerPositions="0.45264452644526443" orientation="VERTICAL">
                <items>
                   <VBox fx:id="scrollSkillParent">
                      <children>
@@ -130,7 +130,7 @@
                   </VBox>
                   <VBox>
                      <children>
-                        <VBox fx:id="containerSkills1">
+                        <VBox fx:id="containerSkills1" alignment="CENTER" VBox.vgrow="ALWAYS">
                            <children>
                               <HBox prefWidth="1294.0" style="-fx-background-color: #BCBECE;">
                                  <children>
@@ -149,12 +149,15 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <PieChart fx:id="chartSkills" startAngle="42.7" visible="false">
+                              <PieChart fx:id="chartSkills" legendVisible="false" startAngle="42.7" stylesheets="@stylePieChart.css" visible="false">
                                  <effect>
                                     <DropShadow color="#00000027" height="28.0" offsetX="7.0" offsetY="7.0" radius="13.5" width="28.0" />
                                  </effect>
                               </PieChart>
                            </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
                         </VBox>
                      </children>
                   </VBox>
