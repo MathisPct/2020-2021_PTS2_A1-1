@@ -45,3 +45,9 @@ and open the template in the editor.
 .chart-area-symbol {
     -fx-background-radius: 5;
 }
+
+#unique.chart {
+    /*-fx-font-size: 55px;*/
+    -fx-stroke: #daa520;
+    
+}

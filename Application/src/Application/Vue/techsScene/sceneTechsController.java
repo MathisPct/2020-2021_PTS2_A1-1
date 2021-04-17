@@ -8,6 +8,7 @@ package Application.Vue.techsScene;
 import Application.Database.UserDao;
 import Application.Metier.Skill;
 import Application.Metier.Tech;
+import Application.Vue.CustomCharts.DoughnutChart;
 import Application.Vue.customBox.ItemHBox;
 import Application.Vue.customBox.MyButton;
 import Application.Vue.customBox.MyCustomBox;
@@ -20,6 +21,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Side;
@@ -50,10 +53,37 @@ public class sceneTechsController implements Initializable{
     @FXML
     private Label GraphskillTechName;
     @FXML
-    private Label skillTechInfo;
-    
+    private Label skillTechInfo; 
+    @FXML
+    private VBox containerGraph; 
     @FXML
     private PieChart chartSkills = new PieChart();
+    
+    DoughnutChart rChart;
+    
+    private ObservableList<PieChart.Data> createData(Tech tech) {
+        ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
+    
+        int idNiveau = 0;
+        for (int i = 0; i < tech.GetSkills().size(); i++) {
+            String niveau = tech.GetSkills().get(i).getLevel();
+            idNiveau = 1;
+            switch (niveau) {
+                case "Simple" : idNiveau = 1;
+                break;
+                case "Intermédiaire" : idNiveau = 2;
+                break;
+                case "Avancé" : idNiveau = 3;
+                break;
+
+            }
+
+            String nameTech = tech.GetSkills().get(i).getName();
+            PieChart.Data d = new PieChart.Data("   " + nameTech + "   ", 1.0d*idNiveau);
+            pieData.add(d);
+        }          
+        return pieData;     
+    }
     
     public void setTech(Tech tech) {
         this.tech = tech;
@@ -199,31 +229,19 @@ public class sceneTechsController implements Initializable{
     }
     
     private void initChart(Tech tech){
+        containerGraph.getChildren().remove(rChart);
+        rChart = new DoughnutChart(createData(tech));
+        containerGraph.getChildren().add(rChart);
         chartSkills.setVisible(true);
         //chartSkills.setTitle("Compétences de " + tech.toString());
         chartSkills.getData().clear();
         chartSkills.setLabelLineLength(20);
         //chartSkills.setStartAngle(0);
         chartSkills.setLegendSide(Side.BOTTOM);
-        int idNiveau = 0;
-        for (int i = 0; i < tech.GetSkills().size(); i++) {
-            String niveau = tech.GetSkills().get(i).getLevel();
-            idNiveau = 1;
-            switch (niveau) {
-                case "simple" : idNiveau = 1;
-                break;
-                case "intermédiaire" : idNiveau = 2;
-                break;
-                case "avancé" : idNiveau = 3;
-                break;
-
-            }
-
-            String nameTech = tech.GetSkills().get(i).getName();
-            Data data = new PieChart.Data(nameTech, 1.0d*idNiveau); 
-            chartSkills.getData().add(data);
-        }
-
-
+        rChart.setAnimated(true);
+        rChart.getStyleClass().add("unique");
+        rChart.setId("unique");
+        rChart.setLegendVisible(false);
+        //rChart.
     }
 }

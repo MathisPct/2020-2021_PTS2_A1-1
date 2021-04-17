@@ -2,11 +2,9 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -130,7 +128,7 @@
                   </VBox>
                   <VBox>
                      <children>
-                        <VBox fx:id="containerSkills1" alignment="CENTER" VBox.vgrow="ALWAYS">
+                        <VBox fx:id="containerGraph" alignment="TOP_CENTER" stylesheets="@../CustomCharts/stylePieChart.css" VBox.vgrow="ALWAYS">
                            <children>
                               <HBox prefWidth="1294.0" style="-fx-background-color: #BCBECE;">
                                  <children>
@@ -149,11 +147,6 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <PieChart fx:id="chartSkills" legendVisible="false" startAngle="42.7" stylesheets="@stylePieChart.css" visible="false">
-                                 <effect>
-                                    <DropShadow color="#00000027" height="28.0" offsetX="7.0" offsetY="7.0" radius="13.5" width="28.0" />
-                                 </effect>
-                              </PieChart>
                            </children>
                            <VBox.margin>
                               <Insets bottom="10.0" />
