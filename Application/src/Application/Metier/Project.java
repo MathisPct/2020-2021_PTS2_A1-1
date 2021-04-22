@@ -13,14 +13,14 @@ public class Project {
 	 * Temps du projet en minutes
 	 */
 	private int estimatedDurationMinutes;
-	/**
-	 * Temps estime du projet en hours
-	 */
-	private float estimatedDurationHours;
-	/**
-	 * Temps estime du projet en jours (1 jour = 7h de travail)
-	 */
-	private float estimatedDurationDays;
+//	/**
+//	 * Temps estime du projet en hours
+//	 */
+//	private float estimatedDurationHours;
+//	/**
+//	 * Temps estime du projet en jours (1 jour = 7h de travail)
+//	 */
+//	private float estimatedDurationDays;
 
         
 	/**
@@ -79,18 +79,18 @@ public class Project {
 	}
 
 	public void setEstimatedDurationHours(float aEstimatedDurationHours) {
-		this.estimatedDurationHours = aEstimatedDurationHours;
+		this.estimatedDurationMinutes = Math.round(aEstimatedDurationHours*60);
 	}
 
 	public float getEstimatedDurationHours() {
-		return this.estimatedDurationHours;
+		return this.estimatedDurationMinutes/60;
 	}
 
 	public void setEstimatedDurationDays(float aEstimatedDurationDays) {
-		this.estimatedDurationDays = aEstimatedDurationDays;
+		this.estimatedDurationMinutes = Math.round(aEstimatedDurationDays*24*60);
 	}
 
 	public float getEstimatedDurationDays() {
-		return this.estimatedDurationDays;
+		return (this.estimatedDurationMinutes/60)/24;
 	}
 }
