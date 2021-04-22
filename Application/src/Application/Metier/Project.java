@@ -22,6 +22,7 @@ public class Project {
 	 */
 	private float estimatedDurationDays;
 
+        
 	/**
 	 * Si le projet est en attente, le demarre (status en cours)
 	 * Si le projet est annulée ou terminé, lève une exception
