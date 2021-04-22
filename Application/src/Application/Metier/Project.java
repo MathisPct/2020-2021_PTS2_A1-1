@@ -13,15 +13,6 @@ public class Project {
 	 * Temps du projet en minutes
 	 */
 	private int estimatedDurationMinutes;
-//	/**
-//	 * Temps estime du projet en hours
-//	 */
-//	private float estimatedDurationHours;
-//	/**
-//	 * Temps estime du projet en jours (1 jour = 7h de travail)
-//	 */
-//	private float estimatedDurationDays;
-
         
 	/**
 	 * Si le projet est en attente, le demarre (status en cours)

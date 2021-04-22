@@ -19,11 +19,11 @@ import java.util.ArrayList;
  * @author Eileen Lorenzo
  */
 public class ProjectDao {
-    private static final String colName = "nom";
-    private static final String colEDuration = "dureeEstimee";
-    private static final String colFDuration = "dureeFinale";
-    private static final String colStatus = "statut";
-    private static final String colID = "ID";
+    private static final String COL_NAME = "nom";
+    private static final String COL_E_DURATION = "dureeEstimee";
+    private static final String COL_F_DURATION = "dureeFinale";
+    private static final String COL_STATUS = "statut";
+    private static final String COL_ID = "id";
     
     private Connection con;
     
@@ -40,8 +40,8 @@ public class ProjectDao {
     public ArrayList<Project> listAll() throws SQLException {
         ArrayList<Project> res = new ArrayList<>();
         Statement stmt = con.createStatement();
-        String reqProjets = "SELECT * FROM projet";
-        ResultSet rSet = stmt.executeQuery(reqProjets);
+        String qProjets = "SELECT * FROM projet";
+        ResultSet rSet = stmt.executeQuery(qProjets);
         
         while (rSet.next()){
             res.add(createProject(rSet));
@@ -59,11 +59,11 @@ public class ProjectDao {
     private Project createProject(ResultSet rSet) throws SQLException{
         Project res = new Project();
         
-        res.setID(rSet.getInt(colID));
-        res.setName(rSet.getString(colName));
-        res.setStatus(stringToProjectStatus(rSet.getString(colStatus)));
-        res.setFinalDuration(rSet.getInt(colFDuration));
-        res.setEstimatedDurationMinutes(rSet.getInt(colEDuration));
+        res.setID(rSet.getInt(COL_ID));
+        res.setName(rSet.getString(COL_NAME));
+        res.setStatus(stringToProjectStatus(rSet.getString(COL_STATUS)));
+        res.setFinalDuration(rSet.getInt(COL_F_DURATION));
+        res.setEstimatedDurationMinutes(rSet.getInt(COL_E_DURATION));
         
         return res;
     }
@@ -89,6 +89,48 @@ public class ProjectDao {
                           break;
                           
             default : res = null;                
+        }
+        
+        return res;
+    }
+    
+    /**
+     * Met à jour le projet donné dans la base de données avec les données du programme
+     * @param p le projet à mettre à jour
+     */
+    public void update(Project p) throws SQLException {
+        Statement stmt = con.createStatement();
+        String qUpdate = "UPDATE projet SET"
+                + " nom = '"+p.getName()+"',"
+                + " dureeEstimee = "+p.getEstimatedDurationMinutes()+","
+                + " dureeFinale = "+p.getFinalDuration()+","
+                + " statut = '"+projectStatusToString(p.getStatus())+"' "
+                + " WHERE id = "+p.getID()+";";
+        stmt.executeUpdate(qUpdate);
+        
+    }
+    
+        /**
+     * Permet de permuter un ProjectStatus en String 
+     * @param ps le ProjectStatus à permuter
+     * @return l'équivalent de type string
+     */
+    private static String projectStatusToString(ProjectStatus ps){
+        String res;
+        switch(ps){
+            case ENDED : res = "fini";
+                          break;
+                          
+            case WAITING : res = "en attente";
+                          break;
+             
+            case WORKING : res = "en cours";
+                          break;
+                          
+            case CANCELED : res = "annule";
+                          break;
+                          
+            default : res = "";                
         }
         
         return res;
