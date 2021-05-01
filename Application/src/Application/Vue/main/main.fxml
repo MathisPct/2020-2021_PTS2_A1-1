@@ -28,7 +28,7 @@
                               <Image url="@../../../images/Icons/Icon_00028.png" />
                            </image>
                         </ImageView>
-                        <Label graphicTextGap="10.0" prefHeight="33.0" prefWidth="131.0" text="Prototype" textFill="WHITE" HBox.hgrow="SOMETIMES">
+                        <Label graphicTextGap="10.0" text="Prototype" textFill="WHITE" textOverrun="WORD_ELLIPSIS" HBox.hgrow="SOMETIMES">
                            <font>
                               <Font size="23.0" />
                            </font>
@@ -36,43 +36,25 @@
                               <Insets left="15.0" />
                            </HBox.margin>
                         </Label>
-                        <AnchorPane prefHeight="53.0" prefWidth="449.0" HBox.hgrow="ALWAYS" />
-                        <ImageView fitHeight="32.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="SOMETIMES">
-                           <image>
-                              <Image url="@../../../images/Icons/Icon_00007.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </ImageView>
-                        <Label fx:id="namesEmployee" graphicTextGap="10.0" prefHeight="23.0" text="prénom nom" textFill="WHITE" HBox.hgrow="SOMETIMES">
-                           <font>
-                              <Font name="Carlito" size="18.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                        </Label>
-                        <AnchorPane layoutX="211.0" layoutY="10.0" prefHeight="53.0" prefWidth="419.0" />
-                        <AnchorPane prefHeight="53.0" prefWidth="0.0" HBox.hgrow="ALWAYS">
+                        <AnchorPane HBox.hgrow="ALWAYS" />
+                        <HBox alignment="CENTER" HBox.hgrow="NEVER">
                            <children>
-                              <ImageView fitHeight="41.0" fitWidth="35.0" layoutX="68.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="7.0">
+                              <ImageView fitHeight="32.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../images/Icons_divers/Icons_divers_00000.png" />
+                                    <Image url="@../../../images/Icons/Icon_00007.png" />
                                  </image>
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
                               </ImageView>
-                              <ImageView fitHeight="41.0" fitWidth="35.0" layoutX="52.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="46.0">
-                                 <image>
-                                    <Image url="@../../../images/Icons_divers/Icons_divers_00001.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fitHeight="41.0" fitWidth="35.0" layoutX="28.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="89.0">
-                                 <image>
-                                    <Image url="@../../../images/Icons_divers/Icons_divers_00002.png" />
-                                 </image>
-                              </ImageView>
+                              <Label fx:id="namesEmployee" graphicTextGap="10.0" text="prénom nom" textFill="WHITE" textOverrun="CLIP">
+                                 <font>
+                                    <Font name="Carlito" size="18.0" />
+                                 </font>
+                              </Label>
                            </children>
-                        </AnchorPane>
+                        </HBox>
+                        <AnchorPane layoutX="211.0" layoutY="10.0" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                </children>
