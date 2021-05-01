@@ -134,11 +134,6 @@ public class Project {
     }
     
 
-    @Override
-    public String toString() {
-        return " " + this.status;
-    }
-
     public String activitiesToString() {
         String res = "";
         for(int i=0; i< activities.size(); i++){
