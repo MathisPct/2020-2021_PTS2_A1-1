@@ -6,6 +6,7 @@
 package Application.Database;
 
 import Application.Metier.Project;
+import Application.Metier.ProjectStatus;
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -38,21 +39,27 @@ public class ProjectDaoTest {
         ArrayList<Project> projects = instance.listAll();
         Project projet1 = projects.get(0);
         String result = projet1.getName();
-        String expResult = "smart city";
+        String expResult = "Test Update";
         
         assertEquals(expResult, result);
         
         projet1 = projects.get(1);
         result = projet1.getName();
+        ProjectStatus eres2 = ProjectStatus.WAITING;
+        ProjectStatus res2 = projet1.getStatus();
         expResult = "war gaming";
         
         assertEquals(expResult, result);
+        assertEquals(eres2, res2);
         
         projet1 = projects.get(2);
         result = projet1.getName();
         expResult = "bitcoin";
+        eres2 = ProjectStatus.WORKING;
+        res2 = projet1.getStatus();
         
         assertEquals(expResult, result);
+        assertEquals(eres2, res2);
     }
     
     @Test
