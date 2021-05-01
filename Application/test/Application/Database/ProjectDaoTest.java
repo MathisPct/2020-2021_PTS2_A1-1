@@ -41,6 +41,18 @@ public class ProjectDaoTest {
         String expResult = "smart city";
         
         assertEquals(expResult, result);
+        
+        projet1 = projects.get(1);
+        result = projet1.getName();
+        expResult = "war gaming";
+        
+        assertEquals(expResult, result);
+        
+        projet1 = projects.get(2);
+        result = projet1.getName();
+        expResult = "bitcoin";
+        
+        assertEquals(expResult, result);
     }
     
     @Test
