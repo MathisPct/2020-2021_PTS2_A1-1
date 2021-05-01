@@ -27,6 +27,24 @@ public class Material {
         this.DeliveryDate = DeliveryDate;
         this.price = price;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public Date getDeliveryDate() {
+        return DeliveryDate;
+    }
+    
+    
     
     
             

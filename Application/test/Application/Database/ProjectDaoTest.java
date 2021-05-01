@@ -41,6 +41,10 @@ public class ProjectDaoTest {
         String result = projet1.getName();
         String expResult = "Test Update";
         
+        String res1_2 = projet1.materialsToString();
+        String expRes1_2 = "souris 5 150.0 2019-08-01 | mamy choice 3 450.0 2020-07-28 | ";
+        assertEquals(expRes1_2, res1_2);
+        System.out.println(projet1.activitiesToString());
         assertEquals(expResult, result);
         
         projet1 = projects.get(1);
@@ -51,6 +55,10 @@ public class ProjectDaoTest {
         
         assertEquals(expResult, result);
         assertEquals(eres2, res2);
+        String res2_2 = projet1.materialsToString();
+        String expRes2_2 = "sas 1 250.0 2020-06-01 | ";
+        assertEquals(expRes2_2, res2_2);
+        System.out.println(projet1.activitiesToString());
         
         projet1 = projects.get(2);
         result = projet1.getName();
@@ -60,6 +68,10 @@ public class ProjectDaoTest {
         
         assertEquals(expResult, result);
         assertEquals(eres2, res2);
+        String res3_2 = projet1.materialsToString();
+        String expRes3_2 = "asus 1 150.0 2020-06-01 | raspberry 5 125.0 2019-06-17 | haut parleur 1 3000.0 2020-11-18 | ";
+        assertEquals(expRes3_2, res3_2);
+        System.out.println(projet1.activitiesToString());
     }
     
     @Test

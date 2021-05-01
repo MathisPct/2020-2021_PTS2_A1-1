@@ -5,16 +5,10 @@
  */
 package Application.Database;
 
-<<<<<<< Updated upstream
-import Application.Metier.Project;
-import Application.Metier.ProjectStatus;
-import Application.Metier.Tech;
-=======
 
 import Application.Metier.Activity;
 import Application.Metier.Material;
 import Application.Metier.Project;
->>>>>>> Stashed changes
 import com.mysql.jdbc.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,9 +25,7 @@ public class ProjectDao {
     private static final int COL_F_DURATION = 5;
     private static final int COL_STATUS = 6;
     private static final int COL_ID = 1;
-    
-<<<<<<< Updated upstream
-=======
+
     private static final int COL_ASTATUS = 1;
     private static final int COL_TYPE = 2;
     private static final int COL_SUMMARY = 3;
@@ -49,7 +41,6 @@ public class ProjectDao {
     private static final int COL_MATNAME = 5;
     private static final int COL_TYPENAME = 6;    
     
->>>>>>> Stashed changes
     private Connection con;
     
     public ProjectDao()throws ClassNotFoundException, SQLException {
@@ -82,15 +73,6 @@ public class ProjectDao {
      * @throws SQLException 
      */
     private Project createProject(ResultSet rSet) throws SQLException{
-<<<<<<< Updated upstream
-        Project res = new Project();
-        
-        res.setID(rSet.getInt(COL_ID));
-        res.setName(rSet.getString(COL_NAME));
-        res.setStatus(stringToProjectStatus(rSet.getString(COL_STATUS)));
-        res.setFinalDuration(rSet.getInt(COL_F_DURATION));
-        res.setEstimatedDurationMinutes(rSet.getInt(COL_E_DURATION));
-=======
         Project project = new Project();
         
         //infos Générales du projet
@@ -179,86 +161,6 @@ public class ProjectDao {
                 + " statut = '"+Converter.projectStatusToString(p.getStatus())+"' "
                 + " WHERE id = "+p.getID()+";";
         stmt.executeUpdate(qUpdate);
->>>>>>> Stashed changes
-        
-        return res;
-    }
-
-
-    
-<<<<<<< Updated upstream
-    /**
-     * Permet de permuter une String en ProjectStatus
-     * @param s la string à permuter
-     * @return l'équivalent de type ProjectStatus
-     */
-    private static ProjectStatus stringToProjectStatus(String s){
-        ProjectStatus res;
-        switch(s){
-            case "fini" : res = ProjectStatus.ENDED;
-                          break;
-                          
-            case "en attente" : res = ProjectStatus.WAITING;
-                          break;
-             
-            case "en cours" : res = ProjectStatus.WORKING;
-                          break;
-                          
-            case "annule" : res = ProjectStatus.CANCELED;
-                          break;
-                          
-            default : res = null;                
-        }
-        
-        return res;
-    }
-    
-    /**
-     * Met à jour le projet donné dans la base de données avec les données du programme
-     * @param p le projet à mettre à jour
-     */
-    public void update(Project p) throws SQLException {
-        Statement stmt = con.createStatement();
-        String qUpdate = "UPDATE projet SET"
-                + " nom = '"+p.getName()+"',"
-                + " dureeEstimee = "+p.getEstimatedDurationMinutes()+","
-                + " dureeFinale = "+p.getFinalDuration()+","
-                + " statut = '"+projectStatusToString(p.getStatus())+"' "
-                + " WHERE id = "+p.getID()+";";
-        stmt.executeUpdate(qUpdate);
         
     }
-    
-        /**
-     * Permet de permuter un ProjectStatus en String 
-     * @param ps le ProjectStatus à permuter
-     * @return l'équivalent de type string
-     */
-    private static String projectStatusToString(ProjectStatus ps){
-        String res;
-        switch(ps){
-            case ENDED : res = "fini";
-                          break;
-                          
-            case WAITING : res = "en attente";
-                          break;
-             
-            case WORKING : res = "en cours";
-                          break;
-                          
-            case CANCELED : res = "annule";
-                          break;
-                          
-            default : res = "";                
-        }
-        
-        return res;
-    }
-=======
-    
-    
-    
- 
-    
->>>>>>> Stashed changes
 }

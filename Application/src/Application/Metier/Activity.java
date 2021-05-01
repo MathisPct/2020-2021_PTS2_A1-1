@@ -29,6 +29,34 @@ public class Activity {
         this.details = details;
         this.duration = duration;
     }
+
+    public ActivityStatus getStatus() {
+        return status;
+    }
+
+    public ActivityType getType() {
+        return type;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
     
     
     
