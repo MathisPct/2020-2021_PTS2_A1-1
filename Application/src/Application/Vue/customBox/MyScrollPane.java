@@ -83,9 +83,9 @@ public class MyScrollPane extends ScrollPane{
         System.out.println("generateItemBoxProject");
 
         // Génération des Item de la boite
-        String client = "<nom du client>";
+        String client = p.getName();
         String statut = "<statut>";
-        //statut = p.getStatusString();
+        statut = p.getStatusString();
         String dateCommande = "00/00/0000";
         String dateLivraison = "00/00/0000";
         String totalActivite = "0";

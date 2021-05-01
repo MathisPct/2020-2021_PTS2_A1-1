@@ -38,7 +38,7 @@ public class ProjectDaoTest {
         ArrayList<Project> projects = instance.listAll();
         Project projet1 = projects.get(0);
         String result = projet1.getName();
-        String expResult = "smart city";
+        String expResult = "Test Update";
         
         assertEquals(expResult, result);
     }
