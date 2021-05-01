@@ -5,6 +5,7 @@
  */
 package Application.Vue.projectsScene;
 
+import Application.Database.ProjectDao;
 import Application.Metier.Project;
 import Application.Metier.Tech;
 import Application.Vue.customBox.MyCustomBox;
@@ -13,9 +14,12 @@ import Application.Vue.customBox.MyStyle;
 import java.net.URL;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javafx.scene.image.ImageView;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -69,8 +73,15 @@ public class SceneProjectsController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("SceneProjects");
-        setListProject();
-        scrollPaneProject();          
+        try {
+            setListProject();
+            scrollPaneProject();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SceneProjectsController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(SceneProjectsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                  
     }    
     
     @FXML
@@ -119,7 +130,8 @@ public class SceneProjectsController implements Initializable {
         });
     }
     
-    public void setListProject() {
+    public void setListProject() throws ClassNotFoundException, SQLException {
+        /*
         Project p1 = new Project();
         Project p2 = new Project();
         Project p3 = new Project();
@@ -131,6 +143,9 @@ public class SceneProjectsController implements Initializable {
         listProject.add(p3);
         listProject.add(p4);
         listProject.add(p5);
+        */
+        ProjectDao projectDAO = new ProjectDao();
+        listProject = projectDAO.listAll();
     }
     
     public void setProject(Project p) {

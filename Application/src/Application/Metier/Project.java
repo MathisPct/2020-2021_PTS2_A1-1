@@ -52,6 +52,18 @@ public class Project {
 	public ProjectStatus getStatus() {
 		return this.status;
 	}
+        
+        public String getStatusString() {
+            String res = "";
+            switch(this.status) {
+                case ENDED: res = "Terminé"; break;
+                case WAITING: res = "En attente"; break;
+                case WORKING: res = "En cours"; break;
+                case CANCELED: res = "Annulé"; break;
+                default : res = "undefined" ; break;
+            }
+            return res;
+	}
 
 	public void setID(int aID) {
 		this.id = aID;

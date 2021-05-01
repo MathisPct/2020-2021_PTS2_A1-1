@@ -5,8 +5,11 @@
  */
 package Application.Vue.customBox;
 
+import Application.Database.ProjectDao;
 import Application.Metier.Project;
+import Application.Metier.ProjectStatus;
 import Application.Metier.Tech;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -43,8 +46,7 @@ public class MyScrollPane extends ScrollPane{
       
     public MyRowBox generateMainProjectRow(Project p) { 
         // Génération de la ligne du nom du technicien
-        //String pName = p.getName();
-        String pName = "<nom du projet>";
+        String pName = p.getName();
         MyRowBox mainTechRow = new MyRowBox(pName, this.style);           
         mainTechRow.generateLineBoxRow();
         return mainTechRow;
@@ -78,10 +80,12 @@ public class MyScrollPane extends ScrollPane{
     public MyRowBox generateItemBoxProject(Project p) {
         // création du container d'Items
         MyRowBox projetItems = new MyRowBox("", this.style);
+        System.out.println("generateItemBoxProject");
 
         // Génération des Item de la boite
         String client = "<nom du client>";
-        String statut = "< statut >";
+        String statut = "<statut>";
+        //statut = p.getStatusString();
         String dateCommande = "00/00/0000";
         String dateLivraison = "00/00/0000";
         String totalActivite = "0";
