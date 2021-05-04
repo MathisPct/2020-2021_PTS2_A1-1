@@ -126,6 +126,12 @@ public class Project {
     public int getId() {
         return id;
     }
+
+    public ArrayList<Activity> getActivities() {
+        return activities;
+    }
+    
+    
     
 
     @Override
