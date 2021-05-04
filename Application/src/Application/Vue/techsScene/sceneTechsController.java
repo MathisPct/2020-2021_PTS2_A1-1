@@ -141,36 +141,7 @@ public class sceneTechsController implements Initializable{
         this.scrollSkills.setContent(null);
         
         VBox vboxLayout = new VBox(this.scrollSkills.getSPStyle().getBoxSpacing());
-        
-        /*
-        for (int i = 0; i < tech.GetSkills().size(); i++) {          
-            //création de la boite principale
-            MyCustomBox boxSkill = new MyCustomBox(this.scrollSkills, tech, this.scrollSkills.getSPStyle());       
-            // Génération de la ligne du nom du technicien
-            String skillName = tech.GetSkills().get(i).getName();
-            String skillLevel = tech.GetSkills().get(i).getLevel();
-            ArrayList<ItemHBox> itemList = new ArrayList();
-            ItemHBox itemName = new ItemHBox(skillName, "", this.scrollSkills.getSPStyle());
-            ItemHBox itemLevel = new ItemHBox("Niveau: ",skillLevel, this.scrollSkills.getSPStyle());
-            itemList.add(itemName);
-            itemList.add(itemLevel);
-            MyRowBox mainSkillRow = new MyRowBox("", "", this.scrollSkills.getSPStyle());
-            mainSkillRow.setStyle("-fx-background-color: " + this.scrollSkills.getSPStyle().getColorBase());
-            mainSkillRow.generateItemHBoxRow(itemList, Priority.ALWAYS);
-            MyButton btn = new MyButton("Modifier", this.scrollSkills.getSPStyle());
-            btn.addIconButton("MODIFIER");
-            mainSkillRow.addButtonToRowBox(btn);
-            // ajout des boites secondaires à la boite principale
-            boxSkill.addRowBoxListItem(mainSkillRow); //ajout de la bôite de titre
-            boxSkill.initBox(); // initialisation de la boite principale      
-            MyCustomBox.setVgrow(boxSkill, Priority.ALWAYS);
-            vboxLayout.getChildren().add(boxSkill);      
-        }
-        this.scrollSkills.setContent(vboxLayout);   
-        this.scrollSkills.setFitToWidth(true);
-        this.containerSkills.getChildren().add(this.scrollSkills);
-        */
-        
+  
         for (int i = 0; i < tech.GetSkills().size(); i++) {
             MyRowBox skillRow = new MyRowBox("", "", this.scrollSkills.getSPStyle());
             skillRow.generateSkillGridPane(tech, tech.GetSkills().get(i));
