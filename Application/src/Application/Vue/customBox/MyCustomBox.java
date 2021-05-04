@@ -73,7 +73,6 @@ public class MyCustomBox extends VBox {
         
         for (int i = 1; i<this.rowBoxList.size(); i++) {
             this.Vcontainer.getChildren().remove(this.rowBoxList.get(i));
-            System.out.println("fermeture sous-boite n°"+i);
             }
         this.rowBoxList.get(0).setTitleBasic(this.rowBoxList.get(0).getTitle());
         rowBoxList.get(0).setBoxBarColor(this.style.getColorBaseBar());
@@ -84,8 +83,6 @@ public class MyCustomBox extends VBox {
         for (int i = 1; i<this.rowBoxList.size(); i++) {
             this.Vcontainer.getChildren().add(this.rowBoxList.get(i));
             this.rowBoxList.get(i).setBoxBarColor(this.style.getColorSelected());
-            
-            System.out.println("ajout sous-boite n°"+i);
             }
         this.rowBoxList.get(0).setTitleSelected(this.rowBoxList.get(0).getTitle());
         rowBoxList.get(0).setBoxBarColor(this.style.getColorSelected());
@@ -95,34 +92,9 @@ public class MyCustomBox extends VBox {
     public Tech GetTech() {
         return this.tech;
     }
-    
-    //public void openBox() {
-    
+      
     public void openBoxAction() {
-        //this.setOnMouseClicked((event) -> {
-            // affichage console boite clickée
-            System.out.println("Custom box clicked");
-            
-            //findBox(this);
-        
-            /*
-            if (this.Vcontainer.getChildren().size() > 1) {
-                for (int i = 1; i<this.rowBoxList.size(); i++) {
-                this.Vcontainer.getChildren().remove(rowBoxList.get(i));
-                rowBoxList.get(0).setBoxBarColor(this.style.getColorBaseBar());
-                rowBoxList.get(0).setBoxColor(this.style.getColorBase());
-                }               
-            }
-            else {
-                for (int i = 1; i<this.rowBoxList.size(); i++) {    
-                this.Vcontainer.getChildren().add(rowBoxList.get(i));
-                rowBoxList.get(0).setBoxBarColor(this.style.getColorSelected());
-                rowBoxList.get(0).setBoxColor(this.style.getColorSelected());
-                rowBoxList.get(i).setBoxBarColor(this.style.getColorSelected());
-            }
-                
-            } */
-        //}); 
+        System.out.println("Custom box clicked");  
     }
     
     
