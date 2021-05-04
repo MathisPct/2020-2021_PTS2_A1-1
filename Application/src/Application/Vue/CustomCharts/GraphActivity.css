@@ -4,15 +4,16 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : 16 avr. 2021, 14:25:43
+    Created on : 4 mai 2021, 22:04:09
     Author     : David
 */
 
-.default-color0.chart-pie { -fx-pie-color: #FF8E34; } /* orange */
-.default-color1.chart-pie { -fx-pie-color: #3F4B6C; }  /* bleu deep */
-.default-color2.chart-pie { -fx-pie-color: #FFC79A; } /* orange rosé */
-.default-color3.chart-pie { -fx-pie-color: #FFE4CA; } /* orange rosé light */
-.default-color4.chart-pie { -fx-pie-color: #799BD0; } /* bleu clair  */
+.default-color0.chart-pie { -fx-pie-color: #3F4B6C; }  /* bleu deep */
+.default-color1.chart-pie { -fx-pie-color: #799BD0; } /* bleu clair  */
+.default-color2.chart-pie { -fx-pie-color: #FF5134; } /* rouge activités prévues  */
+.default-color3.chart-pie { -fx-pie-color: #FF8E34; } /* orange */
+.default-color4.chart-pie { -fx-pie-color: #FFC79A; } /* orange rosé */
+.default-color5.chart-pie { -fx-pie-color: #FFE4CA; } /* orange rosé light */
  
 
 /*
@@ -49,4 +50,20 @@ and open the template in the editor.
     /*-fx-font-size: 55px;*/
     -fx-stroke: #daa520;
     
+}
+
+.realisees {
+    -fx-text-fill: #3F4B6C;
+}
+
+.enCours {
+    -fx-text-fill: #799BD0;
+}
+
+.annulees {
+    -fx-text-fill: #000000;
+}
+
+.prevues {
+    -fx-text-fill: #FF5134;
 }

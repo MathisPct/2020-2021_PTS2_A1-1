@@ -27,6 +27,12 @@ public class Activity {
         this.summary = summary;
         this.details = details;
     }
+
+    public ActivityStatus getStatus() {
+        return status;
+    }
+    
+    
     
     
 }

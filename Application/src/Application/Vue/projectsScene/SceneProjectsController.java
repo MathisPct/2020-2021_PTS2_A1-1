@@ -66,8 +66,7 @@ public class SceneProjectsController implements Initializable {
             Logger.getLogger(SceneProjectsController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(SceneProjectsController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-                  
+        }                
     }
     
     public void scrollPaneProject() {
@@ -128,12 +127,12 @@ public class SceneProjectsController implements Initializable {
         this.paneDetailProject.getChildren().add(detailBox);
     }
     
-    public void initGraphActivity(Project p) throws IOException {
+    public void initGraphActivity(Project p) throws IOException {       
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Application/Vue/projectsGraphs/projectsGraphActivity/sceneGraphActivity.fxml"));
         SceneGraphActivityController controller = new SceneGraphActivityController(p);
         loader.setController(controller);
         VBox graphBox = loader.load();
-        this.paneDetailProject.getChildren().add(graphBox);
+        this.paneDetailProject.getChildren().add(graphBox);        
     }
     
 }

@@ -81,7 +81,7 @@ public class sceneTechsController implements Initializable{
     @FXML
     private PieChart chartSkills = new PieChart();
     
-    DoughnutChart rChart;
+    private DoughnutChart rChart;
     
     private ObservableList<PieChart.Data> createData(Tech tech) {
         ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
@@ -91,7 +91,7 @@ public class sceneTechsController implements Initializable{
             String niveau = tech.GetSkills().get(i).getLevel();
             idNiveau = 1;
             switch (niveau) {
-                case "Simple" : idNiveau = 1;
+                case "Simple" : idNiveau = 1; 
                 break;
                 case "Intermédiaire" : idNiveau = 2;
                 break;
@@ -282,12 +282,9 @@ public class sceneTechsController implements Initializable{
      */
     public void initScrollPaneSkill(Tech tech) {
         this.containerSkills.getChildren().clear();
-        this.scrollSkills.setContent(null);
-        
+        this.scrollSkills.setContent(null);     
 
         VBox vboxLayout = new VBox(this.scrollSkills.getSPStyle().getBoxSpacing());
-  
-
 
         for (int i = 0; i < tech.GetSkills().size(); i++) {
             MyRowBox skillRow = new MyRowBox("", "", this.scrollSkills.getSPStyle());
@@ -319,11 +316,10 @@ public class sceneTechsController implements Initializable{
         chartSkills.getData().clear();
         chartSkills.setLabelLineLength(20);
         //chartSkills.setStartAngle(0);
-        chartSkills.setLegendSide(Side.BOTTOM);
         rChart.setAnimated(true);
         rChart.getStyleClass().add("unique");
         rChart.setId("unique");
         rChart.setLegendVisible(false);
-        //rChart.
+
     }
 }
