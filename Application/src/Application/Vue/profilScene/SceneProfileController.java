@@ -92,11 +92,14 @@ public class SceneProfileController implements Initializable {
             if (!passwordLabel.getText().equals(passwordVerifLabel.getText()) ){
                 throw new BadPasswordError("Les 2 mots de passes ne sont pas les mêmes");
             }   
+            //si l'un des mots de passe est vide
+            else if(passwordLabel.getText().isEmpty() || passwordVerifLabel.getText().isEmpty()){
+                throw new BadPasswordError("L'un des mots de passe est vide");
+            }
             else if (!Utils.IsPasswordSafe(passwordLabel.getText())){
                 throw new BadPasswordError("Le mot de passe n'est pas assez sécurisé");
             }
             else{
-                
                 this.userConnected.setFirstName(prenomLabel.getText());
                 this.userConnected.setLastName(nomLabel.getText());
                 this.userConnected.setPasswordHash(Utils.HashPassword(passwordLabel.getText()));

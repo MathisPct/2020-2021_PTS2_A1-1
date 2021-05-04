@@ -1,5 +1,6 @@
 package Application.Metier;
 
+import Application.Database.BadPasswordError;
 import java.util.Scanner;
 
 /**
@@ -36,8 +37,9 @@ public class Utils {
 	 * Une force suffisante = Longueur comprise entre 6 et 15 caractères
          *                        Avec au moins une lettre, un chiffre, une majuscule, et aucun caractère alphanumérique XX 
          * @return true si le mot de passe est assez complexe
+         * @throws exception si le mot de passe entré en paramètre est vide
 	 */
-	public static boolean IsPasswordSafe(String aPass) {
+	public static boolean IsPasswordSafe(String aPass) throws BadPasswordError {
             boolean Safe = false;
             boolean longueur = false;
             boolean minuscule = false;
@@ -47,6 +49,10 @@ public class Utils {
             int temp;
             int codeAscii;           
             int i;
+            
+            if(aPass.isEmpty()){
+                throw new BadPasswordError("Le mot de passe est vide");
+            }
             
             Scanner sc = new Scanner(aPass);
             String str = sc.next();
