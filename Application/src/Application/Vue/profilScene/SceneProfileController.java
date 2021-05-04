@@ -39,6 +39,13 @@ public class SceneProfileController implements Initializable {
     private TextField prenomLabel;
     
     /**
+     * Attribut chaine de caractère qui correspond au label "Identifiant" dans 
+     * le fichier FXML associé
+     */
+    @FXML
+    private TextField loginLabel;
+    
+    /**
      * Attribut chaine de caractère qui correspond au label "Mot de passe" dans la scène
      */
     @FXML
@@ -84,6 +91,7 @@ public class SceneProfileController implements Initializable {
         System.out.println("SceneProfil");
         this.nomLabel.setText(userConnected.getLastName());
         this.prenomLabel.setText(userConnected.getFirstName());
+        this.loginLabel.setText(userConnected.getLogin());
     } 
     
     public void validate() throws SQLException, IOException{
@@ -102,6 +110,7 @@ public class SceneProfileController implements Initializable {
             else{
                 this.userConnected.setFirstName(prenomLabel.getText());
                 this.userConnected.setLastName(nomLabel.getText());
+                this.userConnected.setLogin(loginLabel.getText());
                 this.userConnected.setPasswordHash(Utils.HashPassword(passwordLabel.getText()));
                 dao.Update(userConnected);
                 this.mainController.initFieldsUser();
