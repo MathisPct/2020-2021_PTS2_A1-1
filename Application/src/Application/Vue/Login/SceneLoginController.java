@@ -13,6 +13,7 @@ import Application.Database.DaoError;
 import Application.Database.UserDao;
 import Application.Main;
 import Application.Metier.User;
+import Application.Metier.Utils;
 import Application.Vue.UtilsIHM;
 import Application.Vue.main.MainController;
 import com.jfoenix.controls.JFXButton;
@@ -24,6 +25,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -42,11 +44,9 @@ public class SceneLoginController implements Initializable {
      * Attribut chaine de caractère qui correspond au label "Mot de passe" dans la scène
      */
     @FXML
-    private TextField passwordLabel;
+    private PasswordField passwordLabel;
 
     private UserDao dao;
-
-    private UtilsIHM utils = new UtilsIHM();
 
     /**
      * Utilisateur crée lors de la recherche d'un user dans la BDD avec read(login,mdp)
@@ -65,7 +65,7 @@ public class SceneLoginController implements Initializable {
             this.dao = new UserDao();
         }catch(SQLException eSQL){
             eSQL.printStackTrace();
-            this.utils.afficherErreur(eSQL.getLocalizedMessage());
+            UtilsIHM.afficherErreur(eSQL.getLocalizedMessage());
         }
     }
     
@@ -83,7 +83,7 @@ public class SceneLoginController implements Initializable {
         try{
             User user;
             System.out.println("Connexion");
-            user = dao.Read(idLabel.getText(), passwordLabel.getText());
+            user = dao.Read(idLabel.getText(), Utils.HashPassword(passwordLabel.getText()).toUpperCase());
             user.setIsConnected(true);
             this.userConnected.Copy(user);
             //dès que l'utilisateur est connecté
@@ -92,7 +92,7 @@ public class SceneLoginController implements Initializable {
             this.mainController.projects(); 
         }catch(DaoError e){
             e.printStackTrace();
-            utils.afficherErreur(e.getLocalizedMessage());
+            UtilsIHM.afficherErreur(e.getLocalizedMessage());
         }
     }
     

@@ -5,6 +5,6 @@ package Application.Database;
  */
 public class BadPasswordError extends DaoError {
     public BadPasswordError(){
-        super();
+        super("Mauvais mot de passe");
     }
 }

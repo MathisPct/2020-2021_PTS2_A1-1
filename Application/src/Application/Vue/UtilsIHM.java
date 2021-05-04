@@ -12,7 +12,7 @@ public class UtilsIHM {
      * @param message Le message d'erreur à afficher
      * @autor Mathis Poncet
      */
-    public void afficherErreur(String message) {
+    public static void afficherErreur(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Erreur !");
         alert.setHeaderText(null);
