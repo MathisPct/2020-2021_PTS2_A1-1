@@ -284,7 +284,11 @@ public class sceneTechsController implements Initializable{
         this.containerSkills.getChildren().clear();
         this.scrollSkills.setContent(null);
         
-        VBox vboxLayout = new VBox(this.scrollSkills.getSPStyle().getBoxSpacing());         
+
+        VBox vboxLayout = new VBox(this.scrollSkills.getSPStyle().getBoxSpacing());
+  
+
+
         for (int i = 0; i < tech.GetSkills().size(); i++) {
             MyRowBox skillRow = new MyRowBox("", "", this.scrollSkills.getSPStyle());
             skillRow.generateSkillGridPane(tech, tech.GetSkills().get(i));

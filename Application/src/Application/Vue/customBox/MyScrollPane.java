@@ -5,8 +5,11 @@
  */
 package Application.Vue.customBox;
 
+import Application.Database.ProjectDao;
 import Application.Metier.Project;
+import Application.Metier.ProjectStatus;
 import Application.Metier.Tech;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -43,8 +46,7 @@ public class MyScrollPane extends ScrollPane{
       
     public MyRowBox generateMainProjectRow(Project p) { 
         // Génération de la ligne du nom du technicien
-        //String pName = p.getName();
-        String pName = "<nom du projet>";
+        String pName = p.getName();
         MyRowBox mainTechRow = new MyRowBox(pName, this.style);           
         mainTechRow.generateLineBoxRow();
         return mainTechRow;
@@ -78,26 +80,21 @@ public class MyScrollPane extends ScrollPane{
     public MyRowBox generateItemBoxProject(Project p) {
         // création du container d'Items
         MyRowBox projetItems = new MyRowBox("", this.style);
+        System.out.println("generateItemBoxProject");
 
         // Génération des Item de la boite
-        String client = "<nom du client>";
-        String statut = "< statut >";
+        String client = p.getName();
+        String statut = "<statut>";
+        statut = p.getStatusString();
         String dateCommande = "00/00/0000";
-        String dateLivraison = "00/00/0000";
         String totalActivite = "0";
-        String prevue = "0";
-        String terminee = "0";
-        String enCours = "0";
-        String annule = "0";
         ArrayList<ItemVBox> itemBoxList = new ArrayList();
-        ItemVBox i1 = new ItemVBox("Client", client, this.style);
-        ItemVBox i2 = new ItemVBox("Statut", statut, this.style);
-        ItemVBox i3 = new ItemVBox("Commande", dateCommande , this.style);
-        ItemVBox i4 = new ItemVBox("Livraison", dateLivraison , this.style);          
+        ItemVBox i1 = new ItemVBox("Statut", statut, this.style);
+        ItemVBox i2 = new ItemVBox("Client", client, this.style);
+        ItemVBox i3 = new ItemVBox("Commande", dateCommande , this.style);          
         itemBoxList.add(i1);
         itemBoxList.add(i2);
         itemBoxList.add(i3);
-        itemBoxList.add(i4);
         projetItems.generateItemVBoxRow(itemBoxList, Priority.NEVER); //ajout des items à la boite d'item
         
         AnchorPane AP1 = new AnchorPane();
@@ -107,15 +104,7 @@ public class MyScrollPane extends ScrollPane{
         MyRowBox activityItems = new MyRowBox("", this.style);
         ArrayList<ItemVBox> itemBoxListActitvity = new ArrayList();
         ItemVBox ia1 = new ItemVBox("Activités", totalActivite, this.style);
-        ItemVBox ia2 = new ItemVBox("prévues", prevue, this.style);
-        ItemVBox ia3 = new ItemVBox("terminées", terminee, this.style);
-        ItemVBox ia4 = new ItemVBox("En cours", enCours, this.style);
-        ItemVBox ia5 = new ItemVBox("annulées", annule, this.style);
         itemBoxListActitvity.add(ia1);
-        itemBoxListActitvity.add(ia2);
-        itemBoxListActitvity.add(ia3);
-        itemBoxListActitvity.add(ia4);
-        itemBoxListActitvity.add(ia5);
         activityItems.addSubItemBox(itemBoxListActitvity); //ajout des items à la boite d'item
         projetItems.getChildren().add(activityItems); 
         //activityItems.setPrefWidth(400);

@@ -5,27 +5,26 @@
  */
 package Application.Vue.projectsScene;
 
+import Application.Database.ProjectDao;
 import Application.Metier.Project;
-import Application.Metier.Tech;
 import Application.Vue.customBox.MyCustomBox;
 import Application.Vue.customBox.MyScrollPane;
 import Application.Vue.customBox.MyStyle;
+import Application.Vue.projectsDetailsScene.SceneProjectsDetailsController;
+import Application.Vue.projectsGraphs.projectsGraphActivity.SceneGraphActivityController;
 import java.net.URL;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javafx.scene.image.ImageView;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
@@ -35,54 +34,40 @@ import javafx.scene.layout.VBox;
  */
 public class SceneProjectsController implements Initializable {
     private ArrayList<Project> listProject; // liste contenant les project récupérés depuis la dao
-    private Project project;
-    
+    private Project project;   
     @FXML
-    private Label label;
-    
+    private Label label;    
     @FXML
     private ImageView appClose;
-
     @FXML
     private JFXButton projectsWindow;
-
     @FXML
     private JFXButton customers;
-
     @FXML
     private JFXButton techsWindow;
-
     @FXML
     private JFXButton techWindow;
-
     @FXML
     private JFXButton profileWindow;
-
     @FXML
-    private JFXButton deconnectionButton;
-      
-
+    private JFXButton deconnectionButton;     
     @FXML
-    private VBox containerProject;
-
-    
+    private VBox containerProject;  
+    @FXML
+    private VBox paneDetailProject;
+  
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("SceneProjects");
-        setListProject();
-        scrollPaneProject();          
-    }    
-    
-    @FXML
-    public void loadSceneCustomers(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Application/Vue/customersScene/sceneCustomers.fxml"));
-        Scene scene = customers.getScene();
-    }
-    
-    @FXML
-    public void loadSceneLogin(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Application/Vue/customersScene/sceneLogin.fxml"));
-        Scene scene = deconnectionButton.getScene();
+        try {
+            setListProject();
+            scrollPaneProject();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SceneProjectsController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(SceneProjectsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                  
     }
     
     public void scrollPaneProject() {
@@ -116,24 +101,39 @@ public class SceneProjectsController implements Initializable {
             SP.findBox(boxProject);
             boxProject.openBox();
             setProject(p);
+            try {
+                this.paneDetailProject.getChildren().clear();
+                initDetailProject(p);
+                initGraphActivity(p);
+            } catch (IOException ex) {
+                Logger.getLogger(SceneProjectsController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
     }
     
-    public void setListProject() {
-        Project p1 = new Project();
-        Project p2 = new Project();
-        Project p3 = new Project();
-        Project p4 = new Project();
-        Project p5 = new Project();
-        listProject = new ArrayList();
-        listProject.add(p1);
-        listProject.add(p2);
-        listProject.add(p3);
-        listProject.add(p4);
-        listProject.add(p5);
+    public void setListProject() throws ClassNotFoundException, SQLException {
+        ProjectDao projectDAO = new ProjectDao();
+        listProject = projectDAO.listAll();
     }
     
     public void setProject(Project p) {
         this.project = p;
     }
+    
+    public void initDetailProject(Project p) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Application/Vue/projectsDetailsScene/sceneProjectsDetails.fxml"));
+        SceneProjectsDetailsController controller = new SceneProjectsDetailsController(p);
+        loader.setController(controller);
+        VBox detailBox = loader.load();
+        this.paneDetailProject.getChildren().add(detailBox);
+    }
+    
+    public void initGraphActivity(Project p) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Application/Vue/projectsGraphs/projectsGraphActivity/sceneGraphActivity.fxml"));
+        SceneGraphActivityController controller = new SceneGraphActivityController(p);
+        loader.setController(controller);
+        VBox graphBox = loader.load();
+        this.paneDetailProject.getChildren().add(graphBox);
+    }
+    
 }
