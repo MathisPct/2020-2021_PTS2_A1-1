@@ -8,7 +8,7 @@ public class BadUserError extends DaoError {
      *Crée une nouvelle instance de BadUserError
      */
     public BadUserError() {
-        super("Vous ne possédez pas les droits requis pour accéder à cette fonctionnalité");
+        super("L'utilisateur ne correspond pas à celui dans la base de donnée");
     }
 
     /**

@@ -5,8 +5,10 @@
  */
 package Application.Vue.techsScene;
 
+import Application.Database.DaoError;
 import Application.Database.UserDao;
 import Application.Metier.Tech;
+import Application.Vue.UtilsIHM;
 import Application.Vue.customBox.ItemHBox;
 import Application.Vue.customBox.MyButton;
 import Application.Vue.customBox.MyCustomBox;
@@ -21,6 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -40,6 +43,19 @@ public class sceneTechsController implements Initializable{
     private VBox containerTech;  
     @FXML
     private VBox containerSkills;  
+    /**
+     * Liste qui contient les skills possibles pour les techniciens afin d'effectuer
+     * des recherches par skill dans la bdd
+     */
+    @FXML
+    private ComboBox<String> comboBoxSkills = new ComboBox<>();
+    
+    /**
+     * Label qui indique le nombre de techniciens à l'utilisateur
+     */
+    @FXML
+    private Label totalTechs;
+    
     @FXML
     private Label skillTechName;
     @FXML
@@ -66,7 +82,8 @@ public class sceneTechsController implements Initializable{
     }
 
     /**
-     * Initialise la liste des données des techniciens
+     * Initialise les données de la fenêtre tels que la liste des techniciens
+     * et la liste des skills contenues dans la comboBox
      * @throws SQLException
      * @throws ClassNotFoundException
      * @autor Mathis Poncet
@@ -75,12 +92,67 @@ public class sceneTechsController implements Initializable{
         this.dao = new UserDao();
         this.listTechs = new ArrayList<>();
         try {
-            this.listTechs.addAll(this.dao.ListTechs());
+            this.listTechs.addAll(this.dao.ListTechs(""));
+            initNbTechs(); 
+            initComboBox();
         }catch (Exception e){
             e.printStackTrace();
         }
     }
-
+    
+    /**
+     * Initialise la comboBox avec les compétences qui peuvent appartenir aux
+     * techniciens de la BDD
+     * @throws SQLException 
+     */
+    private void initComboBox() throws SQLException{
+        try{
+            this.comboBoxSkills.getItems().add("Tous les skills");
+            this.comboBoxSkills.getItems().addAll(this.dao.ListSkills());
+        }catch(DaoError dao){
+            dao.printStackTrace();
+            UtilsIHM.afficherErreur(dao.getLocalizedMessage());
+        }
+    }
+    
+    /**
+     * Initialise le champ totalTechs qui indique le nombre de techniciens
+     */
+    private void initNbTechs(){
+        this.totalTechs.setText(String.valueOf(this.listTechs.size()));
+    }
+    
+    /**
+     * Lance la recherche par skill lorsqu'un élément est choisi dans 
+     * comboBoxSkills
+     */
+    @FXML
+    public void searchTechsSkill() throws SQLException, DaoError{
+        String skillChoice = comboBoxSkills.getValue();
+        //si tous les skills sont choisis
+        if(comboBoxSkills.getSelectionModel().getSelectedIndex() == 0){
+            skillChoice = "";
+        }
+        System.out.println(skillChoice);
+        try{
+            this.listTechs.clear();
+            this.listTechs.addAll(dao.ListTechs(skillChoice));
+            initNbTechs(); //initialise le nombre de techniciens trouvés
+            this.containerTech.getChildren().clear();
+            this.containerSkills.getChildren().clear();
+            scrollPaneTech();
+            this.skillTechInfo.setText("Choisissez un technicien pour afficher ses compétences");
+            this.skillTechName.setText("");
+        }catch(SQLException eSQL){
+            eSQL.printStackTrace();
+            UtilsIHM.afficherErreur(eSQL.getLocalizedMessage());
+        }catch(DaoError eDao){
+            eDao.printStackTrace();
+            UtilsIHM.afficherErreur(eDao.getLocalizedMessage());
+            comboBoxSkills.getSelectionModel().select(0);
+        }
+    }
+    
     public void scrollPaneTech() {
             System.out.println("SceneTechs");
             MyStyle style = new MyStyle("ORANGE", "Carlito");
