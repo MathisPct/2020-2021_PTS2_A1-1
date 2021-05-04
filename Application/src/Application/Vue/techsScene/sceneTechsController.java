@@ -7,8 +7,13 @@ package Application.Vue.techsScene;
 
 import Application.Database.DaoError;
 import Application.Database.UserDao;
+import Application.Metier.Skill;
 import Application.Metier.Tech;
+
+import Application.Vue.CustomCharts.DoughnutChart;
+
 import Application.Vue.UtilsIHM;
+
 import Application.Vue.customBox.ItemHBox;
 import Application.Vue.customBox.MyButton;
 import Application.Vue.customBox.MyCustomBox;
@@ -21,10 +26,19 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+
+import javafx.geometry.Side;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.PieChart.Data;
+
 import javafx.scene.control.ComboBox;
+
 import javafx.scene.control.Label;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
@@ -59,7 +73,39 @@ public class sceneTechsController implements Initializable{
     @FXML
     private Label skillTechName;
     @FXML
-    private Label skillTechInfo;
+    private Label GraphskillTechName;
+    @FXML
+    private Label skillTechInfo; 
+    @FXML
+    private VBox containerGraph; 
+    @FXML
+    private PieChart chartSkills = new PieChart();
+    
+    DoughnutChart rChart;
+    
+    private ObservableList<PieChart.Data> createData(Tech tech) {
+        ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
+    
+        int idNiveau = 0;
+        for (int i = 0; i < tech.GetSkills().size(); i++) {
+            String niveau = tech.GetSkills().get(i).getLevel();
+            idNiveau = 1;
+            switch (niveau) {
+                case "Simple" : idNiveau = 1;
+                break;
+                case "Intermédiaire" : idNiveau = 2;
+                break;
+                case "Avancé" : idNiveau = 3;
+                break;
+
+            }
+
+            String nameTech = tech.GetSkills().get(i).getName();
+            PieChart.Data d = new PieChart.Data("   " + nameTech + "   ", 1.0d*idNiveau);
+            pieData.add(d);
+        }          
+        return pieData;     
+    }
     
     public void setTech(Tech tech) {
         this.tech = tech;
@@ -101,6 +147,9 @@ public class sceneTechsController implements Initializable{
     }
     
     /**
+
+     * Cette fonction créé le scrollpane des techniciens en lui assignant un style et en définissant sa boite parente
+     * à savoir containerTech.
      * Initialise la comboBox avec les compétences qui peuvent appartenir aux
      * techniciens de la BDD
      * @throws SQLException 
@@ -153,6 +202,7 @@ public class sceneTechsController implements Initializable{
         }
     }
     
+
     public void scrollPaneTech() {
             System.out.println("SceneTechs");
             MyStyle style = new MyStyle("ORANGE", "Carlito");
@@ -163,6 +213,12 @@ public class sceneTechsController implements Initializable{
             //this.vboxLayoutSkills = new VBox(scrollTech.getSPStyle().getBoxSpacing());
     }
     
+    /**
+     * Cette fonction génère les box de techniciens dans le scrollPane des techniciens à partir d'une liste de technicien
+     * @param listTech liste de technicien dont il faudra générer les box
+     * @param SP scrollPane qui contient les boites 
+     * @param boxSkills utile pour définir l'action de clic sur une boite
+     */
     public void initScrollPaneTech(ArrayList<Tech> listTech, MyScrollPane SP, VBox boxSkills) {        
         VBox vboxLayout = new VBox(SP.getSPStyle().getBoxSpacing());
         for (int i = 0; i < listTech.size(); i++) {         
@@ -178,7 +234,14 @@ public class sceneTechsController implements Initializable{
         SP.setContent(vboxLayout);
         SP.setFitToWidth(true);
     }   
-       
+    
+    /**
+     * Cette fonction défini l'action à effectuer quand une boite de technicien est cliqué
+     * @param SP
+     * @param boxTech
+     * @param tech
+     * @param containerSkills 
+     */
     public void setActionBoxTech(MyScrollPane SP, MyCustomBox boxTech, Tech tech, VBox containerSkills) {
         boxTech.setOnMouseClicked((event) -> {
             System.out.println("Instance clicked");
@@ -192,6 +255,11 @@ public class sceneTechsController implements Initializable{
         });
     }
     
+    /**
+     * Cette fonction créé le scrollpane des skills en lui assignant un style et en définissant sa boite parente
+     * à savoir containerSkill.
+     * @param tech 
+     */
     public void scrollPaneSkill(Tech tech) {
         try {
             initData();
@@ -208,12 +276,19 @@ public class sceneTechsController implements Initializable{
         }
     } 
 
+    /**
+     * Cette fonction génère les box de skills d'un technicien passé en paramètre dans le scrollPane de skills
+     * @param tech 
+     */
     public void initScrollPaneSkill(Tech tech) {
         this.containerSkills.getChildren().clear();
         this.scrollSkills.setContent(null);
         
+
         VBox vboxLayout = new VBox(this.scrollSkills.getSPStyle().getBoxSpacing());
   
+
+
         for (int i = 0; i < tech.GetSkills().size(); i++) {
             MyRowBox skillRow = new MyRowBox("", "", this.scrollSkills.getSPStyle());
             skillRow.generateSkillGridPane(tech, tech.GetSkills().get(i));
@@ -222,12 +297,33 @@ public class sceneTechsController implements Initializable{
         this.scrollSkills.setContent(vboxLayout);   
         this.scrollSkills.setFitToWidth(true);
         this.containerSkills.getChildren().add(this.scrollSkills);
-        
-
+        initChart(tech);
     }
-
+    
+    /**
+     * Cette fonction sert à définir le nom de technicien à afficher.
+     * @param tech le technicien à afficher dasn le label
+     */
     public void setTechLabelName(Tech tech) {
         String techName = tech.getFirstName() + " " + tech.getLastName();
         this.skillTechName.setText(techName);
+        this.GraphskillTechName.setText(techName);
+    }
+    
+    private void initChart(Tech tech){
+        containerGraph.getChildren().remove(rChart);
+        rChart = new DoughnutChart(createData(tech));
+        containerGraph.getChildren().add(rChart);
+        chartSkills.setVisible(true);
+        //chartSkills.setTitle("Compétences de " + tech.toString());
+        chartSkills.getData().clear();
+        chartSkills.setLabelLineLength(20);
+        //chartSkills.setStartAngle(0);
+        chartSkills.setLegendSide(Side.BOTTOM);
+        rChart.setAnimated(true);
+        rChart.getStyleClass().add("unique");
+        rChart.setId("unique");
+        rChart.setLegendVisible(false);
+        //rChart.
     }
 }
