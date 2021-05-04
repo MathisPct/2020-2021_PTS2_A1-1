@@ -62,6 +62,7 @@ public class UserDao {
             while (rSet.next()){
                 user.setFirstName(rSet.getString("nom"));
                 user.setLastName(rSet.getString("prenom"));
+                user.setTypeUser(rSet.getString("TYPE_UTILISATEUR"));
             }
         }catch(SQLException sqlE){ //exception levé si aucun user trouvé
             sqlE.printStackTrace();
@@ -84,8 +85,9 @@ public class UserDao {
             stmt = con.createStatement();
             //On update le login, le mdp, le nom et le prénom
             String reqUpdateUser = "UPDATE utilisateur SET login='"+ aUser.getLogin() +"', password='"+ aUser.getPasswordHash() + "' WHERE id ="+ aUser.getID();         
+            String reqUpdateTypeUSer = "UPDATE " + aUser.getTypeUser() + " SET nom='"+ aUser.getLastName()+"', prenom='"+ aUser.getFirstName() + "' WHERE id ="+ aUser.getID();
             stmt.executeUpdate(reqUpdateUser);
-    
+            stmt.executeUpdate(reqUpdateTypeUSer);
         }
         catch(SQLException se)
         {

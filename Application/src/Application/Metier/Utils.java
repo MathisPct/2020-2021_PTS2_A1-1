@@ -34,7 +34,7 @@ public class Utils {
 	/**
 	 * Indique si le mot de passe est d'une force suffisante
 	 * Une force suffisante = Longueur comprise entre 6 et 15 caractères
-         *                        Avec au moins une lettre, un chiffre, une majuscule, et aucun caractère alphanumérique XX
+         *                        Avec au moins une lettre, un chiffre, une majuscule, et aucun caractère alphanumérique XX 
          * @return true si le mot de passe est assez complexe
 	 */
 	public static boolean IsPasswordSafe(String aPass) {

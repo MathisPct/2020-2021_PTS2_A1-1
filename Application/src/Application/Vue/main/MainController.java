@@ -281,19 +281,24 @@ public class MainController implements Initializable {
      * @throws IOException
      */
     @FXML
-    public void editProfile() throws IOException{
+    public void editProfile() throws IOException, ClassNotFoundException, SQLException{
         if (!currentUser.isConnected()){
             BadUserError badUserErr = new BadUserError("Vous devez être connecté pour visualiser cette page");
             utilsIHM.afficherErreur(badUserErr.getMessage());
         }else {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Application/Vue/profilScene/sceneProfil.fxml"));
+                SceneProfileController controller = new SceneProfileController(currentUser, this);
+                fxmlLoader.setController(controller);
                 Pane tempPane = fxmlLoader.load();
                 container.setCenter(tempPane);
                 setBtnMenuIsActive(profileWindow); //colorie le bouton actif
             } catch (IOException e) {
                 utilsIHM.afficherErreur("Impossible de charger la page monProfil");
                 e.printStackTrace();
+            }catch (SQLException ex){
+                utilsIHM.afficherErreur(ex.getLocalizedMessage());
+                ex.printStackTrace();
             }
         }
     }
