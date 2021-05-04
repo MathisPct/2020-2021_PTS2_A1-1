@@ -19,7 +19,9 @@ public class Skill {
      * @return valeur chaine de caractère qui est le nom de la compétence
      */
     public String getName() {
-        return name;
+        String str = name;
+        String cap = str.substring(0, 1).toUpperCase() + str.substring(1);
+        return cap;
     }
 
     /**
@@ -35,7 +37,9 @@ public class Skill {
      * @return valeur chaine de caractère qui est le level de la compétence
      */
     public String getLevel() {
-        return level;
+        String str = level;
+        String cap = str.substring(0, 1).toUpperCase() + str.substring(1);
+        return cap;
     }
 
     /**
