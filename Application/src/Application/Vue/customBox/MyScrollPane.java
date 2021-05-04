@@ -80,14 +80,13 @@ public class MyScrollPane extends ScrollPane{
     public MyRowBox generateItemBoxProject(Project p) {
         // création du container d'Items
         MyRowBox projetItems = new MyRowBox("", this.style);
-        System.out.println("generateItemBoxProject");
 
         // Génération des Item de la boite
         String client = p.getName();
         String statut = "<statut>";
         statut = p.getStatusString();
         String dateCommande = "00/00/0000";
-        String totalActivite = "0";
+        String totalActivite = String.valueOf(p.getActivities().size());
         ArrayList<ItemVBox> itemBoxList = new ArrayList();
         ItemVBox i1 = new ItemVBox("Statut", statut, this.style);
         ItemVBox i2 = new ItemVBox("Client", client, this.style);
