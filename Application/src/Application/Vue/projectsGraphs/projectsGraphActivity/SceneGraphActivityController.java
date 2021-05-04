@@ -100,6 +100,7 @@ public class SceneGraphActivityController implements Initializable{
     }
     
     private void initLabelValueActivities() {
+        labelNomProjet.setText(projet.getName());
         labelValueTotalActivite.setText(String.valueOf(getTotalActivities()));
         labelValueRealisees.setText(String.valueOf(nbActiviteRealisees));
         labelValueEnCours.setText(String.valueOf(nbActiviteEnCours));
