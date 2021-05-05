@@ -20,6 +20,7 @@ import Application.Vue.customBox.MyCustomBox;
 import Application.Vue.customBox.MyRowBox;
 import Application.Vue.customBox.MyScrollPane;
 import Application.Vue.customBox.MyStyle;
+import Application.Vue.main.MainController;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -82,6 +83,11 @@ public class sceneTechsController implements Initializable{
     private PieChart chartSkills = new PieChart();
     
     private DoughnutChart rChart;
+    private MainController mainController;
+    
+    public sceneTechsController(MainController mainController) {
+        this.mainController = mainController;
+    }
     
     private ObservableList<PieChart.Data> createData(Tech tech) {
         ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
@@ -206,10 +212,10 @@ public class sceneTechsController implements Initializable{
     public void scrollPaneTech() {
             System.out.println("SceneTechs");
             MyStyle style = new MyStyle("ORANGE", "Carlito");
-            MyScrollPane scrollTech = new MyScrollPane(style);
+            MyScrollPane scrollTech = new MyScrollPane(style, mainController);
             initScrollPaneTech(listTechs, scrollTech, this.containerSkills);
             this.containerTech.getChildren().add(scrollTech);
-            this.scrollSkills = new MyScrollPane(scrollTech.getSPStyle());
+            this.scrollSkills = new MyScrollPane(scrollTech.getSPStyle(), mainController);
             //this.vboxLayoutSkills = new VBox(scrollTech.getSPStyle().getBoxSpacing());
     }
     
@@ -265,7 +271,7 @@ public class sceneTechsController implements Initializable{
             initData();
             System.out.println("SceneSkill");
             MyStyle style = new MyStyle("BLEU", "Carlito");
-            this.scrollSkills = new MyScrollPane(style);
+            this.scrollSkills = new MyScrollPane(style, mainController);
             initScrollPaneSkill(tech);
             this.containerSkills.getChildren().add(this.scrollSkills);
             

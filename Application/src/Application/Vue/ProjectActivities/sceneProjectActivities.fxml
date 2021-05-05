@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="838.0" prefWidth="1495.0" style="-fx-background-color: #E6E6E6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox prefHeight="33.0" prefWidth="1335.0" style="-fx-background-color: #3F4B6C;">
+         <children>
+            <Label alignment="CENTER" graphicTextGap="0.0" prefHeight="31.0" text="Liste des activités" textFill="WHITE">
+               <font>
+                  <Font name="Carlito" size="20.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Label>
+            <Label alignment="CENTER" graphicTextGap="0.0" layoutX="10.0" layoutY="10.0" prefHeight="31.0" prefWidth="16.0" text="|" textFill="WHITE">
+               <font>
+                  <Font name="Carlito" size="20.0" />
+               </font>
+            </Label>
+            <Label graphicTextGap="0.0" layoutX="191.0" layoutY="10.0" prefHeight="31.0" prefWidth="56.0" text="total : " textFill="WHITE">
+               <font>
+                  <Font name="Carlito" size="20.0" />
+               </font>
+            </Label>
+            <Label graphicTextGap="0.0" layoutX="207.0" layoutY="10.0" prefHeight="31.0" prefWidth="51.0" text="5" textFill="WHITE">
+               <font>
+                  <Font name="Carlito" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <SplitPane dividerPositions="0.797722705961152" prefHeight="994.0" prefWidth="1495.0" style="-fx-background-color: #E6E6E6;">
+        <items>
+            <VBox>
+               <children>
+                  <HBox prefWidth="863.0" style="-fx-background-color: #BCBECE;">
+                     <children>
+                        <Label prefHeight="33.0" text=" Affichage des activités" textFill="#3f4b6c">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Label>
+                        <AnchorPane HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <VBox />
+                  <JFXButton buttonType="RAISED" graphicTextGap="15.0" style="-fx-background-color: #BCBECE;" text="Ajouter une activité" textFill="#3f4b6c" textOverrun="LEADING_WORD_ELLIPSIS" VBox.vgrow="NEVER">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/Icons/Icon_00036.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets left="15.0" top="15.0" />
+                     </VBox.margin>
+                  </JFXButton>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+            <SplitPane orientation="VERTICAL" />
+        </items>
+      </SplitPane>
+   </children>
+</VBox>

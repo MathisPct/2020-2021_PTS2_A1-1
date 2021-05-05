@@ -8,10 +8,14 @@ package Application.Vue.projectsGraphs.projectsGraphActivity;
 import Application.Metier.ActivityStatus;
 import Application.Metier.Project;
 import Application.Vue.CustomCharts.DoughnutChart;
+import Application.Vue.main.MainController;
+import com.jfoenix.controls.JFXButton;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
@@ -23,12 +27,10 @@ import javafx.scene.layout.VBox;
  * @author David
  */
 public class SceneGraphActivityController implements Initializable{
+    private MainController mainController;
+    private Project projet;   
     
-    private int nbActiviteRealisees;
-    private int nbActivitePrevues;
-    private int nbActiviteEnCours;
-    private int nbActiviteAnnulees;
-    private int nbResteActivite;
+    private DoughnutChart rChart;
 
     @FXML
     private VBox containerGraph;
@@ -44,26 +46,25 @@ public class SceneGraphActivityController implements Initializable{
     private Label labelValueRealisees;
     @FXML
     private Label labelValueTotalActivite;
-    
-    DoughnutChart rChart;
-    
-    /**
-    * Projet dont on veut voir le détail (loadé grâce au bouton "voir détail")
-    */
-    private Project projet;
-   
-    
-    public SceneGraphActivityController(Project p) {
+    @FXML
+    private JFXButton btnActivities;
+      
+    public SceneGraphActivityController(Project p, MainController mainController) {
         this.projet = p;
+        this.mainController = mainController;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        initValuesActivities();
         initLabelValueActivities();
         if(getTotalActivities()!=0) {
             initChart(projet);
         }
+    }
+       
+    @FXML
+    void openActivities(ActionEvent event) throws IOException {
+        this.mainController.projectActivities();
     }
     
     private void initChart(Project p){
@@ -79,18 +80,14 @@ public class SceneGraphActivityController implements Initializable{
     }
     
     private ObservableList<PieChart.Data> createData(Project p) {
-        ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
-        
-        PieChart.Data d1 = new PieChart.Data("Réalisées", nbActiviteRealisees);
-        PieChart.Data d2 = new PieChart.Data("En cours", nbActiviteEnCours);
-        PieChart.Data d3 = new PieChart.Data("Prévues", nbActivitePrevues);
-        //PieChart.Data d4 = new PieChart.Data("Annulées", nbActiviteAnnulees);
-        //PieChart.Data d5 = new PieChart.Data("Reste", nbResteActivite);
-        pieData.add(d1);
-        pieData.add(d2);
-        pieData.add(d3);
-        //pieData.add(d4);
-        //pieData.add(d5);
+        ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList(); 
+        int nbRealisees = projet.getNbActivities(ActivityStatus.ENDED);
+        int nbEnCours = projet.getNbActivities(ActivityStatus.WORKING);
+        int nbPrevues = projet.getNbActivities(ActivityStatus.PLANNED);     
+        PieChart.Data d1 = new PieChart.Data("Réalisées", nbRealisees);
+        PieChart.Data d2 = new PieChart.Data("En cours", nbEnCours);
+        PieChart.Data d3 = new PieChart.Data("Prévues", nbPrevues);
+        pieData.addAll(d1, d2, d3);
         return pieData;     
     }
     
@@ -100,43 +97,13 @@ public class SceneGraphActivityController implements Initializable{
     }
     
     private void initLabelValueActivities() {
+        //init nom du projet
         labelNomProjet.setText(projet.getName());
+        // init valeurs des activités
         labelValueTotalActivite.setText(String.valueOf(getTotalActivities()));
-        labelValueRealisees.setText(String.valueOf(nbActiviteRealisees));
-        labelValueEnCours.setText(String.valueOf(nbActiviteEnCours));
-        labelValueAnnulees.setText(String.valueOf(nbActiviteAnnulees)); 
-        labelValuePrevues.setText(String.valueOf(nbActivitePrevues));      
-    }
-    
-    private void initValuesActivities() {
-        int cptRealise = 0;
-        int cptEnCours = 0;
-        int cptAnnule = 0;
-        int cptPrevues = 0;
-        int reste = 0;
-        int cptTotal = getTotalActivities();
-        
-        for (int i = 0; i < projet.getActivities().size(); i++) {
-            if(projet.getActivities().get(i).getStatus() == ActivityStatus.ENDED) {
-                cptRealise += 1;
-            }
-            if(projet.getActivities().get(i).getStatus() == ActivityStatus.WORKING) {
-                cptEnCours += 1;
-            }
-            if(projet.getActivities().get(i).getStatus() == ActivityStatus.PLANNED) {
-                cptPrevues += 1;
-            }
-            if(projet.getActivities().get(i).getStatus() == ActivityStatus.CANCELED) {
-                cptAnnule += 1;
-            }
-        }
-        int sommeActivites = 0;
-        reste = getTotalActivities() - cptPrevues + cptAnnule;
-        nbActiviteRealisees = cptRealise;
-        nbActivitePrevues = cptPrevues;
-        nbActiviteEnCours = cptEnCours;
-        nbActiviteAnnulees = cptAnnule;
-        nbResteActivite = reste;      
-    }
-    
+        labelValueRealisees.setText(String.valueOf(projet.getNbActivities(ActivityStatus.ENDED)));
+        labelValueEnCours.setText(String.valueOf(projet.getNbActivities(ActivityStatus.WORKING)));
+        labelValueAnnulees.setText(String.valueOf(projet.getNbActivities(ActivityStatus.CANCELED))); 
+        labelValuePrevues.setText(String.valueOf(projet.getNbActivities(ActivityStatus.PLANNED)));      
+    }  
 }

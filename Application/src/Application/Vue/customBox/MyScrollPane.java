@@ -9,6 +9,7 @@ import Application.Database.ProjectDao;
 import Application.Metier.Project;
 import Application.Metier.ProjectStatus;
 import Application.Metier.Tech;
+import Application.Vue.main.MainController;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javafx.geometry.Insets;
@@ -23,10 +24,12 @@ import javafx.scene.layout.Priority;
  */
 public class MyScrollPane extends ScrollPane{
     private MyStyle style;
+    private MainController mainController;
     private ArrayList <MyCustomBox> listCustomBox = new ArrayList();
     
-    public MyScrollPane(MyStyle style) {
+    public MyScrollPane(MyStyle style, MainController mainController) {
         this.style = style;
+        this.mainController = mainController;
         this.setPadding(new Insets(10,10,10,10)); //top, right, bottom, left 
     }
   
@@ -111,10 +114,14 @@ public class MyScrollPane extends ScrollPane{
         AnchorPane AP2 = new AnchorPane();
         projetItems.getChildren().add(AP2);
         AP2.setPrefWidth(40);
-        //Génération d'un Item Bouton
-        MyButtonProject btn = new MyButtonProject("Voir détails", p, this.style);
-        btn.addIconButton("CRAYON");
-        projetItems.addButtonToRowBox(btn);
+        //Génération d'un Item Bouton ACTIVITES
+        MyButtonProject btnActivity = new MyButtonProject("Activités", "ACTIVITY", p, mainController, this.style);
+        btnActivity.addIconButton("CRAYON");
+        projetItems.addButtonToRowBox(btnActivity);
+        //Génération d'un Item Bouton MATERIEL
+        MyButtonProject btnMateriel = new MyButtonProject("Matériel", "MATERIEL", p, mainController, this.style);
+        btnMateriel.addIconButton("CRAYON");
+        projetItems.addButtonToRowBox(btnMateriel);
         HBox.setHgrow(activityItems, Priority.ALWAYS);
         return projetItems;
     } 

@@ -10,6 +10,7 @@ import Application.Metier.Project;
 import Application.Vue.customBox.MyCustomBox;
 import Application.Vue.customBox.MyScrollPane;
 import Application.Vue.customBox.MyStyle;
+import Application.Vue.main.MainController;
 import Application.Vue.projectsDetailsScene.SceneProjectsDetailsController;
 import Application.Vue.projectsGraphs.projectsGraphActivity.SceneGraphActivityController;
 import java.net.URL;
@@ -55,6 +56,12 @@ public class SceneProjectsController implements Initializable {
     private VBox containerProject;  
     @FXML
     private VBox paneDetailProject;
+    
+    private MainController mainController;
+    
+    public SceneProjectsController(MainController mainController) {
+        this.mainController = mainController;
+    }
   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -72,7 +79,7 @@ public class SceneProjectsController implements Initializable {
     public void scrollPaneProject() {
         System.out.println("Affiche des projets");
         MyStyle style = new MyStyle("ORANGE", "Carlito");
-        MyScrollPane scrollProject = new MyScrollPane(style);
+        MyScrollPane scrollProject = new MyScrollPane(style, mainController);
         initScrollPaneProject(listProject, scrollProject);
         this.containerProject.getChildren().add(scrollProject);
         //this.vboxLayoutSkills = new VBox(scrollTech.getSPStyle().getBoxSpacing());
@@ -129,7 +136,7 @@ public class SceneProjectsController implements Initializable {
     
     public void initGraphActivity(Project p) throws IOException {       
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Application/Vue/projectsGraphs/projectsGraphActivity/sceneGraphActivity.fxml"));
-        SceneGraphActivityController controller = new SceneGraphActivityController(p);
+        SceneGraphActivityController controller = new SceneGraphActivityController(p, mainController);
         loader.setController(controller);
         VBox graphBox = loader.load();
         this.paneDetailProject.getChildren().add(graphBox);        

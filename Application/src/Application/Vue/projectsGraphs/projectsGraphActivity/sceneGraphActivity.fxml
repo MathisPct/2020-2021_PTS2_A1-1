@@ -37,7 +37,7 @@
          <children>
             <VBox spacing="5.0" HBox.hgrow="ALWAYS">
                <children>
-                  <JFXButton buttonType="RAISED" contentDisplay="RIGHT" graphicTextGap="8.0" style="-fx-background-color: #799BD0;" text="Activités" VBox.vgrow="ALWAYS">
+                  <JFXButton fx:id="btnActivities" buttonType="RAISED" contentDisplay="RIGHT" graphicTextGap="8.0" onAction="#openActivities" style="-fx-background-color: #799BD0;" text="Activités" VBox.vgrow="ALWAYS">
                      <font>
                         <Font name="System Bold" size="21.0" />
                      </font>
