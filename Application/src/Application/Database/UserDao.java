@@ -4,6 +4,8 @@ import Application.Metier.Skill;
 import com.mysql.jdbc.Connection;
 import Application.Metier.Tech;
 import Application.Metier.User;
+import Application.Vue.UtilsIHM;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 import javax.swing.plaf.nimbus.State;
 import java.sql.DriverManager;
@@ -75,8 +77,10 @@ public class UserDao {
      * Met à jour l'utilisateur dans la BD
      * @param aUser L'utilisateur à mettre à jour
      * @author Lucas Moniot
+     * @throws DaoError levée lorsqu'une erreur SQL est levée ou que le nouveau 
+     * login de aUser est déjà existant dans la base de donnée
      */
-    public void Update(User aUser) throws SQLException {
+    public void Update(User aUser) throws DaoError{
         
         Statement stmt = null;
         Connection conn = null;
@@ -89,14 +93,20 @@ public class UserDao {
             stmt.executeUpdate(reqUpdateUser);
             stmt.executeUpdate(reqUpdateTypeUSer);
         }
+        catch(MySQLIntegrityConstraintViolationException ex){
+            ex.printStackTrace();
+            throw new DaoError("Le login est déjà existant dans la base de données", ex);
+        }
         catch(SQLException se)
         {
             //Handle errors for JDBC
             se.printStackTrace();
+            throw new DaoError("Erreur SQL " + se.getLocalizedMessage(), se);
         }catch(Exception e){
             //Handle errors for Class.forName
             e.printStackTrace();
-        }finally{
+        }
+        finally{
             //finally block used to close resources
             try{
                if(conn!=null)
