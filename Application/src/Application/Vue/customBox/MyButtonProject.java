@@ -12,7 +12,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author David
  */
 public class MyButtonProject extends MyButton{
@@ -27,6 +26,10 @@ public class MyButtonProject extends MyButton{
         this.type = type;
     }
     
+    /**
+     * Cette méthode permet de setter des actions 
+     * personnalisées pour un bouton de projet donné
+     */
     @Override
     public void setButton() {
         

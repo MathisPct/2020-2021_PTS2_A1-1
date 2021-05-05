@@ -200,10 +200,8 @@ public class MainController implements Initializable {
     
     @FXML
     public void projectActivities() throws IOException{
-
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Application/Vue/ProjectActivities/sceneProjectActivities.fxml"));
-            
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Application/Vue/ProjectActivities/sceneProjectActivities.fxml"));            
             SceneProjectActivitiesController controller = new SceneProjectActivitiesController(this);
             fxmlLoader.setController(controller);
             Pane tempPane = fxmlLoader.load();
@@ -356,10 +354,12 @@ public class MainController implements Initializable {
     private void setBtnMenuIsActive(JFXButton button){
         for (int i = 0; i < boxMenu1.getChildren().size(); i++) {
             if(button == boxMenu1.getChildren().get(i)){
-                button.setStyle("-fx-background-color: #14202B");
+                //button.setStyle("-fx-background-color: #14202B");
+                button.getStyleClass().add("menu-btn-selected");
             }
             else{
-                boxMenu1.getChildren().get(i).setStyle("");
+                boxMenu1.getChildren().get(i).getStyleClass().remove("menu-btn-selected");
+                //boxMenu1.getChildren().get(i).setStyle("");
             }
         }   
     }    

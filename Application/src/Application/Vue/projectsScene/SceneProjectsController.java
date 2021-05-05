@@ -35,7 +35,10 @@ import javafx.scene.layout.VBox;
  */
 public class SceneProjectsController implements Initializable {
     private ArrayList<Project> listProject; // liste contenant les project récupérés depuis la dao
-    private Project project;   
+    private Project project;
+    
+    @FXML
+    private Label labelTotalProjects;
     @FXML
     private Label label;    
     @FXML
@@ -68,6 +71,7 @@ public class SceneProjectsController implements Initializable {
         System.out.println("SceneProjects");
         try {
             setListProject();
+            initFields();
             scrollPaneProject();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SceneProjectsController.class.getName()).log(Level.SEVERE, null, ex);
@@ -86,9 +90,9 @@ public class SceneProjectsController implements Initializable {
     }
     
     public void initScrollPaneProject(ArrayList<Project> listProject, MyScrollPane SP) {        
-        VBox vboxLayout = new VBox(SP.getSPStyle().getBoxSpacing());
+        VBox vboxLayout = new VBox(SP.getScrollPaneStyle().getBoxSpacing());
         for (int i = 0; i < listProject.size(); i++) {         
-            MyCustomBox boxProject = new MyCustomBox(SP, listProject.get(i), SP.getSPStyle());       
+            MyCustomBox boxProject = new MyCustomBox(SP, listProject.get(i), SP.getScrollPaneStyle());       
             setActionBoxProject(SP, boxProject, listProject.get(i));//Evenement boite principale          
             boxProject.addRowBoxListItem(SP.generateMainProjectRow(listProject.get(i))); //ajout de la bôite de titre
             boxProject.addRowBoxListItem(SP.generateItemBoxProject(listProject.get(i))); //ajout de la boite d'item
@@ -119,6 +123,7 @@ public class SceneProjectsController implements Initializable {
     
     public void setListProject() throws ClassNotFoundException, SQLException {
         ProjectDao projectDAO = new ProjectDao();
+        
         listProject = projectDAO.listAll();
     }
     
@@ -140,6 +145,14 @@ public class SceneProjectsController implements Initializable {
         loader.setController(controller);
         VBox graphBox = loader.load();
         this.paneDetailProject.getChildren().add(graphBox);        
+    }
+    
+    /**
+     * Cette méthode initialise les champs fixes de l'IHM
+     */
+    public void initFields() {
+        int totalProjects = listProject.size();
+        labelTotalProjects.setText(String.valueOf(totalProjects));
     }
     
 }

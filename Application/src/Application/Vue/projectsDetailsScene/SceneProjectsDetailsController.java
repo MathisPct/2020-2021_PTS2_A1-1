@@ -6,17 +6,12 @@
 package Application.Vue.projectsDetailsScene;
 
 import Application.Metier.Project;
-import Application.Vue.Login.SceneLoginController;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 
 /**
  *
@@ -24,40 +19,31 @@ import javafx.scene.layout.Pane;
  */
 public class SceneProjectsDetailsController implements Initializable {
     
-
+    //ATTRIBUTS LOGIQUES
+    private Project projet;
+    
+    //ATTRIBUT FXML
     @FXML
     private TextField labelDetailNomProjet;
-
     @FXML
     private TextField labelEstimatedDuration;
-
     @FXML
     private TextField labelFinalDuration;
-
     @FXML
-    private Label labelStatutProjet;
-    
+    private Label labelStatutProjet;   
     @FXML
     private Label labelNomProjet;
-    
-
-
-    /**
-     * Projet dont on veut voir le détail (loadé grâce au bouton "voir détail")
-     */
-    private Project projet;
-   
-    
-    public SceneProjectsDetailsController(Project p) {
-        this.projet = p;
-    }
-    
+        
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("SceneProjectsDetails");
         updateValuesDetailProject();
     }
     
+    public SceneProjectsDetailsController(Project p) {
+        this.projet = p;
+    }
+       
     public void updateValuesDetailProject() {
         labelNomProjet.setText(projet.getName());
         labelDetailNomProjet.setText(projet.getName());
@@ -103,8 +89,5 @@ public class SceneProjectsDetailsController implements Initializable {
 
     public void setLabelStatutProjet(String value) {
         this.labelStatutProjet.setText(value);
-    }
-    
-    
-    
+    }  
 }

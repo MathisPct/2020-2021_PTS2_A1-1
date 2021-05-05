@@ -7,7 +7,7 @@ package Application.Vue.projectsGraphs.projectsGraphActivity;
 
 import Application.Metier.ActivityStatus;
 import Application.Metier.Project;
-import Application.Vue.CustomCharts.DoughnutChart;
+import Application.Vue.Style.CustomCharts.DoughnutChart;
 import Application.Vue.main.MainController;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
@@ -27,11 +27,12 @@ import javafx.scene.layout.VBox;
  * @author David
  */
 public class SceneGraphActivityController implements Initializable{
+    //ATTRIBUTS LOGIQUES
     private MainController mainController;
     private Project projet;   
     
+    //ATTRIBUTS GRAPHIQUES
     private DoughnutChart rChart;
-
     @FXML
     private VBox containerGraph;
     @FXML
@@ -67,6 +68,10 @@ public class SceneGraphActivityController implements Initializable{
         this.mainController.projectActivities();
     }
     
+    /**
+     * Cette méthode initialise le graphique des activités
+     * @param p project dont on veut afficher les activités
+     */
     private void initChart(Project p){
         containerGraph.getChildren().remove(rChart);
         rChart = new DoughnutChart(createData(p));

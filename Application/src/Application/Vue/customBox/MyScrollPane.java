@@ -39,9 +39,9 @@ public class MyScrollPane extends ScrollPane{
         }
     }
 
-    public MyRowBox generateMainTechRow(Tech t) { 
+    public MyRowBox generateMainTechRow(Tech tech) { 
         // Génération de la ligne du nom du technicien
-        String techFullName = t.getFirstName()+" "+t.getLastName();
+        String techFullName = tech.getFirstName()+" "+tech.getLastName();
         MyRowBox mainTechRow = new MyRowBox(techFullName, this.style);           
         mainTechRow.generateLineBoxRow();
         return mainTechRow;
@@ -58,8 +58,60 @@ public class MyScrollPane extends ScrollPane{
     public MyRowBox generateItemBoxTech(Tech tech) {
         // création du container d'Items
         MyRowBox itemTechRow = new MyRowBox("", this.style);
+        itemTechRow.generateItemVBoxRow(createTechItemList(tech), Priority.NEVER); //ajout des items à la boite d'item
+        //Génération d'un Item Bouton
+        MyButtonTech btn = new MyButtonTech("Voir détails", tech, this.style);
+        btn.addIconButton("CRAYON");
+        itemTechRow.addButtonToRowBox(btn);
+        return itemTechRow;
+    }
+    
+    public MyRowBox generateItemBoxProject(Project p) {
+        // création du container d'Items
+        MyRowBox projetItems = new MyRowBox("", this.style);
+        projetItems.generateItemVBoxRow(createProjectItemList(p), Priority.NEVER); //ajout des items à la boite d'item
+        //Génération d'un Item Bouton ACTIVITES
+        projetItems.addButtonToRowBox(createBtnActivities(p));
+        //Génération d'un Item Bouton MATERIEL
+        projetItems.addButtonToRowBox(createBtnMateriel(p));
+        return projetItems;
+    }
+    
+    public MyButton createBtnActivities(Project p) {
+        //Génération d'un Item Bouton ACTIVITES
+        MyButtonProject btnActivities = new MyButtonProject("Activités", "ACTIVITY", p, mainController, this.style);
+        btnActivities.addIconButton("CRAYON");
+        return btnActivities;
+    }
+    
+    public MyButton createBtnMateriel(Project p) {
+        //Génération d'un Item Bouton ACTIVITES
+        MyButtonProject btnMateriel = new MyButtonProject("Matériel", "MATERIEL", p, mainController, this.style);
+        btnMateriel.addIconButton("CRAYON");
+        return btnMateriel;
+    }
+    
 
+    public ArrayList<ItemVBox> createProjectItemList(Project p) {
         // Génération des Item de la boite
+        String client = "<Client>";
+        String statut = p.getStatusString();
+        String dateCommande = "00/00/0000";
+        String totalActivite = String.valueOf(p.getActivities().size());
+        ArrayList<ItemVBox> itemBoxList = new ArrayList();
+        ItemVBox i1 = new ItemVBox("Statut", statut, this.style);
+        ItemVBox i2 = new ItemVBox("Client", client, this.style);
+        ItemVBox i3 = new ItemVBox("Commande", dateCommande , this.style);
+        ItemVBox i4 = new ItemVBox("Activités", totalActivite, this.style);
+        itemBoxList.add(i1);
+        itemBoxList.add(i2);
+        itemBoxList.add(i3);
+        itemBoxList.add(i4);
+        return itemBoxList;
+    }
+    
+    public ArrayList<ItemVBox> createTechItemList(Tech tech) {
+        // Génération des Item de la boite technicien
         String totalSkills = String.valueOf(tech.GetSkills().size());
         String grade = tech.getGrade();
         String euro = Character.toString ((char) 8364);
@@ -71,68 +123,17 @@ public class MyScrollPane extends ScrollPane{
         itemBoxList.add(i1);
         itemBoxList.add(i2);
         itemBoxList.add(i3);
-        itemTechRow.generateItemVBoxRow(itemBoxList, Priority.NEVER); //ajout des items à la boite d'item
-
-        //Génération d'un Item Bouton
-        MyButtonTech btn = new MyButtonTech("Voir détails", tech, this.style);
-        btn.addIconButton("CRAYON");
-        itemTechRow.addButtonToRowBox(btn);
-        return itemTechRow;
+        return itemBoxList;
     }
     
-    public MyRowBox generateItemBoxProject(Project p) {
-        // création du container d'Items
-        MyRowBox projetItems = new MyRowBox("", this.style);
-
-        // Génération des Item de la boite
-        String client = p.getName();
-        String statut = "<statut>";
-        statut = p.getStatusString();
-        String dateCommande = "00/00/0000";
-        String totalActivite = String.valueOf(p.getActivities().size());
-        ArrayList<ItemVBox> itemBoxList = new ArrayList();
-        ItemVBox i1 = new ItemVBox("Statut", statut, this.style);
-        ItemVBox i2 = new ItemVBox("Client", client, this.style);
-        ItemVBox i3 = new ItemVBox("Commande", dateCommande , this.style);          
-        itemBoxList.add(i1);
-        itemBoxList.add(i2);
-        itemBoxList.add(i3);
-        projetItems.generateItemVBoxRow(itemBoxList, Priority.NEVER); //ajout des items à la boite d'item
-        
-        AnchorPane AP1 = new AnchorPane();
-        projetItems.getChildren().add(AP1);
-        AP1.setPrefWidth(40);
-       
-        MyRowBox activityItems = new MyRowBox("", this.style);
-        ArrayList<ItemVBox> itemBoxListActitvity = new ArrayList();
-        ItemVBox ia1 = new ItemVBox("Activités", totalActivite, this.style);
-        itemBoxListActitvity.add(ia1);
-        activityItems.addSubItemBox(itemBoxListActitvity); //ajout des items à la boite d'item
-        projetItems.getChildren().add(activityItems); 
-        //activityItems.setPrefWidth(400);
-        activityItems.setAlignment(Pos.CENTER_LEFT);
-        AnchorPane AP2 = new AnchorPane();
-        projetItems.getChildren().add(AP2);
-        AP2.setPrefWidth(40);
-        //Génération d'un Item Bouton ACTIVITES
-        MyButtonProject btnActivity = new MyButtonProject("Activités", "ACTIVITY", p, mainController, this.style);
-        btnActivity.addIconButton("CRAYON");
-        projetItems.addButtonToRowBox(btnActivity);
-        //Génération d'un Item Bouton MATERIEL
-        MyButtonProject btnMateriel = new MyButtonProject("Matériel", "MATERIEL", p, mainController, this.style);
-        btnMateriel.addIconButton("CRAYON");
-        projetItems.addButtonToRowBox(btnMateriel);
-        HBox.setHgrow(activityItems, Priority.ALWAYS);
-        return projetItems;
-    } 
-    
-    public MyStyle getSPStyle() {
+    public MyStyle getScrollPaneStyle() {
         return this.style;
     }
     
     public ArrayList getCustomBoxList() {
         return this.listCustomBox;
     }
+    
 
 }
 
