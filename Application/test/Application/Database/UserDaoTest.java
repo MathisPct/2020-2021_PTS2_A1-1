@@ -60,7 +60,7 @@ public class UserDaoTest {
      * Test of Update method, of class UserDao.
      */
     @Test
-    public void testUpdate() throws ClassNotFoundException, SQLException {
+    public void testUpdate() throws ClassNotFoundException, SQLException, DaoError {
         UserDao userDao = new UserDao();
         User pmartinUpdate = new User(1); //user pmartin récupéré lors de la maj de la BDD
         
