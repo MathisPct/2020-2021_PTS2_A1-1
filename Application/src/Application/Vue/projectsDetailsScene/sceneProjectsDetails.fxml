@@ -13,9 +13,9 @@
 
 <VBox spacing="15.0" style="-fx-border-style: solid; -fx-border-width: 2; -fx-border-color: #D1D1D1; -fx-background-color: #EFEFF1;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox style="-fx-background-color: #BCBECE;">
+      <HBox styleClass="box-title-hbox">
          <children>
-            <Label text="Détail |" textFill="#3f4b6c">
+            <Label styleClass="box-title" text="Détail |" textFill="#3f4b6c">
                <font>
                   <Font size="18.0" />
                </font>
@@ -23,7 +23,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Label fx:id="labelNomProjet" layoutX="10.0" layoutY="10.0" text="&lt;nom du projet&gt;" textFill="#3f4b6c">
+            <Label fx:id="labelNomProjet" layoutX="10.0" layoutY="10.0" styleClass="box-title-value" text="&lt;nom du projet&gt;" textFill="#3f4b6c">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -141,7 +141,7 @@
       </HBox>
       <HBox alignment="CENTER" spacing="25.0">
          <children>
-            <JFXButton alignment="CENTER" buttonType="RAISED" prefHeight="25.0" style="-fx-background-color: #FF8E34;" text="Action sur le projet">
+            <JFXButton alignment="CENTER" buttonType="RAISED" prefHeight="25.0" styleClass="btn" text="Action sur le projet">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -153,7 +153,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton buttonType="RAISED" prefHeight="25.0" style="-fx-background-color: #FF8E34;" text="Validation projet">
+            <JFXButton buttonType="RAISED" prefHeight="25.0" styleClass="btn" text="Validation projet">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -169,7 +169,7 @@
       </HBox>
       <HBox alignment="CENTER">
          <children>
-            <JFXButton buttonType="RAISED" prefHeight="25.0" style="-fx-background-color: #FF8E34;" text="Valider">
+            <JFXButton buttonType="RAISED" prefHeight="25.0" styleClass="btn" text="Valider">
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>
