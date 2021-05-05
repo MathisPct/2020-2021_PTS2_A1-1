@@ -18,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import Application.Vue.UtilsIHM;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import java.io.IOException;
 
 /**
@@ -60,7 +61,6 @@ public class SceneProfileController implements Initializable {
 
     private UserDao dao;
 
-    private UtilsIHM utils = new UtilsIHM();
 
     /**
      * Utilisateur crée lors de la recherche d'un user dans la BDD avec read(login,mdp)
@@ -82,7 +82,7 @@ public class SceneProfileController implements Initializable {
         catch(SQLException eSQL)
         {
             eSQL.printStackTrace();
-            this.utils.afficherErreur(eSQL.getLocalizedMessage());
+            UtilsIHM.afficherErreur(eSQL.getLocalizedMessage());
         }
     }
     
@@ -94,7 +94,15 @@ public class SceneProfileController implements Initializable {
         this.loginLabel.setText(userConnected.getLogin());
     } 
     
-    public void validate() throws SQLException, IOException{
+    /**
+     * Evènement appelé lorsque l'user clique sur le bouton d'enregistrement des
+     * informations
+     * @throws IOException levé lorsque la redirection vers un autre fichier FXML
+     * est impossible 
+     * @throws DaoError levé lorsqu'une erreur SQL est levé ou que le nouveau 
+     * login est déjà existant dans la base de données
+     */
+    public void validate() throws IOException, DaoError{
         try{
             System.out.println("Enregistrer");
             if (!passwordLabel.getText().equals(passwordVerifLabel.getText()) ){
@@ -115,17 +123,16 @@ public class SceneProfileController implements Initializable {
                 dao.Update(userConnected);
                 this.mainController.initFieldsUser();
                 this.mainController.projects();
-                
             }
         }catch(BadPasswordError e){
             e.printStackTrace();
-            utils.afficherErreur(e.getLocalizedMessage());
+            UtilsIHM.afficherErreur(e.getLocalizedMessage());
         }catch(IOException ex){
             ex.printStackTrace();
-            utils.afficherErreur("Impossible de charger la page Projet");
-        }catch(SQLException ex){
+            UtilsIHM.afficherErreur("Impossible de charger la page Projet");
+        }catch(DaoError ex){
             ex.printStackTrace();
-            utils.afficherErreur("Impossible d'update l'user");
+            UtilsIHM.afficherErreur(ex.getLocalizedMessage());
         }
     }
 }
