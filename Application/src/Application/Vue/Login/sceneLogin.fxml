@@ -15,9 +15,9 @@
 
 <VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox prefHeight="14.0" prefWidth="1129.0" style="-fx-background-color: #3F4B6C;">
+      <HBox prefHeight="14.0" prefWidth="1129.0" styleClass="window-title-hbox">
          <children>
-            <Label graphicTextGap="0.0" prefHeight="31.0" prefWidth="363.0" text="Espace de connexion" textFill="WHITE" HBox.hgrow="NEVER">
+            <Label graphicTextGap="0.0" prefHeight="31.0" prefWidth="363.0" styleClass="window-title" text="Espace de connexion" textFill="WHITE" HBox.hgrow="NEVER">
                <font>
                   <Font name="Carlito" size="20.0" />
                </font>
@@ -81,7 +81,7 @@
                         <Font name="System Italic" size="17.0" />
                      </font>
                   </Text>
-                  <JFXButton contentDisplay="CENTER" onAction="#connect" prefHeight="44.0" prefWidth="160.0" style="-fx-background-color: #FF8E34;" text="Connexion">
+                  <JFXButton buttonType="RAISED" contentDisplay="CENTER" onAction="#connect" prefHeight="44.0" prefWidth="160.0" style="-fx-background-color: #FF8E34;" text="Connexion">
                      <font>
                         <Font name="Carlito Bold" size="24.0" />
                      </font>

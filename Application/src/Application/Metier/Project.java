@@ -131,9 +131,21 @@ public class Project {
         return activities;
     }
     
+    /**
+     * Cette méthode retourne le nombre total d'activité par statut du projet
+     * @param status statut des activités à compter
+     * @return le nombre total d'activité par statut du projet
+     */
+    public int getNbActivities(ActivityStatus status) {
+        int cpt = 0;
+        for (int i = 0; i < getActivities().size(); i++) {
+            if(getActivities().get(i).getStatus() == status) {
+                cpt += 1;
+            }
+        }
+        return cpt;
+    }
     
-    
-
     @Override
     public String toString() {
         return " " + this.status;

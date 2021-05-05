@@ -11,8 +11,11 @@ import java.util.ResourceBundle;
 import Application.Database.BadUserError;
 import Application.Metier.User;
 import Application.Vue.Login.SceneLoginController;
+import Application.Vue.ProjectActivities.SceneProjectActivitiesController;
 import Application.Vue.UtilsIHM;
 import Application.Vue.profilScene.SceneProfileController;
+import Application.Vue.projectsScene.SceneProjectsController;
+import Application.Vue.techsScene.sceneTechsController;
 import javafx.fxml.Initializable;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
@@ -182,6 +185,8 @@ public class MainController implements Initializable {
             }
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Application/Vue/projectsScene/sceneProjects.fxml"));
+                SceneProjectsController controller = new SceneProjectsController(this);
+                fxmlLoader.setController(controller);
                 Pane tempPane = fxmlLoader.load();
                 container.setCenter(tempPane);
                 setBtnMenuIsActive(projectsWindow);//colorie le bouton actif
@@ -192,6 +197,20 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
     }
+    
+    @FXML
+    public void projectActivities() throws IOException{
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Application/Vue/ProjectActivities/sceneProjectActivities.fxml"));            
+            SceneProjectActivitiesController controller = new SceneProjectActivitiesController(this);
+            fxmlLoader.setController(controller);
+            Pane tempPane = fxmlLoader.load();
+            container.setCenter(tempPane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
 
     /**
      * Evenement déclenché lorsque l'utilisateur demande à se connecter (bouton de connexion)
@@ -263,6 +282,8 @@ public class MainController implements Initializable {
             else {
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClass().getResource("/Application/Vue/techsScene/sceneTechs.fxml"));
+                    sceneTechsController controller = new sceneTechsController(this);
+                    fxmlLoader.setController(controller);
                     Pane tempPane = fxmlLoader.load();
                     container.setCenter(tempPane);
                     setBtnMenuIsActive(techsWindow); //colorie le bouton actif
@@ -333,10 +354,12 @@ public class MainController implements Initializable {
     private void setBtnMenuIsActive(JFXButton button){
         for (int i = 0; i < boxMenu1.getChildren().size(); i++) {
             if(button == boxMenu1.getChildren().get(i)){
-                button.setStyle("-fx-background-color: #14202B");
+                //button.setStyle("-fx-background-color: #14202B");
+                button.getStyleClass().add("menu-btn-selected");
             }
             else{
-                boxMenu1.getChildren().get(i).setStyle("");
+                boxMenu1.getChildren().get(i).getStyleClass().remove("menu-btn-selected");
+                //boxMenu1.getChildren().get(i).setStyle("");
             }
         }   
     }    

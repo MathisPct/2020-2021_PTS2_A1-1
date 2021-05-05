@@ -1,0 +1,76 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 5 mai 2021, 19:45:52
+    Author     : David
+*/
+
+
+.box-title {
+    -fx-text-fill: #3F4B6C;
+    -fx-font-size: 22px;
+    -fx-text-overrun: clip;
+}
+
+.menu-btn:hover {
+    -fx-background-color: linear-gradient(from 100% 0% to 0% 100%,  #FF8E34, #FF5134);
+}
+
+.menu-btn:pressed {
+    -fx-scale-y: 0.9;
+    -fx-scale-x: 1.05;
+}
+
+.menu-btn-selected {
+-fx-background-color: #283048;    
+}
+
+.menu-btn:enabled {
+    -fx-background-color: #FF5134;
+}
+
+
+.box-title-value {
+    -fx-text-fill: #3F4B6C;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 0 3;
+    -fx-text-overrun: clip;
+}
+
+.menu-box {
+    -fx-background-color: linear-gradient(from 100% 0% to 0% 100%,  #0D161E, #283048); 
+    -fx-padding: 0 0 0 0;
+    -fx-border-color: #3F4B6C0F;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.box-title-hbox {
+    -fx-background-color: linear-gradient(#A2A7BD, #BCBECE); 
+    -fx-background-radius: 1;
+    -fx-padding: 0 0 0 5;
+    -fx-border-style: solid;
+    -fx-border-color: #3F4B6C0F;
+    -fx-border-width: 1.5;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.window-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 26px;
+    -fx-padding: 0 0 0 10; 
+}
+
+.window-title-hbox {
+    -fx-background-color: linear-gradient(#283048, #3F4B6C);
+    -fx-alignment: CENTER_LEFT;
+}
+
+.split-pane *.split-pane-divider {
+    -fx-padding: 0 2 0 2;
+}
+
+
+

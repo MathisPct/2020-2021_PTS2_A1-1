@@ -1,4 +1,4 @@
-package Application.Vue.CustomCharts;
+package Application.Vue.Style.CustomCharts;
 
 import javafx.collections.ObservableList;
 import javafx.geometry.Bounds;

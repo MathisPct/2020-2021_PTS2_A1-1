@@ -10,6 +10,7 @@ import Application.Metier.Project;
 import Application.Vue.customBox.MyCustomBox;
 import Application.Vue.customBox.MyScrollPane;
 import Application.Vue.customBox.MyStyle;
+import Application.Vue.main.MainController;
 import Application.Vue.projectsDetailsScene.SceneProjectsDetailsController;
 import Application.Vue.projectsGraphs.projectsGraphActivity.SceneGraphActivityController;
 import java.net.URL;
@@ -34,7 +35,10 @@ import javafx.scene.layout.VBox;
  */
 public class SceneProjectsController implements Initializable {
     private ArrayList<Project> listProject; // liste contenant les project récupérés depuis la dao
-    private Project project;   
+    private Project project;
+    
+    @FXML
+    private Label labelTotalProjects;
     @FXML
     private Label label;    
     @FXML
@@ -55,12 +59,19 @@ public class SceneProjectsController implements Initializable {
     private VBox containerProject;  
     @FXML
     private VBox paneDetailProject;
+    
+    private MainController mainController;
+    
+    public SceneProjectsController(MainController mainController) {
+        this.mainController = mainController;
+    }
   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("SceneProjects");
         try {
             setListProject();
+            initFields();
             scrollPaneProject();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SceneProjectsController.class.getName()).log(Level.SEVERE, null, ex);
@@ -72,16 +83,16 @@ public class SceneProjectsController implements Initializable {
     public void scrollPaneProject() {
         System.out.println("Affiche des projets");
         MyStyle style = new MyStyle("ORANGE", "Carlito");
-        MyScrollPane scrollProject = new MyScrollPane(style);
+        MyScrollPane scrollProject = new MyScrollPane(style, mainController);
         initScrollPaneProject(listProject, scrollProject);
         this.containerProject.getChildren().add(scrollProject);
         //this.vboxLayoutSkills = new VBox(scrollTech.getSPStyle().getBoxSpacing());
     }
     
     public void initScrollPaneProject(ArrayList<Project> listProject, MyScrollPane SP) {        
-        VBox vboxLayout = new VBox(SP.getSPStyle().getBoxSpacing());
+        VBox vboxLayout = new VBox(SP.getScrollPaneStyle().getBoxSpacing());
         for (int i = 0; i < listProject.size(); i++) {         
-            MyCustomBox boxProject = new MyCustomBox(SP, listProject.get(i), SP.getSPStyle());       
+            MyCustomBox boxProject = new MyCustomBox(SP, listProject.get(i), SP.getScrollPaneStyle());       
             setActionBoxProject(SP, boxProject, listProject.get(i));//Evenement boite principale          
             boxProject.addRowBoxListItem(SP.generateMainProjectRow(listProject.get(i))); //ajout de la bôite de titre
             boxProject.addRowBoxListItem(SP.generateItemBoxProject(listProject.get(i))); //ajout de la boite d'item
@@ -112,6 +123,7 @@ public class SceneProjectsController implements Initializable {
     
     public void setListProject() throws ClassNotFoundException, SQLException {
         ProjectDao projectDAO = new ProjectDao();
+        
         listProject = projectDAO.listAll();
     }
     
@@ -129,10 +141,18 @@ public class SceneProjectsController implements Initializable {
     
     public void initGraphActivity(Project p) throws IOException {       
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Application/Vue/projectsGraphs/projectsGraphActivity/sceneGraphActivity.fxml"));
-        SceneGraphActivityController controller = new SceneGraphActivityController(p);
+        SceneGraphActivityController controller = new SceneGraphActivityController(p, mainController);
         loader.setController(controller);
         VBox graphBox = loader.load();
         this.paneDetailProject.getChildren().add(graphBox);        
+    }
+    
+    /**
+     * Cette méthode initialise les champs fixes de l'IHM
+     */
+    public void initFields() {
+        int totalProjects = listProject.size();
+        labelTotalProjects.setText(String.valueOf(totalProjects));
     }
     
 }

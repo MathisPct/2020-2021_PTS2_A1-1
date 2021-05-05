@@ -12,11 +12,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="838.0" prefWidth="1495.0" style="-fx-background-color: #E6E6E6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.Vue.techsScene.sceneTechsController">
+<VBox prefHeight="838.0" prefWidth="1495.0" style="-fx-background-color: #E6E6E6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox prefHeight="33.0" prefWidth="1335.0" style="-fx-background-color: #3F4B6C;">
+      <HBox prefHeight="33.0" prefWidth="1335.0" styleClass="window-title-hbox">
          <children>
-            <Label alignment="CENTER" graphicTextGap="0.0" prefHeight="31.0" text="Liste des techniciens" textFill="WHITE">
+            <Label alignment="CENTER" graphicTextGap="0.0" prefHeight="31.0" styleClass="window-title" text="Liste des techniciens" textFill="WHITE">
                <font>
                   <Font name="Carlito" size="20.0" />
                </font>
@@ -41,13 +41,13 @@
             </Label>
          </children>
       </HBox>
-      <SplitPane dividerPositions="0.5" prefHeight="994.0" prefWidth="1495.0" style="-fx-background-color: #E6E6E6;">
+      <SplitPane dividerPositions="0.5" prefHeight="994.0" prefWidth="1495.0" style="-fx-background-color: #E6E6E6;" styleClass="split-pane-divider">
         <items>
             <VBox fx:id="scrollTechParent">
                <children>
-                  <HBox prefWidth="863.0" style="-fx-background-color: #BCBECE;">
+                  <HBox prefWidth="863.0" styleClass="box-title-hbox">
                      <children>
-                        <Label prefHeight="33.0" text=" Affichage des techniciens" textFill="#3f4b6c">
+                        <Label prefHeight="33.0" styleClass="box-title" text=" Affichage des techniciens" textFill="#3f4b6c">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -58,7 +58,7 @@
                         <AnchorPane HBox.hgrow="ALWAYS" />
                         <ComboBox fx:id="comboBoxSkills" onAction="#searchTechsSkill" promptText="filtre par compétences" HBox.hgrow="NEVER">
                            <HBox.margin>
-                              <Insets right="5.0" top="3.0" />
+                              <Insets right="5.0" />
                            </HBox.margin>
                         </ComboBox>
                      </children>
@@ -88,9 +88,9 @@
                <items>
                   <VBox fx:id="scrollSkillParent">
                      <children>
-                        <HBox prefWidth="1294.0" style="-fx-background-color: #BCBECE;">
+                        <HBox prefWidth="1294.0" styleClass="box-title-hbox">
                            <children>
-                              <Label fx:id="skillTechInfo" prefHeight="33.0" text="Compétences de " textFill="#3f4b6c">
+                              <Label fx:id="skillTechInfo" prefHeight="33.0" styleClass="box-title" text="Compétences de " textFill="#3f4b6c">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -98,7 +98,7 @@
                                     <Insets left="10.0" />
                                  </HBox.margin>
                               </Label>
-                              <Label fx:id="skillTechName" layoutX="15.0" layoutY="10.0" prefHeight="33.0" text="&lt;prénom nom&gt;" textFill="#3f4b6c">
+                              <Label fx:id="skillTechName" layoutX="15.0" layoutY="10.0" prefHeight="33.0" styleClass="box-title-value" text="&lt;prénom nom&gt;" textFill="#3f4b6c">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
@@ -128,11 +128,11 @@
                   </VBox>
                   <VBox>
                      <children>
-                        <VBox fx:id="containerGraph" alignment="TOP_CENTER" stylesheets="@../CustomCharts/stylePieChart.css" VBox.vgrow="ALWAYS">
+                        <VBox fx:id="containerGraph" alignment="TOP_CENTER" stylesheets="@../Style/CustomCharts/stylePieChart.css" VBox.vgrow="ALWAYS">
                            <children>
-                              <HBox prefWidth="1294.0" style="-fx-background-color: #BCBECE;">
+                              <HBox prefWidth="1294.0" styleClass="box-title-hbox">
                                  <children>
-                                    <Label fx:id="skillTechInfo1" prefHeight="33.0" text="Graphique de compétences de " textFill="#3f4b6c">
+                                    <Label fx:id="skillTechInfo1" prefHeight="33.0" styleClass="box-title" text="Graphique de compétences de " textFill="#3f4b6c">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -140,9 +140,9 @@
                                           <Insets left="10.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <Label fx:id="GraphskillTechName" layoutX="15.0" layoutY="10.0" prefHeight="33.0" text="&lt;prénom nom&gt;" textFill="#3f4b6c">
+                                    <Label fx:id="GraphskillTechName" layoutX="15.0" layoutY="10.0" prefHeight="33.0" styleClass="box-title-value" text="&lt;prénom nom&gt;" textFill="#3f4b6c">
                                        <font>
-                                          <Font name="System Bold" size="18.0" />
+                                          <Font size="18.0" />
                                        </font>
                                     </Label>
                                  </children>

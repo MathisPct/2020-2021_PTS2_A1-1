@@ -12,11 +12,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="838.0" prefWidth="1495.0" style="-fx-background-color: #E6E6E6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Application.Vue.projectsScene.SceneProjectsController">
+<VBox prefHeight="838.0" prefWidth="1495.0" style="-fx-background-color: #E6E6E6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox prefHeight="33.0" prefWidth="1335.0" style="-fx-background-color: #3F4B6C;">
+      <HBox alignment="CENTER_LEFT" styleClass="window-title-hbox">
          <children>
-            <Label alignment="CENTER" graphicTextGap="0.0" prefHeight="31.0" prefWidth="203.0" text="Gestionnaire de projet" textFill="WHITE">
+            <Label alignment="CENTER" graphicTextGap="0.0" styleClass="window-title" text="Gestionnaire de projet" textFill="WHITE">
                <font>
                   <Font name="Carlito" size="20.0" />
                </font>
@@ -31,7 +31,7 @@
                   <Font name="Carlito" size="20.0" />
                </font>
             </Label>
-            <Label graphicTextGap="0.0" layoutX="207.0" layoutY="10.0" prefHeight="31.0" prefWidth="51.0" text="5" textFill="WHITE">
+            <Label fx:id="labelTotalProjects" graphicTextGap="0.0" layoutX="207.0" layoutY="10.0" prefHeight="31.0" prefWidth="51.0" text="5" textFill="WHITE">
                <font>
                   <Font name="Carlito" size="20.0" />
                </font>
@@ -42,9 +42,9 @@
         <items>
             <VBox>
                <children>
-                  <HBox prefHeight="33.0" prefWidth="1294.0" style="-fx-background-color: #BCBECE;">
+                  <HBox prefHeight="33.0" prefWidth="1294.0" styleClass="box-title-hbox">
                      <children>
-                        <Label prefWidth="545.0" text=" Affichage des projets" textFill="#3f4b6c">
+                        <Label prefWidth="545.0" styleClass="box-title" text=" Affichage des projets" textFill="#3f4b6c">
                            <font>
                               <Font size="18.0" />
                            </font>
