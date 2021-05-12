@@ -141,7 +141,7 @@
       </HBox>
       <HBox alignment="CENTER" spacing="25.0">
          <children>
-            <JFXButton alignment="CENTER" buttonType="RAISED" prefHeight="25.0" styleClass="btn" text="Action sur le projet">
+            <JFXButton alignment="CENTER" buttonType="RAISED" prefHeight="25.0" styleClass="btn" text="&lt;default action&gt;">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -153,7 +153,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton buttonType="RAISED" prefHeight="25.0" styleClass="btn" text="Validation projet">
+            <JFXButton buttonType="RAISED" prefHeight="25.0" styleClass="btn" text="Valider le projet">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -161,22 +161,6 @@
                   <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../images/Icons%20black/Icons_black_00015.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </JFXButton>
-         </children>
-      </HBox>
-      <HBox alignment="CENTER">
-         <children>
-            <JFXButton buttonType="RAISED" prefHeight="25.0" styleClass="btn" text="Valider">
-               <font>
-                  <Font name="System Bold" size="21.0" />
-               </font>
-               <graphic>
-                  <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../images/Icons%20black/Icons_black_00010.png" />
                      </image>
                   </ImageView>
                </graphic>
