@@ -19,6 +19,7 @@ public class MyStyle {
     private String colorBase;
     private String colorBaseBar;
     private String colorSelected;
+    private String colorSelectedGradient;
 
 
     private String colorSelectedLight;
@@ -42,7 +43,9 @@ public class MyStyle {
                 this.colorBase = "#FFFFFF";
                 this.colorBaseBar = "#BCBECE";
                 this.colorSelected = "#FF8E34";
-                this.colorSelectedLight = "#FFE4CA";
+                this.colorSelectedGradient = "linear-gradient( to bottom, #FF8E34, #FFAD70)"; 
+                //this.colorSelectedLight = "#FFE4CA";
+                this.colorSelectedLight = "linear-gradient( to bottom, #FFE4CA, #FFD0AA)";
                 this.colorTitle = "#475975";
                 this.colorTitleSelected = "#212939";
                 this.colorLabel = "#212939";
@@ -52,6 +55,7 @@ public class MyStyle {
                 this.colorBase = "#FFFFFF";
                 this.colorBaseBar = "#BCBECE";
                 this.colorSelected = "#FF8E34";
+                this.colorSelectedGradient = "linear-gradient( to right,  #FF8E34, #E16100)";
                 this.colorSelectedLight = "#FFE4CA";
                 this.colorTitle = "#475975";
                 this.colorTitleSelected = "#212939";
@@ -82,6 +86,10 @@ public class MyStyle {
     public String getColorSelected() {
         return colorSelected;
     }
+
+    public String getColorSelectedGradient() {
+        return colorSelectedGradient;
+    } 
 
     public String getColorSelectedLight() {
         return colorSelectedLight;

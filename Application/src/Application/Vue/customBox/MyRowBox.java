@@ -53,7 +53,7 @@ public class MyRowBox extends HBox{
         setBar();
         setTitleBasic(title);
         this.getChildren().addAll(this.boxBar, this.title);
-        this.setStyle("-fx-background-color: " + style.getColorBase());   
+        this.setStyle("-fx-background-color: " + style.getColorBase());
     }
     
     public void generateLineBoxTwoText() {
@@ -61,7 +61,7 @@ public class MyRowBox extends HBox{
         setTitleBasic(this.title);
         setTitleBasic(this.label1);
         this.getChildren().addAll(this.boxBar, this.title, addSpacer(),this.label1);       
-        this.setStyle("-fx-background-color: " + style.getColorBase());   
+        this.setStyle("-fx-background-color: " + style.getColorBase());     
     }
     
     public void generateItemVBoxRow(ArrayList<ItemVBox> itemBoxList, Priority priorityFirst) {

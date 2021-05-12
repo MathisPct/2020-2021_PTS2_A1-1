@@ -51,6 +51,10 @@ public class MyCustomBox extends VBox {
         }
         this.Vcontainer.getChildren().add(this.rowBoxList.get(0));
         this.getChildren().addAll(this.Vcontainer);
+        this.setStyle(  "-fx-border-radius: 5;\n"
+                      + "-fx-border-style: solid;\n" 
+                      + "-fx-border-color: #3F4B6C0F;\n" 
+                      + "-fx-border-width: 1.5;");
     }
     
     public void removeRowBoxListItem(MyRowBox rowBox) {
@@ -86,7 +90,7 @@ public class MyCustomBox extends VBox {
             }
         this.rowBoxList.get(0).setTitleSelected(this.rowBoxList.get(0).getTitle());
         rowBoxList.get(0).setBoxBarColor(this.style.getColorSelected());
-        rowBoxList.get(0).setBoxColor(this.style.getColorSelected());
+        rowBoxList.get(0).setBoxColor(this.style.getColorSelectedGradient());
     }
     
     public Tech GetTech() {
