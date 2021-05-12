@@ -65,7 +65,7 @@ public class SceneGraphActivityController implements Initializable{
        
     @FXML
     void openActivities(ActionEvent event) throws IOException {
-        this.mainController.projectActivities();
+        this.mainController.projectActivities(projet);
     }
     
     /**

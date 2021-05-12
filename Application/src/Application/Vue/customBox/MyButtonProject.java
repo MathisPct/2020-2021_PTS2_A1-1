@@ -37,7 +37,7 @@ public class MyButtonProject extends MyButton{
             switch(type) {
                 case "ACTIVITY" :                               
                     try {
-                        mainController.projectActivities();
+                        mainController.projectActivities(this.project);
                         System.out.println("[OPEN ACTIVITY: " + this.project.getName() + "]");
                     } catch (IOException ex) {
                         Logger.getLogger(MyButtonProject.class.getName()).log(Level.SEVERE, null, ex);
@@ -46,7 +46,7 @@ public class MyButtonProject extends MyButton{
                 case "MATERIEL" : 
                                
                     try {
-                        mainController.projectActivities();
+                        mainController.projectActivities(this.project);
                         System.out.println("[OPEN MATERIEL: " + this.project.getName() + "]");
                     } catch (IOException ex) {
                         Logger.getLogger(MyButtonProject.class.getName()).log(Level.SEVERE, null, ex);

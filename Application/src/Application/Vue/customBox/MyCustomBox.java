@@ -5,6 +5,7 @@
  */
 package Application.Vue.customBox;
 
+import Application.Metier.Activity;
 import Application.Metier.Project;
 import Application.Metier.Tech;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class MyCustomBox extends VBox {
     private MyScrollPane parent;
     private Tech tech;
     private Project project;
+    private Activity activity;
     
     public MyCustomBox(MyScrollPane parent, Tech tech, MyStyle style) {
         this.style = style;
@@ -42,6 +44,17 @@ public class MyCustomBox extends VBox {
         this.parent = parent;
         this.tech = null;
         this.project = project;
+    }
+    
+    public MyCustomBox(MyScrollPane parent, Activity activity, MyStyle style) {
+        this.style = style;
+        this.Vcontainer = new VBox();
+        this.rowBoxList = new ArrayList();
+        this.isOpen = false;
+        this.parent = parent;
+        this.tech = null;
+        this.project = null;
+        this.activity = activity;
     }
     
     public void initBox() {

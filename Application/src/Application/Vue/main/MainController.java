@@ -9,9 +9,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import Application.Database.BadUserError;
+import Application.Metier.Project;
 import Application.Metier.User;
 import Application.Vue.Login.SceneLoginController;
-import Application.Vue.ProjectActivities.SceneProjectActivitiesController;
+import Application.Vue.ProjectActivityScene.SceneProjectActivityController;
 import Application.Vue.UtilsIHM;
 import Application.Vue.profilScene.SceneProfileController;
 import Application.Vue.projectsScene.SceneProjectsController;
@@ -199,10 +200,10 @@ public class MainController implements Initializable {
     }
     
     @FXML
-    public void projectActivities() throws IOException{
+    public void projectActivities(Project projet) throws IOException{
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Application/Vue/ProjectActivities/sceneProjectActivities.fxml"));            
-            SceneProjectActivitiesController controller = new SceneProjectActivitiesController(this);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Application/Vue/ProjectActivityScene/SceneProjectActivity.fxml"));            
+            SceneProjectActivityController controller = new SceneProjectActivityController(this, projet);
             fxmlLoader.setController(controller);
             Pane tempPane = fxmlLoader.load();
             container.setCenter(tempPane);

@@ -5,18 +5,14 @@
  */
 package Application.Vue.customBox;
 
-import Application.Database.ProjectDao;
+
+import Application.Metier.Activity;
 import Application.Metier.Project;
-import Application.Metier.ProjectStatus;
 import Application.Metier.Tech;
 import Application.Vue.main.MainController;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 /**
  *
@@ -124,6 +120,14 @@ public class MyScrollPane extends ScrollPane{
         itemBoxList.add(i2);
         itemBoxList.add(i3);
         return itemBoxList;
+    }
+    
+    public MyRowBox generateMainActivityRow(Activity a) { 
+        // Génération de la ligne du nom du technicien
+        String pName = "nom de l'activité";
+        MyRowBox mainActivityRow = new MyRowBox(pName, this.style);           
+        mainActivityRow.generateLineBoxRow();
+        return mainActivityRow;
     }
     
     public MyStyle getScrollPaneStyle() {
