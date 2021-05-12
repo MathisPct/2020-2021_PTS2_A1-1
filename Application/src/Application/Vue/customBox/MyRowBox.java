@@ -5,6 +5,11 @@
  */
 package Application.Vue.customBox;
 
+import Application.Vue.customBox.MyItemBoxes.ItemVBox;
+import Application.Vue.customBox.MyItemBoxes.ItemHBox;
+import Application.Vue.customBox.MyButtons.MyButtonSkill;
+import Application.Vue.customBox.MyButtons.MyButton;
+import Application.Vue.customBox.MyStyles.MyStyle;
 import Application.Metier.Skill;
 import Application.Metier.Tech;
 import java.util.ArrayList;

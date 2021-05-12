@@ -8,9 +8,10 @@ package Application.Vue.ProjectActivityScene;
 import Application.Database.ProjectDao;
 import Application.Metier.Activity;
 import Application.Metier.Project;
-import Application.Vue.customBox.MyCustomBox;
-import Application.Vue.customBox.MyScrollPane;
-import Application.Vue.customBox.MyStyle;
+import Application.Vue.customBox.MyCustomBoxes.MyCustomBox;
+import Application.Vue.customBox.MyScrollPanes.MyScrollPane;
+import Application.Vue.customBox.MyStyles.MyStyle;
+import Application.Vue.customBox.MyStyles.MyStyleOrange;
 import Application.Vue.main.MainController;
 import java.net.URL;
 import java.sql.SQLException;
@@ -40,7 +41,7 @@ public class SceneProjectActivityController implements Initializable {
         this.mainController = mainController;
         this.projet = projet;
         this.activityList = new ArrayList<>();
-        this.style = new MyStyle("ORANGE", "Carlito");
+        this.style = new MyStyleOrange("Carlito");
         this.scrollActivity = new MyScrollPane(style, mainController);
     }
     
@@ -58,7 +59,7 @@ public class SceneProjectActivityController implements Initializable {
     public void initSPActivity() {        
         VBox vboxLayout = new VBox(scrollActivity.getScrollPaneStyle().getBoxSpacing());
         for (int i = 0; i < activityList.size(); i++) {         
-            MyCustomBox boxProjectActivity = new MyCustomBox(scrollActivity, activityList.get(i), style);                  
+            MyCustomBox boxProjectActivity = new MyCustomBoxActivity(activityList.get(i), style);                  
             boxProjectActivity.addRowBoxListItem(scrollActivity.generateMainActivityRow(activityList.get(i))); //ajout de la bôite de titre        
             boxProjectActivity.initBox();//initialisation de la boite principale
             scrollActivity.getCustomBoxList().add(boxProjectActivity);//remplissage de la liste de customBox avec l'instance actuellement générée      

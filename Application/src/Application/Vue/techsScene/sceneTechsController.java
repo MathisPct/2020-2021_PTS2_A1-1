@@ -14,12 +14,14 @@ import Application.Vue.Style.CustomCharts.DoughnutChart;
 
 import Application.Vue.UtilsIHM;
 
-import Application.Vue.customBox.ItemHBox;
-import Application.Vue.customBox.MyButton;
-import Application.Vue.customBox.MyCustomBox;
+import Application.Vue.customBox.MyItemBoxes.ItemHBox;
+import Application.Vue.customBox.MyButtons.MyButton;
+import Application.Vue.customBox.MyCustomBoxes.MyCustomBox;
+import Application.Vue.customBox.MyCustomBoxes.MyCustomBoxTech;
 import Application.Vue.customBox.MyRowBox;
-import Application.Vue.customBox.MyScrollPane;
-import Application.Vue.customBox.MyStyle;
+import Application.Vue.customBox.MyScrollPanes.MyScrollPane;
+import Application.Vue.customBox.MyStyles.MyStyle;
+import Application.Vue.customBox.MyStyles.MyStyleOrange;
 import Application.Vue.main.MainController;
 import java.net.URL;
 import java.sql.SQLException;
@@ -211,7 +213,7 @@ public class sceneTechsController implements Initializable{
 
     public void scrollPaneTech() {
             System.out.println("SceneTechs");
-            MyStyle style = new MyStyle("ORANGE", "Carlito");
+            MyStyle style = new MyStyleOrange("Carlito");
             MyScrollPane scrollTech = new MyScrollPane(style, mainController);
             initScrollPaneTech(listTechs, scrollTech, this.containerSkills);
             this.containerTech.getChildren().add(scrollTech);
@@ -228,7 +230,7 @@ public class sceneTechsController implements Initializable{
     public void initScrollPaneTech(ArrayList<Tech> listTech, MyScrollPane SP, VBox boxSkills) {        
         VBox vboxLayout = new VBox(SP.getScrollPaneStyle().getBoxSpacing());
         for (int i = 0; i < listTech.size(); i++) {         
-            MyCustomBox boxTech = new MyCustomBox(SP, listTech.get(i), SP.getScrollPaneStyle());       
+            MyCustomBox boxTech = new MyCustomBoxTech(listTech.get(i), SP.getScrollPaneStyle());       
             setActionBoxTech(SP, boxTech, listTech.get(i), boxSkills);//Evenement boite principale          
             boxTech.addRowBoxListItem(SP.generateMainTechRow(listTech.get(i))); //ajout de la bôite de titre
             boxTech.addRowBoxListItem(SP.generateItemBoxTech(listTech.get(i))); //ajout de la boite d'item
@@ -270,7 +272,7 @@ public class sceneTechsController implements Initializable{
         try {
             initData();
             System.out.println("SceneSkill");
-            MyStyle style = new MyStyle("BLEU", "Carlito");
+            MyStyle style = new MyStyleOrange("Carlito");
             this.scrollSkills = new MyScrollPane(style, mainController);
             initScrollPaneSkill(tech);
             this.containerSkills.getChildren().add(this.scrollSkills);

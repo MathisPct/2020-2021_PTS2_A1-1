@@ -7,9 +7,12 @@ package Application.Vue.projectsScene;
 
 import Application.Database.ProjectDao;
 import Application.Metier.Project;
-import Application.Vue.customBox.MyCustomBox;
-import Application.Vue.customBox.MyScrollPane;
-import Application.Vue.customBox.MyStyle;
+import Application.Vue.customBox.MyCustomBoxes.MyCustomBox;
+import Application.Vue.customBox.MyCustomBoxes.MyCustomBoxProject;
+import Application.Vue.customBox.MyScrollPanes.MyScrollPane;
+import Application.Vue.customBox.MyScrollPanes.MyScrollPaneProject;
+import Application.Vue.customBox.MyStyles.MyStyle;
+import Application.Vue.customBox.MyStyles.MyStyleOrange;
 import Application.Vue.main.MainController;
 import Application.Vue.projectsDetailsScene.SceneProjectsDetailsController;
 import Application.Vue.projectsGraphs.projectsGraphActivity.SceneGraphActivityController;
@@ -34,8 +37,8 @@ import javafx.scene.layout.VBox;
  * @author math7
  */
 public class SceneProjectsController implements Initializable {
-    private ArrayList<Project> listProject; // liste contenant les project récupérés depuis la dao
-    private Project project;
+    
+    private MyScrollPaneProject SPprojects;
     
     @FXML
     private Label labelTotalProjects;
@@ -64,53 +67,31 @@ public class SceneProjectsController implements Initializable {
     
     public SceneProjectsController(MainController mainController) {
         this.mainController = mainController;
+        this.SPprojects = null;
     }
   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        MyStyle style = new MyStyleOrange("Carlito");
         System.out.println("SceneProjects");
+        this.SPprojects = new MyScrollPaneProject(style, this, mainController);
         try {
-            setListProject();
+            this.SPprojects.setListProject();
             initFields();
-            scrollPaneProject();
+            containerProject.getChildren().add(this.SPprojects.scrollPaneProject());
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(SceneProjectsController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(SceneProjectsController.class.getName()).log(Level.SEVERE, null, ex);
         }                
-    }
-    
-    public void scrollPaneProject() {
-        System.out.println("Affiche des projets");
-        MyStyle style = new MyStyle("ORANGE", "Carlito");
-        MyScrollPane scrollProject = new MyScrollPane(style, mainController);
-        initScrollPaneProject(listProject, scrollProject);
-        this.containerProject.getChildren().add(scrollProject);
-        //this.vboxLayoutSkills = new VBox(scrollTech.getSPStyle().getBoxSpacing());
-    }
-    
-    public void initScrollPaneProject(ArrayList<Project> listProject, MyScrollPane SP) {        
-        VBox vboxLayout = new VBox(SP.getScrollPaneStyle().getBoxSpacing());
-        for (int i = 0; i < listProject.size(); i++) {         
-            MyCustomBox boxProject = new MyCustomBox(SP, listProject.get(i), SP.getScrollPaneStyle());       
-            setActionBoxProject(SP, boxProject, listProject.get(i));//Evenement boite principale          
-            boxProject.addRowBoxListItem(SP.generateMainProjectRow(listProject.get(i))); //ajout de la bôite de titre
-            boxProject.addRowBoxListItem(SP.generateItemBoxProject(listProject.get(i))); //ajout de la boite d'item
-            boxProject.initBox();//initialisation de la boite principale
-            SP.getCustomBoxList().add(boxProject);//remplissage de la liste de customBox avec l'instance actuellement générée      
-            MyCustomBox.setVgrow(boxProject, Priority.ALWAYS);
-            vboxLayout.getChildren().add(boxProject);
-        }      
-        SP.setContent(vboxLayout);
-        SP.setFitToWidth(true);
-    }   
+    }  
        
-    public void setActionBoxProject(MyScrollPane SP, MyCustomBox boxProject, Project p) {
+    public void setActionBoxProject(MyCustomBox boxProject, Project p) {
         boxProject.setOnMouseClicked((event) -> {
             System.out.println("Instance clicked");
-            SP.findBox(boxProject);
+            SPprojects.findBox(boxProject);
             boxProject.openBox();
-            setProject(p);
+            SPprojects.setProject(p);
             try {
                 this.paneDetailProject.getChildren().clear();
                 initDetailProject(p);
@@ -119,16 +100,6 @@ public class SceneProjectsController implements Initializable {
                 Logger.getLogger(SceneProjectsController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-    }
-    
-    public void setListProject() throws ClassNotFoundException, SQLException {
-        ProjectDao projectDAO = new ProjectDao();
-        
-        listProject = projectDAO.listAll();
-    }
-    
-    public void setProject(Project p) {
-        this.project = p;
     }
     
     public void initDetailProject(Project p) throws IOException {
@@ -151,8 +122,7 @@ public class SceneProjectsController implements Initializable {
      * Cette méthode initialise les champs fixes de l'IHM
      */
     public void initFields() {
-        int totalProjects = listProject.size();
+        int totalProjects = this.SPprojects.getListProject().size();
         labelTotalProjects.setText(String.valueOf(totalProjects));
-    }
-    
+    }    
 }

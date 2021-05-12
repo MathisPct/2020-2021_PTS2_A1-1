@@ -3,11 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Application.Vue.customBox;
+package Application.Vue.customBox.MyCustomBoxes;
 
+import Application.Vue.customBox.MyScrollPanes.MyScrollPane;
+import Application.Vue.customBox.MyStyles.MyStyle;
 import Application.Metier.Activity;
 import Application.Metier.Project;
 import Application.Metier.Tech;
+import Application.Vue.customBox.MyRowBox;
 import java.util.ArrayList;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -17,46 +20,19 @@ import javafx.scene.layout.VBox;
  * @author David
  */
 public class MyCustomBox extends VBox {
+    
     private MyStyle style;
     private VBox Vcontainer;
     private ArrayList<MyRowBox> rowBoxList;
     private boolean isOpen;
-    private MyScrollPane parent;
-    private Tech tech;
-    private Project project;
-    private Activity activity;
     
-    public MyCustomBox(MyScrollPane parent, Tech tech, MyStyle style) {
+    public MyCustomBox(MyStyle style) {
         this.style = style;
         this.Vcontainer = new VBox();
         this.rowBoxList = new ArrayList();
         this.isOpen = false;
-        this.parent = parent;
-        this.tech = tech;
-        this.project = null;
     }
-    
-    public MyCustomBox(MyScrollPane parent, Project project, MyStyle style) {
-        this.style = style;
-        this.Vcontainer = new VBox();
-        this.rowBoxList = new ArrayList();
-        this.isOpen = false;
-        this.parent = parent;
-        this.tech = null;
-        this.project = project;
-    }
-    
-    public MyCustomBox(MyScrollPane parent, Activity activity, MyStyle style) {
-        this.style = style;
-        this.Vcontainer = new VBox();
-        this.rowBoxList = new ArrayList();
-        this.isOpen = false;
-        this.parent = parent;
-        this.tech = null;
-        this.project = null;
-        this.activity = activity;
-    }
-    
+      
     public void initBox() {
         //parcourt de la liste de rowBox
         for (int i = 0; i<this.rowBoxList.size(); i++) {           
@@ -104,14 +80,14 @@ public class MyCustomBox extends VBox {
         this.rowBoxList.get(0).setTitleSelected(this.rowBoxList.get(0).getTitle());
         rowBoxList.get(0).setBoxBarColor(this.style.getColorSelected());
         rowBoxList.get(0).setBoxColor(this.style.getColorSelectedGradient());
-    }
-    
-    public Tech GetTech() {
-        return this.tech;
-    }
+    }   
       
     public void openBoxAction() {
         System.out.println("Custom box clicked");  
+    }
+    
+    public MyStyle getCustomBoxStyle(){
+        return this.style;       
     }
     
     

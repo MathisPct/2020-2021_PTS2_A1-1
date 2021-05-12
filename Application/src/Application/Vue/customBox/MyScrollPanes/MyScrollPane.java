@@ -3,12 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Application.Vue.customBox;
+package Application.Vue.customBox.MyScrollPanes;
 
 
+import Application.Vue.customBox.MyItemBoxes.ItemVBox;
+import Application.Vue.customBox.MyButtons.MyButtonTech;
+import Application.Vue.customBox.MyButtons.MyButtonProject;
+import Application.Vue.customBox.MyButtons.MyButton;
+import Application.Vue.customBox.MyStyles.MyStyle;
 import Application.Metier.Activity;
 import Application.Metier.Project;
 import Application.Metier.Tech;
+import Application.Vue.customBox.MyCustomBoxes.MyCustomBox;
+import Application.Vue.customBox.MyRowBox;
 import Application.Vue.main.MainController;
 import java.util.ArrayList;
 import javafx.geometry.Insets;
@@ -42,14 +49,15 @@ public class MyScrollPane extends ScrollPane{
         mainTechRow.generateLineBoxRow();
         return mainTechRow;
     }
-      
-    public MyRowBox generateMainProjectRow(Project p) { 
-        // Génération de la ligne du nom du technicien
-        String pName = p.getName();
-        MyRowBox mainTechRow = new MyRowBox(pName, this.style);           
-        mainTechRow.generateLineBoxRow();
-        return mainTechRow;
-    }
+    
+//    ////////////  
+//    public MyRowBox generateMainProjectRow(Project p) { 
+//        // Génération de la ligne du nom du technicien
+//        String pName = p.getName();
+//        MyRowBox mainTechRow = new MyRowBox(pName, this.style);           
+//        mainTechRow.generateLineBoxRow();
+//        return mainTechRow;
+//    }
     
     public MyRowBox generateItemBoxTech(Tech tech) {
         // création du container d'Items
@@ -62,49 +70,52 @@ public class MyScrollPane extends ScrollPane{
         return itemTechRow;
     }
     
-    public MyRowBox generateItemBoxProject(Project p) {
-        // création du container d'Items
-        MyRowBox projetItems = new MyRowBox("", this.style);
-        projetItems.generateItemVBoxRow(createProjectItemList(p), Priority.NEVER); //ajout des items à la boite d'item
-        //Génération d'un Item Bouton ACTIVITES
-        projetItems.addButtonToRowBox(createBtnActivities(p));
-        //Génération d'un Item Bouton MATERIEL
-        projetItems.addButtonToRowBox(createBtnMateriel(p));
-        return projetItems;
-    }
+//    //////////////////
+//    public MyRowBox generateItemBoxProject(Project p) {
+//        // création du container d'Items
+//        MyRowBox projetItems = new MyRowBox("", this.style);
+//        projetItems.generateItemVBoxRow(createProjectItemList(p), Priority.NEVER); //ajout des items à la boite d'item
+//        //Génération d'un Item Bouton ACTIVITES
+//        projetItems.addButtonToRowBox(createBtnActivities(p));
+//        //Génération d'un Item Bouton MATERIEL
+//        projetItems.addButtonToRowBox(createBtnMateriel(p));
+//        return projetItems;
+//    }
     
-    public MyButton createBtnActivities(Project p) {
-        //Génération d'un Item Bouton ACTIVITES
-        MyButtonProject btnActivities = new MyButtonProject("Activités", "ACTIVITY", p, mainController, this.style);
-        btnActivities.addIconButton("CRAYON");
-        return btnActivities;
-    }
+//    ///////////
+//    public MyButton createBtnActivities(Project p) {
+//        //Génération d'un Item Bouton ACTIVITES
+//        MyButtonProject btnActivities = new MyButtonProject("Activités", "ACTIVITY", p, mainController, this.style);
+//        btnActivities.addIconButton("CRAYON");
+//        return btnActivities;
+//    }
+//    
+//    /////////////
+//    public MyButton createBtnMateriel(Project p) {
+//        //Génération d'un Item Bouton ACTIVITES
+//        MyButtonProject btnMateriel = new MyButtonProject("Matériel", "MATERIEL", p, mainController, this.style);
+//        btnMateriel.addIconButton("CRAYON");
+//        return btnMateriel;
+//    }
     
-    public MyButton createBtnMateriel(Project p) {
-        //Génération d'un Item Bouton ACTIVITES
-        MyButtonProject btnMateriel = new MyButtonProject("Matériel", "MATERIEL", p, mainController, this.style);
-        btnMateriel.addIconButton("CRAYON");
-        return btnMateriel;
-    }
-    
-
-    public ArrayList<ItemVBox> createProjectItemList(Project p) {
-        // Génération des Item de la boite
-        String client = "<Client>";
-        String statut = p.getStatusString();
-        String dateCommande = "00/00/0000";
-        String totalActivite = String.valueOf(p.getActivities().size());
-        ArrayList<ItemVBox> itemBoxList = new ArrayList();
-        ItemVBox i1 = new ItemVBox("Statut", statut, this.style);
-        ItemVBox i2 = new ItemVBox("Client", client, this.style);
-        ItemVBox i3 = new ItemVBox("Commande", dateCommande , this.style);
-        ItemVBox i4 = new ItemVBox("Activités", totalActivite, this.style);
-        itemBoxList.add(i1);
-        itemBoxList.add(i2);
-        itemBoxList.add(i3);
-        itemBoxList.add(i4);
-        return itemBoxList;
-    }
+//    ///////////////
+//    public ArrayList<ItemVBox> createProjectItemList(Project p) {
+//        // Génération des Item de la boite
+//        String client = "<Client>";
+//        String statut = p.getStatusString();
+//        String dateCommande = "00/00/0000";
+//        String totalActivite = String.valueOf(p.getActivities().size());
+//        ArrayList<ItemVBox> itemBoxList = new ArrayList();
+//        ItemVBox i1 = new ItemVBox("Statut", statut, this.style);
+//        ItemVBox i2 = new ItemVBox("Client", client, this.style);
+//        ItemVBox i3 = new ItemVBox("Commande", dateCommande , this.style);
+//        ItemVBox i4 = new ItemVBox("Activités", totalActivite, this.style);
+//        itemBoxList.add(i1);
+//        itemBoxList.add(i2);
+//        itemBoxList.add(i3);
+//        itemBoxList.add(i4);
+//        return itemBoxList;
+//    }
     
     public ArrayList<ItemVBox> createTechItemList(Tech tech) {
         // Génération des Item de la boite technicien
@@ -138,6 +149,9 @@ public class MyScrollPane extends ScrollPane{
         return this.listCustomBox;
     }
     
+    public MainController getMainController(){
+        return mainController;
+    }
 
 }
 
