@@ -41,13 +41,12 @@ public class MyScrollPaneTech extends MyScrollPane {
         System.out.println("SceneTechs");
         MyStyle style = new MyStyleOrange("Carlito");
         initScrollPaneTech();
-        //this.containerTech.getChildren().add(scrollTech);
     }
-    
 
-    
      /**
-     * Cette fonction génère les box de techniciens dans le scrollPane des techniciens à partir d'une liste de technicien
+     * Cette fonction génère les box de techniciens 
+     * dans le scrollPane des techniciens à partir 
+     * d'une liste de technicien
      */
     public void initScrollPaneTech() {    
         VBox vboxLayout = new VBox(this.getScrollPaneStyle().getBoxSpacing());
@@ -71,37 +70,5 @@ public class MyScrollPaneTech extends MyScrollPane {
     
     public Tech getTech() {
         return this.tech;
-    }
-   
-    
-
-    
-//        /**
-//
-//     * Cette fonction créé le scrollpane des techniciens en lui assignant un style et en définissant sa boite parente
-//     * à savoir containerTech.
-//     * Initialise la comboBox avec les compétences qui peuvent appartenir aux
-//     * techniciens de la BDD
-//     * @throws SQLException 
-//     */
-//    private void initComboBox() throws SQLException{
-//        try{
-//            parentController.getComboBoxSkills().getItems().add("Tous les skills");
-//            parentController.getComboBoxSkills().getItems().addAll(parentController.ListSkills());
-//        }catch(DaoError dao){
-//            dao.printStackTrace();
-//            UtilsIHM.afficherErreur(dao.getLocalizedMessage());
-//        }
-//    }
-//    
-//    /**
-//     * Initialise le champ totalTechs qui indique le nombre de techniciens
-//     */
-//    private void initNbTechs(){
-//        parentController.getLabelTotalTechs().setText(String.valueOf(this.listTechs.size()));
-//    }
-    
-    
-    
-    
+    }   
 }

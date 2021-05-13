@@ -41,7 +41,7 @@ import javafx.scene.layout.VBox;
 public class sceneTechsController implements Initializable{
 
     private UserDao dao; //DAO
-    private ArrayList<Tech> listTechs; // liste contenant les project récupérés depuis la dao
+    private ArrayList<Tech> listTechs;
     private ArrayList<Skill> listSkills;
     private MyScrollPaneSkills SPskills; 
     private MyScrollPaneTech SPtechs;
@@ -55,7 +55,8 @@ public class sceneTechsController implements Initializable{
     @FXML
     private VBox containerTech;  
     /**
-     * Liste qui contient les skills possibles pour les techniciens afin d'effectuer
+     * Liste qui contient les skills possibles
+     * pour les techniciens afin d'effectuer
      * des recherches par skill dans la bdd
      */
     @FXML

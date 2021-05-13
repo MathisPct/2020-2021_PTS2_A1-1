@@ -5,17 +5,14 @@
  */
 package Application.Vue.techsScene.TechSkillsScene;
 
-import Application.Database.UserDao;
 import Application.Metier.Skill;
 import Application.Metier.Tech;
-import Application.Vue.customBox.MyRowBox;
 import Application.Vue.customBox.MyScrollPanes.MyScrollPaneSkills;
 import Application.Vue.customBox.MyStyles.MyStyle;
 import Application.Vue.customBox.MyStyles.MyStyleOrange;
 import Application.Vue.main.MainController;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -65,8 +62,7 @@ public class SceneTechSkillsController implements Initializable {
         MyStyle style = new MyStyleOrange("Carlito");
         SPskills = new MyScrollPaneSkills(style, tech, mainController);
         SPskills.scrollPaneSkill();
-        containerSkills.getChildren().add(SPskills);
-        
+        containerSkills.getChildren().add(SPskills);      
     }
     
     /**
@@ -79,7 +75,26 @@ public class SceneTechSkillsController implements Initializable {
         this.GraphTechName.setText(techName);
     }
     
+    public void clearSkillContainer(){
+        this.containerSkills.getChildren().clear();
+    }
+    
+    public VBox getContainerSkills() {
+        return containerSkills;
+    }
+
+    public AnchorPane getContainerTechGraph() {
+        return containerTechGraph;
+    }
+    
     /**
+     * Initialise le graphique des technicien
+     * @param tech 
+     */
+    private void initChart(Tech tech){
+    }
+    
+        /**
      * Genère les datas pour construire le graphique de skill technicien
      * @param tech
      * @return 
@@ -103,28 +118,6 @@ public class SceneTechSkillsController implements Initializable {
             pieData.add(d);
         }          
         return pieData;     
-    }
-
-    public void clearSkillContainer(){
-        this.containerSkills.getChildren().clear();
-    }
-    
-    public VBox getContainerSkills() {
-        return containerSkills;
-    }
-
-    public AnchorPane getContainerTechGraph() {
-        return containerTechGraph;
-    }
-    
-    
-    
-    
-    /**
-     * Initialise le graphique des technicien
-     * @param tech 
-     */
-    private void initChart(Tech tech){
     }
     
 

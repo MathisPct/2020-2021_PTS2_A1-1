@@ -35,6 +35,7 @@ import javafx.scene.layout.VBox;
 public class SceneProjectsController implements Initializable {
     
     private MyScrollPaneProject SPprojects;
+    private MainController mainController;
     
     @FXML
     private Label labelTotalProjects;
@@ -58,9 +59,7 @@ public class SceneProjectsController implements Initializable {
     private VBox containerProject;  
     @FXML
     private VBox paneDetailProject;
-    
-    private MainController mainController;
-    
+      
     public SceneProjectsController(MainController mainController) {
         this.mainController = mainController;
         this.SPprojects = null;
