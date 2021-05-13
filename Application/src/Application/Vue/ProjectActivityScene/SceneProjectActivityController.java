@@ -5,11 +5,13 @@
  */
 package Application.Vue.ProjectActivityScene;
 
+import Application.Vue.customBox.MyCustomBoxes.MyCustomBoxActivity;
 import Application.Database.ProjectDao;
 import Application.Metier.Activity;
 import Application.Metier.Project;
 import Application.Vue.customBox.MyCustomBoxes.MyCustomBox;
 import Application.Vue.customBox.MyScrollPanes.MyScrollPane;
+import Application.Vue.customBox.MyScrollPanes.MyScrollPaneActivities;
 import Application.Vue.customBox.MyStyles.MyStyle;
 import Application.Vue.customBox.MyStyles.MyStyleOrange;
 import Application.Vue.main.MainController;
@@ -29,50 +31,40 @@ import javafx.scene.layout.VBox;
 public class SceneProjectActivityController implements Initializable {
     
     private MainController mainController;
-    private MyScrollPane scrollActivity;
-    private MyStyle style;
-    private Project projet;
-    private ArrayList<Activity> activityList;
+    private MyScrollPaneActivities SPactivities;
+    private Project project;
+    private ArrayList<Activity> listActivity;
     
     @FXML
     private VBox containerActivity;
 
     public SceneProjectActivityController(MainController mainController, Project projet){
         this.mainController = mainController;
-        this.projet = projet;
-        this.activityList = new ArrayList<>();
-        this.style = new MyStyleOrange("Carlito");
-        this.scrollActivity = new MyScrollPane(style, mainController);
+        this.project = projet;
+        this.listActivity = new ArrayList<>();
+        this.SPactivities = null;
     }
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setListActivity();
-        SPActivity();
+        MyStyle style = new MyStyleOrange("Carlito");
+        this.SPactivities = new MyScrollPaneActivities(style, this, project, mainController);
+        this.SPactivities.scrollPane();
+        this.containerActivity.getChildren().add(this.SPactivities);
     }
     
-    public void SPActivity() {
-        initSPActivity();
-        this.containerActivity.getChildren().add(scrollActivity);
-    }
-    
-    public void initSPActivity() {        
-        VBox vboxLayout = new VBox(scrollActivity.getScrollPaneStyle().getBoxSpacing());
-        for (int i = 0; i < activityList.size(); i++) {         
-            MyCustomBox boxProjectActivity = new MyCustomBoxActivity(activityList.get(i), style);                  
-            boxProjectActivity.addRowBoxListItem(scrollActivity.generateMainActivityRow(activityList.get(i))); //ajout de la bôite de titre        
-            boxProjectActivity.initBox();//initialisation de la boite principale
-            scrollActivity.getCustomBoxList().add(boxProjectActivity);//remplissage de la liste de customBox avec l'instance actuellement générée      
-            MyCustomBox.setVgrow(boxProjectActivity, Priority.ALWAYS);
-            vboxLayout.getChildren().add(boxProjectActivity);
-        }      
-        scrollActivity.setContent(vboxLayout);
-        scrollActivity.setFitToWidth(true);
-    }   
     
     public void setListActivity() {
-        for (Activity activity : projet.getActivities()) {
-            this.activityList.add(activity);
+        for (Activity activity : project.getActivities()) {
+            this.listActivity.add(activity);
+            System.out.println("Activité: " + activity.toString() );
         }
     }
+
+    public ArrayList<Activity> getListActivity() {
+        return listActivity;
+    }
+    
+    
 }

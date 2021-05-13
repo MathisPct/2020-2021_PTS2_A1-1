@@ -88,7 +88,5 @@ public class MyCustomBox extends VBox {
     
     public MyStyle getCustomBoxStyle(){
         return this.style;       
-    }
-    
-    
+    }  
 }

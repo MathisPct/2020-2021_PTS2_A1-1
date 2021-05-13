@@ -3,11 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Application.Vue.ProjectActivityScene;
+package Application.Vue.customBox.MyCustomBoxes;
 
 import Application.Metier.Activity;
-import Application.Vue.customBox.MyCustomBoxes.MyCustomBox;
-import Application.Vue.customBox.MyScrollPanes.MyScrollPane;
 import Application.Vue.customBox.MyStyles.MyStyle;
 
 /**
@@ -16,11 +14,8 @@ import Application.Vue.customBox.MyStyles.MyStyle;
  */
 public class MyCustomBoxActivity extends MyCustomBox {
 
-    private Activity activity;
 
-    public MyCustomBoxActivity(Activity activity, MyStyle style) {
+    public MyCustomBoxActivity(MyStyle style) {
         super(style);
-        this.activity = activity;
     }
-    
 }

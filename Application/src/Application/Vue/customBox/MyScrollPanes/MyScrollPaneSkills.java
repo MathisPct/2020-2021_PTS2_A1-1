@@ -26,9 +26,8 @@ public class MyScrollPaneSkills extends MyScrollPane{
         super(style, mainController);
         this.tech = tech;
     }
-
-    
-        /**
+  
+     /**
      * Cette fonction créé le scrollpane des skills en lui assignant un style et en définissant sa boite parente
      * à savoir containerSkill.
      * @param tech 
@@ -37,8 +36,7 @@ public class MyScrollPaneSkills extends MyScrollPane{
       
         System.out.println("SceneSkill");
         MyStyle style = new MyStyleOrange("Carlito");         
-        initScrollPaneSkill();
-        //this.containerSkills.getChildren().add(this.scrollSkills);       
+        initScrollPaneSkill();      
     } 
     
     /**
@@ -59,8 +57,6 @@ public class MyScrollPaneSkills extends MyScrollPane{
         }
         this.setContent(vboxLayout);   
         this.setFitToWidth(true);
-        //this.containerSkills.getChildren().add(this);
-        //initChart(tech);
     }
     
 }

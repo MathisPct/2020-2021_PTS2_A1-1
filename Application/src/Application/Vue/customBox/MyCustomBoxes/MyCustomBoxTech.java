@@ -25,41 +25,5 @@ public class MyCustomBoxTech extends MyCustomBox {
     public MyCustomBoxTech(Tech tech, MyStyle style) {
         super(style);
         this.tech = tech;
-    }
-    
-    public MyRowBox generateMainTechRow(Tech tech) { 
-        // Génération de la ligne du nom du technicien
-        String techFullName = tech.getFirstName()+" "+tech.getLastName();
-        MyRowBox mainTechRow = new MyRowBox(techFullName, getCustomBoxStyle());           
-        mainTechRow.generateLineBoxRow();
-        return mainTechRow;
-    }
-    
-    public MyRowBox generateItemBoxTech(Tech tech) {
-        // création du container d'Items
-        MyRowBox itemTechRow = new MyRowBox("", getCustomBoxStyle());
-        itemTechRow.generateItemVBoxRow(createTechItemList(tech), Priority.NEVER); //ajout des items à la boite d'item
-        //Génération d'un Item Bouton
-        MyButtonTech btn = new MyButtonTech("Voir détails", tech, getCustomBoxStyle());
-        btn.addIconButton("CRAYON");
-        itemTechRow.addButtonToRowBox(btn);
-        return itemTechRow;
-    }
-    
-    public ArrayList<ItemVBox> createTechItemList(Tech tech) {
-        // Génération des Item de la boite technicien
-        String totalSkills = String.valueOf(tech.GetSkills().size());
-        String grade = tech.getGrade();
-        String euro = Character.toString ((char) 8364);
-        String cout = tech.getCoutHoraire() + euro + " /h";
-        ArrayList<ItemVBox> itemBoxList = new ArrayList();         
-        ItemVBox i1 = new ItemVBox("Compétences", totalSkills, getCustomBoxStyle());
-        ItemVBox i2 = new ItemVBox("Grade", grade , getCustomBoxStyle());
-        ItemVBox i3 = new ItemVBox("Coût horaire", cout , getCustomBoxStyle());
-        itemBoxList.add(i1);
-        itemBoxList.add(i2);
-        itemBoxList.add(i3);
-        return itemBoxList;
-    }
-    
+    }   
 }

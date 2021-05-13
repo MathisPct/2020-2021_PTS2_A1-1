@@ -15,8 +15,7 @@ import Application.Vue.customBox.MyStyles.MyStyle;
  * @author David
  */
 public class MyCustomBoxProject extends MyCustomBox {
-    
-    
+      
     private Project project;
 
     public MyCustomBoxProject(Project project, MyStyle style) {
