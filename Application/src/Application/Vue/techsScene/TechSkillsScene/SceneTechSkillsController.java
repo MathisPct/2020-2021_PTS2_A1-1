@@ -10,6 +10,9 @@ import Application.Metier.Skill;
 import Application.Metier.Tech;
 import Application.Vue.customBox.MyRowBox;
 import Application.Vue.customBox.MyScrollPanes.MyScrollPaneSkills;
+import Application.Vue.customBox.MyStyles.MyStyle;
+import Application.Vue.customBox.MyStyles.MyStyleOrange;
+import Application.Vue.main.MainController;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.sql.SQLException;
@@ -33,6 +36,7 @@ public class SceneTechSkillsController implements Initializable {
     private Tech tech;
     private ArrayList<Skill> listSkills;
     private MyScrollPaneSkills SPskills;
+    private MainController mainController;
     
 
     @FXML
@@ -46,15 +50,33 @@ public class SceneTechSkillsController implements Initializable {
     @FXML
     private AnchorPane containerTechGraph;
     
-    public SceneTechSkillsController(Tech tech){
+    public SceneTechSkillsController(Tech tech, MainController mainController){
         this.tech = tech;
         this.listSkills = new ArrayList<>();
         this.SPskills = null;
+        this.mainController = mainController;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("Initialize ScneTechSkills");
+        System.out.println("Tech : " + tech.getFirstName());
+        initFields();
+        MyStyle style = new MyStyleOrange("Carlito");
+        SPskills = new MyScrollPaneSkills(style, tech, mainController);
+        SPskills.scrollPaneSkill();
+        containerSkills.getChildren().add(SPskills);
+        
+    }
+    
+    /**
+     * Cette fonction sert à définir le nom de technicien à afficher.
+     * @param tech le technicien à afficher dasn le label
+     */
+    public void initFields() {
+        String techName = tech.getFirstName() + " " + tech.getLastName();
+        this.TechName.setText(techName);
+        this.GraphTechName.setText(techName);
     }
     
     /**
@@ -82,8 +104,20 @@ public class SceneTechSkillsController implements Initializable {
         }          
         return pieData;     
     }
-    
 
+    public void clearSkillContainer(){
+        this.containerSkills.getChildren().clear();
+    }
+    
+    public VBox getContainerSkills() {
+        return containerSkills;
+    }
+
+    public AnchorPane getContainerTechGraph() {
+        return containerTechGraph;
+    }
+    
+    
     
     
     /**

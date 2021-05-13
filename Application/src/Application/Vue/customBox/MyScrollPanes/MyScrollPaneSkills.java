@@ -18,46 +18,49 @@ import javafx.scene.layout.VBox;
  *
  * @author David
  */
-public class MyScrollPaneSkills extends MyScrollPaneTech{
-    
+public class MyScrollPaneSkills extends MyScrollPane{
 
+    private Tech tech;
     
-    public MyScrollPaneSkills(MyStyle style, sceneTechsController parentController, MainController mainController) {
-        super(style, parentController, mainController);
+    public MyScrollPaneSkills(MyStyle style, Tech tech, MainController mainController) {
+        super(style, mainController);
+        this.tech = tech;
     }
+
     
         /**
      * Cette fonction créé le scrollpane des skills en lui assignant un style et en définissant sa boite parente
      * à savoir containerSkill.
      * @param tech 
      */
-    public void scrollPaneSkill(Tech tech) {
+    public void scrollPaneSkill() {
       
         System.out.println("SceneSkill");
         MyStyle style = new MyStyleOrange("Carlito");         
-        //initScrollPaneSkill(tech);
+        initScrollPaneSkill();
         //this.containerSkills.getChildren().add(this.scrollSkills);       
     } 
     
-//    /**
-//    * Cette fonction génère les box de skills d'un technicien passé en paramètre dans le scrollPane de skills
-//    * @param tech 
-//    */
-//    public void initScrollPaneSkill(Tech tech) {
-//        this.containerSkills.getChildren().clear();
-//        this.setContent(null);     
-//
-//        VBox vboxLayout = new VBox(this.getScrollPaneStyle().getBoxSpacing());
-//
-//        for (int i = 0; i < tech.GetSkills().size(); i++) {
-//            MyRowBox skillRow = new MyRowBox("", "", this.getScrollPaneStyle());
-//            skillRow.generateSkillGridPane(tech, tech.GetSkills().get(i));
-//            vboxLayout.getChildren().add(skillRow);
-//        }
-//        this.setContent(vboxLayout);   
-//        this.setFitToWidth(true);
-//        this.containerSkills.getChildren().add(this);
-//        initChart(tech);
-//    }
+    /**
+    * Cette fonction génère les box de skills d'un technicien passé en paramètre dans le scrollPane de skills
+    * @param tech 
+    */
+    public void initScrollPaneSkill() {
+        
+        this.getChildren().clear();
+        this.setContent(null);     
+
+        VBox vboxLayout = new VBox(this.getScrollPaneStyle().getBoxSpacing());
+
+        for (int i = 0; i < tech.GetSkills().size(); i++) {
+            MyRowBox skillRow = new MyRowBox("", "", this.getScrollPaneStyle());
+            skillRow.generateSkillGridPane(tech, tech.GetSkills().get(i));
+            vboxLayout.getChildren().add(skillRow);
+        }
+        this.setContent(vboxLayout);   
+        this.setFitToWidth(true);
+        //this.containerSkills.getChildren().add(this);
+        //initChart(tech);
+    }
     
 }
