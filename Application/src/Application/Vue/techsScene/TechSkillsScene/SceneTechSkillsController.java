@@ -93,9 +93,7 @@ public class SceneTechSkillsController implements Initializable {
     private void initChart(Tech tech){
     }
     
-    public void setTech(Tech tech) {
-        this.tech = tech;
-    }
+
     
     
     

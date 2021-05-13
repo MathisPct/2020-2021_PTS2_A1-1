@@ -7,6 +7,7 @@ package Application.Vue.customBox.MyScrollPanes;
 
 import Application.Database.DaoError;
 import Application.Metier.Project;
+import Application.Metier.Tech;
 import Application.Vue.UtilsIHM;
 import Application.Vue.customBox.MyCustomBoxes.MyCustomBox;
 import Application.Vue.customBox.MyCustomBoxes.MyCustomBoxTech;
@@ -27,11 +28,13 @@ import javafx.scene.layout.VBox;
 public class MyScrollPaneTech extends MyScrollPane {
     
     private Project project;
-    private sceneTechsController parentController;  
+    private sceneTechsController parentController;
+    private Tech tech;
 
     public MyScrollPaneTech(MyStyle style, sceneTechsController parentController, MainController mainController) {
         super(style, mainController);
         this.parentController = parentController;
+        this.tech = null;
     }
     
     public void scrollPaneTech() {
@@ -61,6 +64,14 @@ public class MyScrollPaneTech extends MyScrollPane {
         this.setContent(vboxLayout);
         this.setFitToWidth(true);
     } 
+    
+    public void setTech(Tech tech) {
+        this.tech = tech;
+    }
+    
+    public Tech getTech() {
+        return this.tech;
+    }
    
     
 

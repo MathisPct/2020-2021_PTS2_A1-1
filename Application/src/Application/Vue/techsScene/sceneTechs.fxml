@@ -41,9 +41,9 @@
             </Label>
          </children>
       </HBox>
-      <SplitPane prefHeight="994.0" prefWidth="1495.0" style="-fx-background-color: #E6E6E6;" styleClass="split-pane-divider">
+      <SplitPane fx:id="splitPaneContainer" prefHeight="994.0" prefWidth="1495.0" style="-fx-background-color: #E6E6E6;" styleClass="split-pane-divider">
         <items>
-            <VBox fx:id="scrollTechParent">
+            <VBox fx:id="vboxTechs">
                <children>
                   <HBox prefWidth="863.0" styleClass="box-title-hbox">
                      <children>

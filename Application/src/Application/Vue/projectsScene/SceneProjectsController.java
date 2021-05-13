@@ -5,11 +5,9 @@
  */
 package Application.Vue.projectsScene;
 
-import Application.Database.ProjectDao;
+
 import Application.Metier.Project;
 import Application.Vue.customBox.MyCustomBoxes.MyCustomBox;
-import Application.Vue.customBox.MyCustomBoxes.MyCustomBoxProject;
-import Application.Vue.customBox.MyScrollPanes.MyScrollPane;
 import Application.Vue.customBox.MyScrollPanes.MyScrollPaneProject;
 import Application.Vue.customBox.MyStyles.MyStyle;
 import Application.Vue.customBox.MyStyles.MyStyleOrange;
@@ -20,7 +18,6 @@ import java.net.URL;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import javafx.scene.image.ImageView;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -29,7 +26,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 /**
