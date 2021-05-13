@@ -11,7 +11,8 @@ import Application.Vue.customBox.MyButtons.MyButton;
 import Application.Vue.customBox.MyButtons.MyButtonProject;
 import Application.Vue.customBox.MyCustomBoxes.MyCustomBox;
 import Application.Vue.customBox.MyCustomBoxes.MyCustomBoxProject;
-import Application.Vue.customBox.MyItemBoxes.ItemVBox;
+import Application.Vue.customBox.MyPanes.MyPane;
+import Application.Vue.customBox.MyPanes.MyPaneDuoVBox;
 import Application.Vue.customBox.MyRowBox;
 import Application.Vue.customBox.MyStyles.MyStyle;
 import Application.Vue.customBox.MyStyles.MyStyleOrange;
@@ -81,15 +82,22 @@ public class MyScrollPaneProject extends MyScrollPane{
     public MyRowBox generateMainRow(Project p) { 
         // Génération de la ligne du nom du technicien
         String pName = p.getName();
-        MyRowBox mainTechRow = new MyRowBox(pName, getScrollPaneStyle());           
-        mainTechRow.generateLineBoxRow();
+        MyRowBox mainTechRow = new MyRowBox(pName, getScrollPaneStyle()); 
+        String iconName = "WAITING";
+        switch(p.getStatus()){
+            case ENDED: iconName = "OK"; break;
+            case CANCELED: iconName = "CANCELED"; break;
+            case WAITING: iconName = "WAITING"; break;
+            case WORKING: iconName = "WORKING"; break;
+        }
+        mainTechRow.generateLineIconBoxRow(iconName);
         return mainTechRow;
     }
     
     public MyRowBox generateItemBox(Project p) {
         // création du container d'Items
         MyRowBox projetItems = new MyRowBox("", getScrollPaneStyle());
-        projetItems.generateItemVBoxRow(this.createItemList(p), Priority.NEVER); //ajout des items à la boite d'item
+        projetItems.generateItemVBoxRow(this.createItemList(p), Priority.ALWAYS); //ajout des items à la boite d'item
         //Génération d'un Item Bouton ACTIVITES
         projetItems.addButtonToRowBox(this.createBtnActivities(p));
         //Génération d'un Item Bouton MATERIEL
@@ -97,17 +105,17 @@ public class MyScrollPaneProject extends MyScrollPane{
         return projetItems;
     }
         
-    public ArrayList<ItemVBox> createItemList(Project p) {
+    public ArrayList<MyPane> createItemList(Project p) {
         // Génération des Item de la boite
         String client = "<Client>";
         String statut = p.getStatusString();
         String dateCommande = "00/00/0000";
         String totalActivite = String.valueOf(p.getActivities().size());
-        ArrayList<ItemVBox> itemBoxList = new ArrayList();
-        ItemVBox i1 = new ItemVBox("Statut", statut, getScrollPaneStyle());
-        ItemVBox i2 = new ItemVBox("Client", client, getScrollPaneStyle());
-        ItemVBox i3 = new ItemVBox("Commande", dateCommande , getScrollPaneStyle());
-        ItemVBox i4 = new ItemVBox("Activités", totalActivite, getScrollPaneStyle());
+        ArrayList<MyPane> itemBoxList = new ArrayList();
+        MyPane i1 = new MyPaneDuoVBox(getScrollPaneStyle(), "Statut", statut);
+        MyPane i2 = new MyPaneDuoVBox(getScrollPaneStyle(), "Client", client);
+        MyPane i3 = new MyPaneDuoVBox(getScrollPaneStyle(),"Commande", dateCommande);
+        MyPane i4 = new MyPaneDuoVBox(getScrollPaneStyle(), "Total Activités", totalActivite);
         itemBoxList.add(i1);
         itemBoxList.add(i2);
         itemBoxList.add(i3);

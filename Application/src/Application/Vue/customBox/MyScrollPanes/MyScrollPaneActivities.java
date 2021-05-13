@@ -12,6 +12,8 @@ import Application.Vue.customBox.MyCustomBoxes.MyCustomBox;
 import Application.Vue.customBox.MyCustomBoxes.MyCustomBoxActivity;
 import Application.Vue.customBox.MyItemBoxes.ItemHBox;
 import Application.Vue.customBox.MyItemBoxes.ItemVBox;
+import Application.Vue.customBox.MyPanes.MyPane;
+import Application.Vue.customBox.MyPanes.MyPaneDuoVBox;
 import Application.Vue.customBox.MyRowBox;
 import Application.Vue.customBox.MyStyles.MyStyle;
 import Application.Vue.customBox.MyStyles.MyStyleOrange;
@@ -72,16 +74,16 @@ public class MyScrollPaneActivities extends MyScrollPane {
     }
     
     
-    public ArrayList<ItemVBox> createItemList() {
+    public ArrayList<MyPane> createItemList() {
         // Génération des Item de la boite d'activité
         String value = "<value>";
-        ArrayList<ItemVBox> itemBoxList = new ArrayList();         
-        ItemVBox type = new ItemVBox("Type", value, this.getScrollPaneStyle());
-        ItemVBox nom = new ItemVBox("Nom", value , this.getScrollPaneStyle());
-        ItemVBox debut = new ItemVBox("Début", value , this.getScrollPaneStyle());
-        ItemVBox fin = new ItemVBox("Fin", value , this.getScrollPaneStyle());
-        ItemVBox dureePrevue = new ItemVBox("Durée prévue", value , this.getScrollPaneStyle());
-        ItemVBox statut = new ItemVBox("Statut", value , this.getScrollPaneStyle());
+        ArrayList<MyPane> itemBoxList = new ArrayList();         
+        MyPane type = new MyPaneDuoVBox(this.getScrollPaneStyle(), value, value);
+        MyPane nom = new MyPaneDuoVBox(this.getScrollPaneStyle(), value, value);
+        MyPane debut = new MyPaneDuoVBox(this.getScrollPaneStyle(), value, value);
+        MyPane fin = new MyPaneDuoVBox(this.getScrollPaneStyle(), value, value);
+        MyPane dureePrevue = new MyPaneDuoVBox(this.getScrollPaneStyle(), value, value);
+        MyPane statut = new MyPaneDuoVBox(this.getScrollPaneStyle(), value, value);
         itemBoxList.add(statut);
         itemBoxList.add(type);
         itemBoxList.add(nom);

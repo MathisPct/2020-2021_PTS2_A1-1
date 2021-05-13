@@ -11,6 +11,8 @@ import Application.Vue.customBox.MyButtons.MyButtonTech;
 import Application.Vue.customBox.MyCustomBoxes.MyCustomBox;
 import Application.Vue.customBox.MyCustomBoxes.MyCustomBoxTech;
 import Application.Vue.customBox.MyItemBoxes.ItemVBox;
+import Application.Vue.customBox.MyPanes.MyPane;
+import Application.Vue.customBox.MyPanes.MyPaneDuoVBox;
 import Application.Vue.customBox.MyRowBox;
 import Application.Vue.customBox.MyStyles.MyStyle;
 import Application.Vue.customBox.MyStyles.MyStyleOrange;
@@ -76,16 +78,16 @@ public class MyScrollPaneTech extends MyScrollPane {
     }
     
     
-    public ArrayList<ItemVBox> createTechItemList(Tech tech) {
+    public ArrayList<MyPane> createTechItemList(Tech tech) {
         // Génération des Item de la boite technicien
         String totalSkills = String.valueOf(tech.GetSkills().size());
         String grade = tech.getGrade();
         String euro = Character.toString ((char) 8364);
         String cout = tech.getCoutHoraire() + euro + " /h";
-        ArrayList<ItemVBox> itemBoxList = new ArrayList();         
-        ItemVBox i1 = new ItemVBox("Compétences", totalSkills, this.getScrollPaneStyle());
-        ItemVBox i2 = new ItemVBox("Grade", grade , this.getScrollPaneStyle());
-        ItemVBox i3 = new ItemVBox("Coût horaire", cout , this.getScrollPaneStyle());
+        ArrayList<MyPane> itemBoxList = new ArrayList();         
+        MyPane i1 = new MyPaneDuoVBox(this.getScrollPaneStyle(), "Compétences", totalSkills);
+        MyPane i2 = new MyPaneDuoVBox(this.getScrollPaneStyle(), "Grade", grade);
+        MyPane i3 = new MyPaneDuoVBox(this.getScrollPaneStyle(), "cout", cout);
         itemBoxList.add(i1);
         itemBoxList.add(i2);
         itemBoxList.add(i3);

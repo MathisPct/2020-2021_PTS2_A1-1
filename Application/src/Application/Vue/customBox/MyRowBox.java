@@ -12,12 +12,16 @@ import Application.Vue.customBox.MyButtons.MyButton;
 import Application.Vue.customBox.MyStyles.MyStyle;
 import Application.Metier.Skill;
 import Application.Metier.Tech;
+import Application.Vue.customBox.MyPanes.MyPane;
+import Application.Vue.customBox.MyPanes.MyPaneIcon;
+import Application.Vue.customBox.MyPanes.MyPaneTitleIcon;
 import java.util.ArrayList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -61,6 +65,15 @@ public class MyRowBox extends HBox{
         this.setStyle("-fx-background-color: " + style.getColorBase());
     }
     
+    public void generateLineIconBoxRow(String iconName) {
+        setBar();
+        setTitleBasic(title);
+        MyPane icon = new MyPaneIcon(style, iconName, 45);
+        this.getChildren().addAll(this.boxBar, icon, this.title);
+        this.setAlignment(Pos.CENTER_LEFT);       
+        this.setStyle("-fx-background-color: " + style.getColorBase());
+    }
+    
     public void generateLineBoxTwoText() {
         setBar();
         setTitleBasic(this.title);
@@ -69,7 +82,7 @@ public class MyRowBox extends HBox{
         this.setStyle("-fx-background-color: " + style.getColorBase());     
     }
     
-    public void generateItemVBoxRow(ArrayList<ItemVBox> itemBoxList, Priority priorityFirst) {
+    public void generateItemVBoxRow(ArrayList<MyPane> itemBoxList, Priority priorityFirst) {
         setBar();
         this.getChildren().addAll(this.boxBar);      
         for (int i = 0; i<itemBoxList.size(); i++) {
@@ -79,7 +92,7 @@ public class MyRowBox extends HBox{
             else {
                 HBox.setHgrow(itemBoxList.get(i), Priority.ALWAYS);
             }
-            itemBoxList.get(i).initItemBox();
+            //itemBoxList.get(i).initItemBox();
             this.getChildren().add(itemBoxList.get(i));
             this.setStyle("-fx-background-color: " + style.getColorSelectedLight());
         }    
