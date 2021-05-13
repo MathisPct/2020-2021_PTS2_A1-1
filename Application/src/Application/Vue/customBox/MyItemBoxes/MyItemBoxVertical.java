@@ -6,20 +6,22 @@
 package Application.Vue.customBox.MyItemBoxes;
 
 import Application.Vue.customBox.MyStyles.MyStyle;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 /**
  *
  * @author David
  */
-public abstract class MyItemBox extends Pane {
-    
-    private MyStyle style;
-    
-    public MyItemBox(MyStyle style){
-        this.style = style;
+public class MyItemBoxVertical extends MyItemBox {
+
+    public MyItemBoxVertical(MyStyle style) {
+        super(style);
     }
- 
-    public abstract void initItemBox();
+
+    @Override
+    public void initItemBox() {
+        VBox box = new VBox();
+        this.getChildren().add(box);
+    }
     
 }
