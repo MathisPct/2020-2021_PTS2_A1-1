@@ -205,8 +205,7 @@ public class MainController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Application/Vue/ProjectActivityScene/SceneProjectActivity.fxml"));            
             SceneProjectActivityController controller = new SceneProjectActivityController(this, projet);
             fxmlLoader.setController(controller);
-            Pane tempPane = fxmlLoader.load();
-            container.setCenter(tempPane);
+            container.setCenter(fxmlLoader.load());
         } catch (IOException e) {
             e.printStackTrace();
         }
