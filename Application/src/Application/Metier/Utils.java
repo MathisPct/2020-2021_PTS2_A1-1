@@ -34,7 +34,7 @@ public class Utils {
 
 	/**
 	 * Indique si le mot de passe est d'une force suffisante
-	 * Une force suffisante = Longueur comprise entre 6 et 15 caractères
+	 * Une force suffisante = Longueur comprise entre 6 et l'infini
          *                        Avec au moins une lettre, un chiffre, une majuscule, et aucun caractère alphanumérique XX 
          * @return true si le mot de passe est assez complexe
          * @throws exception si le mot de passe entré en paramètre est vide
@@ -76,7 +76,7 @@ public class Utils {
             **/
             
             //Validation de la bonne longueur du mot de passe
-            if ((ch.length >=6)&&(ch.length <= 15)) {
+            if (ch.length >=6) {
                 longueur = true;
             }               
 
