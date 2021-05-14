@@ -113,7 +113,7 @@ public abstract class MyPane extends StackPane {
                 res = "images/canceled.png";
             break;
             case "WAITING":
-                res = "images/waiting1.png";
+                res = "images/paused.png";
             break;
         }
         return res;
