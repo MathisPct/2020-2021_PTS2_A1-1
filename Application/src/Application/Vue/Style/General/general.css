@@ -17,19 +17,21 @@ and open the template in the editor.
 
 .menu-btn:hover {
     -fx-background-color: linear-gradient(from 100% 0% to 0% 100%,  #FF8E34, #FF5134);
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
 }
 
-.menu-btn:pressed {
-    -fx-scale-y: 0.9;
-    -fx-scale-x: 1.05;
+
+.btn {
+    -fx-background-color: #FF8E34;
+}
+
+.btn:hover {
+    -fx-background-color: #FF5134;
 }
 
 .menu-btn-selected {
 -fx-background-color: #283048;    
-}
-
-.menu-btn:enabled {
-    -fx-background-color: #FF5134;
 }
 
 

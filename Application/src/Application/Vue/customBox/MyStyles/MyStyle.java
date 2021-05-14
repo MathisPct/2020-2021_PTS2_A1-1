@@ -1,4 +1,4 @@
-package Application.Vue.customBox;
+package Application.Vue.customBox.MyStyles;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -10,7 +10,7 @@ package Application.Vue.customBox;
  *
  * @author David
  */
-public class MyStyle {
+public abstract class MyStyle {
     private String font;
     private int widthBar;
     private int fontSize;
@@ -19,6 +19,7 @@ public class MyStyle {
     private String colorBase;
     private String colorBaseBar;
     private String colorSelected;
+    private String colorSelectedGradient;
 
 
     private String colorSelectedLight;
@@ -35,31 +36,8 @@ public class MyStyle {
     
 
     
-    public MyStyle(String colorPalette, String fontName) {
-        //Orange Style
-        switch (colorPalette) {
-            case "ORANGE":
-                this.colorBase = "#FFFFFF";
-                this.colorBaseBar = "#BCBECE";
-                this.colorSelected = "#FF8E34";
-                this.colorSelectedLight = "#FFE4CA";
-                this.colorTitle = "#475975";
-                this.colorTitleSelected = "#212939";
-                this.colorLabel = "#212939";
-                this.colorSelectedLabel = "#212939";
-            break;
-            case "BLEU":
-                this.colorBase = "#FFFFFF";
-                this.colorBaseBar = "#BCBECE";
-                this.colorSelected = "#FF8E34";
-                this.colorSelectedLight = "#FFE4CA";
-                this.colorTitle = "#475975";
-                this.colorTitleSelected = "#212939";
-                this.colorLabel = "#212939";
-                this.colorSelectedLabel = "#212939";
-            break;
-        }
-                
+    public MyStyle(String fontName) {
+         
         this.font = fontName;
         this.fontSize = 23;
         this.btnFontSize = 18;
@@ -70,6 +48,8 @@ public class MyStyle {
         this.titlePaddingH = 3;
         this.titlePaddingV = 5;
     }
+    
+    public abstract void initStyleColor();
 
     public String getColorBase() {
         return colorBase;
@@ -82,6 +62,10 @@ public class MyStyle {
     public String getColorSelected() {
         return colorSelected;
     }
+
+    public String getColorSelectedGradient() {
+        return colorSelectedGradient;
+    } 
 
     public String getColorSelectedLight() {
         return colorSelectedLight;
@@ -122,6 +106,44 @@ public class MyStyle {
     public String getColorSelectedLabel() {
         return colorSelectedLabel;
     }  
+
+    public void setColorBase(String colorBase) {
+        this.colorBase = colorBase;
+    }
+
+    public void setColorBaseBar(String colorBaseBar) {
+        this.colorBaseBar = colorBaseBar;
+    }
+
+    public void setColorSelected(String colorSelected) {
+        this.colorSelected = colorSelected;
+    }
+
+    public void setColorSelectedGradient(String colorSelectedGradient) {
+        this.colorSelectedGradient = colorSelectedGradient;
+    }
+
+    public void setColorSelectedLight(String colorSelectedLight) {
+        this.colorSelectedLight = colorSelectedLight;
+    }
+
+    public void setColorTitle(String colorTitle) {
+        this.colorTitle = colorTitle;
+    }
+
+    public void setColorTitleSelected(String colorTitleSelected) {
+        this.colorTitleSelected = colorTitleSelected;
+    }
+
+    public void setColorLabel(String colorLabel) {
+        this.colorLabel = colorLabel;
+    }
+
+    public void setColorSelectedLabel(String colorSelectedLabel) {
+        this.colorSelectedLabel = colorSelectedLabel;
+    }
+    
+    
 
     public int getBoxSpacing() {
         return boxSpacing;

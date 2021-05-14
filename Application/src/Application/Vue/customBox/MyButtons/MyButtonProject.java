@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Application.Vue.customBox;
+package Application.Vue.customBox.MyButtons;
 
+import Application.Vue.customBox.MyButtons.MyButton;
+import Application.Vue.customBox.MyStyles.MyStyle;
 import Application.Metier.Project;
 import Application.Vue.main.MainController;
 import java.io.IOException;
@@ -37,7 +39,7 @@ public class MyButtonProject extends MyButton{
             switch(type) {
                 case "ACTIVITY" :                               
                     try {
-                        mainController.projectActivities();
+                        mainController.projectActivities(this.project);
                         System.out.println("[OPEN ACTIVITY: " + this.project.getName() + "]");
                     } catch (IOException ex) {
                         Logger.getLogger(MyButtonProject.class.getName()).log(Level.SEVERE, null, ex);
@@ -46,7 +48,7 @@ public class MyButtonProject extends MyButton{
                 case "MATERIEL" : 
                                
                     try {
-                        mainController.projectActivities();
+                        mainController.projectActivities(this.project);
                         System.out.println("[OPEN MATERIEL: " + this.project.getName() + "]");
                     } catch (IOException ex) {
                         Logger.getLogger(MyButtonProject.class.getName()).log(Level.SEVERE, null, ex);

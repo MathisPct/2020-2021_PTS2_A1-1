@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Application.Vue.customBox;
+package Application.Vue.customBox.MyItemBoxes;
 
+import Application.Vue.customBox.MyButtons.MyButton;
+import Application.Vue.customBox.MyStyles.MyStyle;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
