@@ -5,6 +5,7 @@
  */
 package Application.Metier;
 
+import Application.Database.Converter;
 import java.util.Date;
 
 /**
@@ -30,12 +31,12 @@ public class Activity {
         this.duration = duration;
     }
 
-    public ActivityStatus getStatus() {
-        return status;
+    public String getType() {
+        return Converter.activityTypeTString(type);
     }
 
-    public ActivityType getType() {
-        return type;
+    public String getStatusAsString() {
+        return Converter.activityStatusToString(status);
     }
 
     public Date getStartDate() {

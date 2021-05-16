@@ -142,7 +142,7 @@ public class Project {
             res += " " + activities.get(i).getDuration();
             res += " " + activities.get(i).getEndDate();
             res += " " + activities.get(i).getStartDate();
-            res += " " + activities.get(i).getStatus();
+            res += " " + activities.get(i).getStatusAsString();
             res += " " + activities.get(i).getType();            
             res += " | ";
         }
