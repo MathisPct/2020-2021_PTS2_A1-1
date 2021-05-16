@@ -19,7 +19,8 @@ public class Main extends javafx.application.Application {
         Parent root = FXMLLoader.load(getClass().getResource("/Application/Vue/main/main.fxml"));
         stage = stage;
         Scene scene = new Scene(root);
-
+        scene.getStylesheets().add("/Application/Vue/Style/General/general.css");
+        scene.getStylesheets().add("/Application/Vue/Style/CustomCharts/GraphActivity.css");
         stage.setTitle("Application techApp");
         stage.setScene(scene);
         stage.setResizable(true);

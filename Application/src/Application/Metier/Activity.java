@@ -5,7 +5,6 @@
  */
 package Application.Metier;
 
-import Application.Database.Converter;
 import java.util.Date;
 
 /**
@@ -19,6 +18,7 @@ public class Activity {
     private Date endDate;
     private String summary;
     private String details;
+
     private int duration;
 
     public Activity(ActivityStatus status, ActivityType type, Date startDate, Date endDate, String summary, String details, int duration) {
@@ -57,6 +57,7 @@ public class Activity {
 
     public int getDuration() {
         return duration;
+
     }
     
     

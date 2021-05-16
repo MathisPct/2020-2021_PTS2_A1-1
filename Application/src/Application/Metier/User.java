@@ -4,132 +4,143 @@ package Application.Metier;
  * Représente un utilisateur du système. Peut être un technicien ou un chef de projet
  */
 public class User {
-	/**
-	 * Identifiant unique de l'utilisateur
-	 */
-	private int ID;
-	/**
-	 * login (nom de connexion) de l'utilisateur
-	 */
-	private String login;
-	/**
-	 * valeur de hachage du mot de passe
-	 */
-	private String passwordHash;
-	/**
-	 * Nom de l'utilisateur
-	 */
-	private String lastName;
-	/**
-	 * prénom de l'utilisateur
-	 */
-	private String firstName;
-	/**
-	 * Indique si l'utilisateur est connecté
-	 */
-	private boolean isConnected = false;
-	/**
-	 * Indique si l'utilisateur est chef de projet ou non
-	 */
-	private boolean isChief = false;
+    /**
+     * Identifiant unique de l'utilisateur
+     */
+    private int ID;
+    /**
+     * login (nom de connexion) de l'utilisateur
+     */
+    private String login;
+    /**
+     * valeur de hachage du mot de passe
+     */
+    private String passwordHash;
+    /**
+     * Nom de l'utilisateur
+     */
+    private String lastName;
+    /**
+     * prénom de l'utilisateur
+     */
+    private String firstName;
+    /**
+     * Indique si l'utilisateur est connecté
+     */
+    private boolean isConnected = false;
+    /**
+     * Indique si l'utilisateur est chef de projet ou non
+     */
+    private boolean isChief = false;
 
-	public User(int id) {
-		this.ID = id;
-	}
+    private String typeUser;
 
-	/**
-	 * Copie les données d'un utilisateur
-	 * @param user l'utilisateur à recopier
-	 */
-	public void Copy(User user) {
-		this.ID = user.getID();
-		this.login = user.getLogin();
-		this.lastName = user.getLastName();
-		this.firstName = user.getFirstName();
-		this.isConnected = user.isConnected();
-		this.isChief = user.isChief();
-		this.passwordHash = user.getPasswordHash();
-	}
+    public User(int id) {
+            this.ID = id;
+    }
 
-	/**
-	 * Efface les champs de l'utilisateur et passe à faux l'état "connecté"
-	 */
-	public void Disconnect() {
-		System.out.println("Deconnexion");
-		this.isConnected = false; //champs connecté à faux
-		this.login = null;
-		this.ID = 0;
-		this.lastName = null;
-		this.firstName = null;
-		this.isChief = false;
-		this.passwordHash = null;
-	}
+    /**
+     * Copie les données d'un utilisateur
+     * @param user l'utilisateur à recopier
+     */
+    public void Copy(User user) {
+            this.ID = user.getID();
+            this.login = user.getLogin();
+            this.lastName = user.getLastName();
+            this.firstName = user.getFirstName();
+            this.isConnected = user.isConnected();
+            this.isChief = user.isChief();
+            this.passwordHash = user.getPasswordHash();
+            this.typeUser = user.typeUser;
+    }
 
-	public void setID(int aID) {
-		this.ID = aID;
-	}
+    /**
+     * Efface les champs de l'utilisateur et passe à faux l'état "connecté"
+     */
+    public void Disconnect() {
+            System.out.println("Deconnexion");
+            this.isConnected = false; //champs connecté à faux
+            this.login = null;
+            this.ID = 0;
+            this.lastName = null;
+            this.firstName = null;
+            this.isChief = false;
+            this.passwordHash = null;
+    }
 
-	public int getID() {
-		return this.ID;
-	}
+    public void setID(int aID) {
+            this.ID = aID;
+    }
 
-	public void setLogin(String aLogin) {
-		this.login = aLogin;
-	}
+    public int getID() {
+            return this.ID;
+    }
 
-	public String getLogin() {
-		return this.login;
-	}
+    public void setLogin(String aLogin) {
+            this.login = aLogin;
+    }
 
-	public void setPasswordHash(String aPasswordHash) {
-		this.passwordHash = aPasswordHash;
-	}
+    public String getLogin() {
+            return this.login;
+    }
 
-	public String getPasswordHash() {
-		return this.passwordHash;
-	}
+    public void setPasswordHash(String aPasswordHash) {
+            this.passwordHash = aPasswordHash;
+    }
 
-	public void setLastName(String aLastName) {
-		this.lastName = aLastName;
-	}
+    public String getPasswordHash() {
+            return this.passwordHash;
+    }
 
-	public String getLastName() {
-		return this.lastName;
-	}
+    public void setLastName(String aLastName) {
+            this.lastName = aLastName;
+    }
 
-	public void setFirstName(String aFirstName) {
-		this.firstName = aFirstName;
-	}
+    public String getLastName() {
+            return this.lastName;
+    }
 
-	public String getFirstName() {
-		return this.firstName;
-	}
+    public void setFirstName(String aFirstName) {
+            this.firstName = aFirstName;
+    }
 
-	public void setIsConnected(boolean aIsConnected) {
-		this.isConnected = aIsConnected;
-	}
+    public String getFirstName() {
+            return this.firstName;
+    }
 
-	public boolean isConnected() {
-		return this.isConnected;
-	}
+    public void setIsConnected(boolean aIsConnected) {
+            this.isConnected = aIsConnected;
+    }
 
-	public void setIsChief(boolean aIsChief) {
-		this.isChief = aIsChief;
-	}
+    public boolean isConnected() {
+            return this.isConnected;
+    }
 
-	public boolean isChief() {
-		return this.isChief;
-	}
+    public void setIsChief(boolean aIsChief) {
+            this.isChief = aIsChief;
+    }
 
-	/**
-	 * Fonction qui retourne l'user de la forme NOM Prenom
-	 * @return chaine de caractère NOM Prénom
-	 * @autor Mathis Poncet
-	 */
-	public String toString(){
-		String res = "";
-		res += this.lastName.toUpperCase();
-		res += " " + this.firstName;
-		return res;
-	}
+    public boolean isChief() {
+            return this.isChief;
+    }
+
+    public String getTypeUser() {
+        return typeUser;
+    }
+
+    public void setTypeUser(String typeUser) {
+        this.typeUser = typeUser;
+    }
+
+    /**
+     * Fonction qui retourne l'user de la forme NOM Prenom
+     * @return chaine de caractère NOM Prénom
+     * @autor Mathis Poncet
+     */
+    public String toString(){
+            String res = "";
+            res += this.lastName.toUpperCase();
+            res += " " + this.firstName;
+            return res;
+    }
 }

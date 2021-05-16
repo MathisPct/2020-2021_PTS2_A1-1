@@ -6,6 +6,7 @@
 package Application.Database;
 
 
+
 import Application.Metier.Activity;
 import Application.Metier.Material;
 import Application.Metier.Project;
@@ -40,6 +41,13 @@ public class ProjectDao {
     private static final int COL_ORDER = 4;
     private static final int COL_MATNAME = 5;
     private static final int COL_TYPENAME = 6;    
+    
+    private static final int COL_ASTATUS = 1;
+    private static final int COL_TYPE = 2;
+    private static final int COL_SUMMARY = 3;
+    private static final int COL_DETAILS = 4;
+    private static final int COL_STARTDATE = 5;
+    private static final int COL_ENDDATE = 6;
     
     private Connection con;
     
@@ -77,6 +85,7 @@ public class ProjectDao {
         
         //infos Générales du projet
         project = createProjectOverall(rSet, project);
+
         
         //activités du projet
         Statement stmt = con.createStatement();
@@ -122,6 +131,7 @@ public class ProjectDao {
             rSet.getDate(COL_STARTDATE), rSet.getDate(COL_ENDDATE), rSet.getString(COL_SUMMARY), rSet.getString(COL_DETAILS), rSet.getInt(COL_ADURATION)));
         }    
         
+
         return p;
     }
 

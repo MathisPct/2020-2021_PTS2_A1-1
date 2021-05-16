@@ -8,9 +8,12 @@ package Application.Database;
 import Application.Metier.Skill;
 import Application.Metier.Tech;
 import Application.Metier.User;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import org.junit.Test;
 
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
@@ -57,14 +60,43 @@ public class UserDaoTest {
      * Test of Update method, of class UserDao.
      */
     @Test
-    public void testUpdate() {
+    public void testUpdate() throws ClassNotFoundException, SQLException, DaoError {
+        UserDao userDao = new UserDao();
+        User pmartinUpdate = new User(1); //user pmartin récupéré lors de la maj de la BDD
+        
+        User pmartin = new User(1); //user pmartin dans la BDD
+        pmartin.setPasswordHash("746F746F"); //info par défaut
+        pmartin.setLogin("pmartin"); //info par défaut
+        
+        pmartin.setLogin("pmarc"); //changement du pseudo de pmartin pour pmarc
+        pmartin.setPasswordHash("toto"); //changement du mdp de pmartin pour toto
+        //update de pmartin dans la BDD . Son pseudo ne devra plus être pmartin mais pmarc
+        // et son mot de passe devra être toto
+        userDao.Update(pmartin); 
+        
+        Connection con = DatabaseConnection.getCon();
+        Statement stmt = con.createStatement();
+        ResultSet rSet = stmt.executeQuery("SELECT * FROM utilisateur WHERE ID=1;");
+        //on récupère les nouvelles données mises à jour de l'user pmartin dans la BDD 
+        while(rSet.next()){
+            pmartinUpdate.setLogin(rSet.getString("LOGIN")); 
+            pmartinUpdate.setPasswordHash(rSet.getString("PASSWORD"));
+        }
+        //on vérifie que le pseudo/mdp a changé suite à l'update de l'user dans la BDD
+        assertEquals("pmarc", pmartinUpdate.getLogin()); 
+        assertEquals("toto", pmartinUpdate.getPasswordHash());
+        
+        //si le test a été validé on reset le login et mdp par défaut
+        pmartin.setLogin("pmartin");
+        pmartin.setPasswordHash("746F746F");
+        userDao.Update(pmartin); //update de l'user dans la BDD
     }
 
     /**
      * Test of ListTechs method, of class UserDao.
      */
     @Test
-    public void testListTechs() throws SQLException, ClassNotFoundException {
+    public void testListTechs() throws SQLException, ClassNotFoundException, DaoError {
         UserDao con = new UserDao();
         Tech tech1 = new Tech(1); //Pierre dans la table technicien de la BDD
         Tech tech2 = new Tech(2); //Charles dans la table utilisateur de la BDD
@@ -82,13 +114,13 @@ public class UserDaoTest {
         skill.setLevel("simple");
         skill.setName("développement C/C++/C#");
         tech1.AddSkill(skill);
-        assertEquals(tech1.GetSkills().toString(), con.ListTechs().get(0).GetSkills().toString());
+        assertEquals(tech1.GetSkills().toString(), con.ListTechs("").get(0).GetSkills().toString());
         
         //test coutHoraire
-        assertEquals(30.0f, con.ListTechs().get(0).getCoutHoraire(), 0.01);
+        assertEquals(30.0f, con.ListTechs("").get(0).getCoutHoraire(), 0.01);
         
         //test grade d'un tech
-        assertEquals("junior", con.ListTechs().get(0).getGrade());
+        assertEquals("junior", con.ListTechs("").get(0).getGrade());
         
         ArrayList<Tech> listTestTech = new ArrayList<>();
         listTestTech.add(tech1);
@@ -98,8 +130,28 @@ public class UserDaoTest {
         listTestTech.add(tech5);
         //parcours des listes, on vérifie que les techniciens des 2 listes correspondent bien
         for (int i = 0; i < 5; i++) {
-            assertEquals(listTestTech.get(i).getFirstName(), con.ListTechs().get(i).getFirstName());
+            assertEquals(listTestTech.get(i).getFirstName(), con.ListTechs("").get(i).getFirstName());
         }
+        
+        //test de la recherche par skill 
+        //seul les technicien d'id 4, 6, 8 possède cette compétence
+        assertEquals(4, con.ListTechs("analyste cobol").get(0).getID());
+        assertEquals(6, con.ListTechs("analyste cobol").get(1).getID());
+        assertEquals(8, con.ListTechs("analyste cobol").get(2).getID());
+        
+        //seul le technicien d'id 2 dans la BDD possède cet ID
+        assertEquals(2, con.ListTechs("réseau").get(0).getID());
+    }
+    
+    /**
+     * Test of ListSkills method, of class UserDao.
+     */
+    @Test
+    public void testListSkills() throws ClassNotFoundException, SQLException, DaoError{
+        UserDao con = new UserDao();
+        
+        assertEquals("développement C/C++/C#", con.ListSkills().get(0));
+        assertEquals("base de données", con.ListSkills().get(7));
     }
     
 }

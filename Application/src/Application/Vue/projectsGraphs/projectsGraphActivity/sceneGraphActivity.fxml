@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="15.0" style="-fx-border-style: solid; -fx-border-width: 2; -fx-border-color: #D1D1D1; -fx-background-color: #EFEFF1;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox styleClass="box-title-hbox" VBox.vgrow="NEVER">
+         <children>
+            <Label styleClass="box-title" text="Graphique des activités |" textFill="#3f4b6c">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <Label fx:id="labelNomProjet" layoutX="10.0" layoutY="10.0" styleClass="box-title-value" text="&lt;nom du projet&gt;" textFill="#3f4b6c">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox VBox.vgrow="ALWAYS">
+         <children>
+            <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <JFXButton fx:id="btnActivities" buttonType="RAISED" contentDisplay="RIGHT" graphicTextGap="8.0" onAction="#openActivities" style="-fx-background-color: #799BD0;" text="Activités" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold" size="21.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/Icons%20black/Icons_black_00005.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </JFXButton>
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <Label text="Activités:" textFill="#3f4b6c">
+                           <font>
+                              <Font name="Carlito Bold" size="22.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="labelValueTotalActivite" layoutX="10.0" layoutY="10.0" text="0" textFill="#3f4b6c">
+                           <font>
+                              <Font name="Carlito Bold" size="29.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </HBox>
+                  <VBox alignment="CENTER_LEFT">
+                     <children>
+                        <AnchorPane prefHeight="105.0" prefWidth="45.0">
+                           <children>
+                              <Label alignment="CENTER" layoutX="-1.0" layoutY="5.0" styleClass="realisees" text="Réalisées:" textFill="#3f4b6c">
+                                 <font>
+                                    <Font name="Carlito" size="19.0" />
+                                 </font>
+                                 <graphic>
+                                    <Circle id="realisees" fill="#3f4b6c" radius="8.0" strokeType="INSIDE" />
+                                 </graphic>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="-1.0" layoutY="31.0" styleClass="enCours" text="En cours:" textFill="#3f4b6c">
+                                 <font>
+                                    <Font name="Carlito" size="19.0" />
+                                 </font>
+                                 <graphic>
+                                    <Circle fill="#799bd0" radius="8.0" strokeType="INSIDE" />
+                                 </graphic>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="19.0" layoutY="80.0" styleClass="annulees" text="Annulées:" textFill="#3f4b6c">
+                                 <font>
+                                    <Font name="Carlito Italic" size="19.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="-1.0" layoutY="55.0" styleClass="prevues" text="Prévues" textFill="#3f4b6c">
+                                 <font>
+                                    <Font name="Carlito" size="19.0" />
+                                 </font>
+                                 <graphic>
+                                    <Circle fill="#ff5134" radius="8.0" strokeType="INSIDE" />
+                                 </graphic>
+                              </Label>
+                              <Label fx:id="labelValueRealisees" alignment="CENTER" layoutX="111.0" layoutY="3.0" styleClass="realisees" text="0" textFill="#3f4b6c">
+                                 <font>
+                                    <Font name="Carlito Bold" size="21.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="labelValueEnCours" alignment="CENTER" layoutX="111.0" layoutY="29.0" styleClass="enCours" text="0" textFill="#3f4b6c">
+                                 <font>
+                                    <Font name="Carlito Bold" size="21.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="labelValueAnnulees" alignment="CENTER" layoutX="114.0" layoutY="78.0" styleClass="annulees" text="0" textFill="#3f4b6c">
+                                 <font>
+                                    <Font name="Carlito Bold" size="21.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="labelValuePrevues" alignment="CENTER" layoutX="114.0" layoutY="53.0" styleClass="prevues" text="0" textFill="#3f4b6c">
+                                 <font>
+                                    <Font name="Carlito Bold" size="21.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets left="15.0" />
+                     </padding>
+                  </VBox>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </VBox>
+            <VBox fx:id="containerGraph" alignment="CENTER" maxHeight="200.0" maxWidth="200.0" HBox.hgrow="ALWAYS" />
+         </children>
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="20.0" />
+   </padding>
+</VBox>

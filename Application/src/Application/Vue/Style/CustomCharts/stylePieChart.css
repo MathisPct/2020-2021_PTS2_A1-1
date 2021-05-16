@@ -1,0 +1,52 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 16 avr. 2021, 14:25:43
+    Author     : David
+*/
+
+.default-color0.chart-pie { -fx-pie-color: #FF8E34; } /* orange */
+.default-color1.chart-pie { -fx-pie-color: #3F4B6C; }  /* bleu deep */
+.default-color2.chart-pie { -fx-pie-color: #FFC79A; } /* orange rosé */
+.default-color3.chart-pie { -fx-pie-color: #FFE4CA; } /* orange rosé light */
+.default-color4.chart-pie { -fx-pie-color: #799BD0; } /* bleu clair  */
+ 
+
+/*
+.default-color2.chart-pie { -fx-pie-color: #799BD0; }  bleu clair 
+.default-color3.chart-pie { -fx-pie-color: #3F4B6C; }  bleu deep
+*/
+ 
+.chart-pie-label-line {
+    -fx-stroke: #3F4B6C;
+    -fx-fill: #3F4B6C;
+    -fx-stroke-width: 5;
+    -fx-opacity: 0.9;
+}
+ 
+.chart-pie-label {
+    -fx-fill: #8b4513;
+    -fx-font-size: 15px;
+    -fx-fill: #3F4B6C;
+    -fx-font-weight: bold;
+    -fx-font-style: italic;
+} 
+.chart-legend {
+   -fx-background-color:  #BCBECE;
+   -fx-stroke: #daa520;
+   -fx-font-size: 1em;
+   -fx-text-fill:  #BCBECE;
+}
+
+.chart-area-symbol {
+    -fx-background-radius: 5;
+}
+
+#unique.chart {
+    /*-fx-font-size: 55px;*/
+    -fx-stroke: #daa520;
+    
+}

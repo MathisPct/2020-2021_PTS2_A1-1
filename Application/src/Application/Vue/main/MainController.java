@@ -9,10 +9,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import Application.Database.BadUserError;
+import Application.Metier.Project;
 import Application.Metier.User;
 import Application.Vue.Login.SceneLoginController;
+import Application.Vue.ProjectActivityScene.SceneProjectActivityController;
 import Application.Vue.UtilsIHM;
 import Application.Vue.profilScene.SceneProfileController;
+import Application.Vue.projectsScene.SceneProjectsController;
+import Application.Vue.techsScene.sceneTechsController;
 import javafx.fxml.Initializable;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
@@ -23,6 +27,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -73,6 +78,28 @@ public class MainController implements Initializable {
     
     @FXML 
     private BorderPane container;
+
+    // Icon bouton menu 
+    @FXML
+    private ImageView imgProjects;
+  
+    @FXML
+    private ImageView imgClients;
+
+    @FXML
+    private ImageView imgTechs;
+
+    @FXML
+    private ImageView imgMateriel;
+
+    @FXML
+    private ImageView imgProfil;
+
+    @FXML
+    private ImageView imgConect;
+
+    @FXML
+    private ImageView imgDisconect;
     
     
     /**
@@ -159,6 +186,8 @@ public class MainController implements Initializable {
             }
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Application/Vue/projectsScene/sceneProjects.fxml"));
+                SceneProjectsController controller = new SceneProjectsController(this);
+                fxmlLoader.setController(controller);
                 Pane tempPane = fxmlLoader.load();
                 container.setCenter(tempPane);
                 setBtnMenuIsActive(projectsWindow);//colorie le bouton actif
@@ -169,6 +198,19 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
     }
+    
+    @FXML
+    public void projectActivities(Project projet) throws IOException{
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Application/Vue/ProjectActivityScene/SceneProjectActivity.fxml"));            
+            SceneProjectActivityController controller = new SceneProjectActivityController(this, projet);
+            fxmlLoader.setController(controller);
+            container.setCenter(fxmlLoader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
 
     /**
      * Evenement déclenché lorsque l'utilisateur demande à se connecter (bouton de connexion)
@@ -240,6 +282,8 @@ public class MainController implements Initializable {
             else {
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClass().getResource("/Application/Vue/techsScene/sceneTechs.fxml"));
+                    sceneTechsController controller = new sceneTechsController(this);
+                    fxmlLoader.setController(controller);
                     Pane tempPane = fxmlLoader.load();
                     container.setCenter(tempPane);
                     setBtnMenuIsActive(techsWindow); //colorie le bouton actif
@@ -258,19 +302,24 @@ public class MainController implements Initializable {
      * @throws IOException
      */
     @FXML
-    public void editProfile() throws IOException{
+    public void editProfile() throws IOException, ClassNotFoundException, SQLException{
         if (!currentUser.isConnected()){
             BadUserError badUserErr = new BadUserError("Vous devez être connecté pour visualiser cette page");
             utilsIHM.afficherErreur(badUserErr.getMessage());
         }else {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Application/Vue/profilScene/sceneProfil.fxml"));
+                SceneProfileController controller = new SceneProfileController(currentUser, this);
+                fxmlLoader.setController(controller);
                 Pane tempPane = fxmlLoader.load();
                 container.setCenter(tempPane);
                 setBtnMenuIsActive(profileWindow); //colorie le bouton actif
             } catch (IOException e) {
                 utilsIHM.afficherErreur("Impossible de charger la page monProfil");
                 e.printStackTrace();
+            }catch (SQLException ex){
+                utilsIHM.afficherErreur(ex.getLocalizedMessage());
+                ex.printStackTrace();
             }
         }
     }
@@ -305,11 +354,13 @@ public class MainController implements Initializable {
     private void setBtnMenuIsActive(JFXButton button){
         for (int i = 0; i < boxMenu1.getChildren().size(); i++) {
             if(button == boxMenu1.getChildren().get(i)){
-                button.setStyle("-fx-background-color: #14202B");
+                //button.setStyle("-fx-background-color: #14202B");
+                button.getStyleClass().add("menu-btn-selected");
             }
             else{
-                boxMenu1.getChildren().get(i).setStyle("");
+                boxMenu1.getChildren().get(i).getStyleClass().remove("menu-btn-selected");
+                //boxMenu1.getChildren().get(i).setStyle("");
             }
         }   
-    }
+    }    
 }
