@@ -1,10 +1,11 @@
 package Application.Metier;
 
 import java.util.ArrayList;
-import java.util.Date;
+
 
 
 public class Project {
+
     private String name;
     /**
      * duree reelle du projet (si termine, sinon vide) exprimee en minutes
@@ -18,9 +19,11 @@ public class Project {
     private int estimatedDurationMinutes;
     private String client;
     private ArrayList<Activity> activities;
+    private ArrayList<Material> materials;
     
     public Project(){
         activities = new ArrayList();
+        materials = new ArrayList();
     }
 
     /**
@@ -123,33 +126,54 @@ public class Project {
         activities.add(a);
     }
 
+    public void addMaterial(Material m){
+        materials.add(m);
+    }
+    
     public int getId() {
         return id;
+    }
+    
+
+    public String activitiesToString() {
+        String res = "";
+        for(int i=0; i< activities.size(); i++){
+            res += activities.get(i).getSummary();
+            res += " " + activities.get(i).getDetails();
+            res += " " + activities.get(i).getDuration();
+            res += " " + activities.get(i).getEndDate();
+            res += " " + activities.get(i).getStartDate();
+            res += " " + activities.get(i).getStatusAsString();
+            res += " " + activities.get(i).getType();            
+            res += " | ";
+        }
+        return res;
+    }
+
+    public String materialsToString() {
+        String res = "";
+        for(int i=0; i< materials.size(); i++){
+            res += materials.get(i).getName();
+            res += " " + materials.get(i).getQuantity();
+            res += " " + materials.get(i).getPrice();
+            res += " " + materials.get(i).getDeliveryDate();
+            res += " | ";
+        }
+        return res;
     }
 
     public ArrayList<Activity> getActivities() {
         return activities;
     }
-    
-    /**
-     * Cette méthode retourne le nombre total d'activité par statut du projet
-     * @param status statut des activités à compter
-     * @return le nombre total d'activité par statut du projet
-     */
-    public int getNbActivities(ActivityStatus status) {
-        int cpt = 0;
-        for (int i = 0; i < getActivities().size(); i++) {
-            if(getActivities().get(i).getStatus() == status) {
-                cpt += 1;
-            }
-        }
-        return cpt;
+
+    public int getNbActivities(ActivityStatus as){
+       int res =0;
+       for (Activity a : activities){
+           if(a.getStatus() == as){
+               res++;
+           }
+       }
+       return res;
     }
     
-    @Override
-    public String toString() {
-        return " " + this.status;
-    }
-        
-        
 }

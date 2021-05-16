@@ -9,11 +9,12 @@ package Application.Metier;
  *
  * @author Eileen
  */
-public enum ActivityType {
-    IMPLEMENTATION,
-    DEVELOPMENT,
+public enum MaterialType {
+    PERIPHERAL,
+    ANALYSIS,
     MAINTENANCE,
-    MIGRATION,
-    AFTER_SALE,
-    INNOVATION
+    SUPPORT,
+    PC,
+    TABLET,
+    SOFTWARE
 }

@@ -5,11 +5,11 @@
  */
 package Application.Database;
 
+
+
 import Application.Metier.Activity;
-import Application.Metier.ActivityStatus;
-import Application.Metier.ActivityType;
+import Application.Metier.Material;
 import Application.Metier.Project;
-import Application.Metier.ProjectStatus;
 import com.mysql.jdbc.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,18 +21,27 @@ import java.util.ArrayList;
  * @author Eileen Lorenzo
  */
 public class ProjectDao {
-    private static final String COL_NAME = "nom";
-    private static final String COL_E_DURATION = "dureeEstimee";
-    private static final String COL_F_DURATION = "dureeFinale";
-    private static final String COL_STATUS = "statut";
-    private static final String COL_ID = "id";
-    
+    private static final int COL_NAME = 3;
+    private static final int COL_E_DURATION = 4;
+    private static final int COL_F_DURATION = 5;
+    private static final int COL_STATUS = 6;
+    private static final int COL_ID = 1;
+
     private static final int COL_ASTATUS = 1;
     private static final int COL_TYPE = 2;
     private static final int COL_SUMMARY = 3;
     private static final int COL_DETAILS = 4;
     private static final int COL_STARTDATE = 5;
     private static final int COL_ENDDATE = 6;
+    private static final int COL_ADURATION = 7;
+    
+    private static final int COL_QUANTITY = 1;
+    private static final int COL_PRICE = 2;
+    private static final int COL_DELIVERY= 3;
+    private static final int COL_ORDER = 4;
+    private static final int COL_MATNAME = 5;
+    private static final int COL_TYPENAME = 6;    
+    
     
     private Connection con;
     
@@ -70,10 +79,11 @@ public class ProjectDao {
         
         //infos Générales du projet
         project = createProjectOverall(rSet, project);
+
         
         //activités du projet
         Statement stmt = con.createStatement();
-        String qProjets = "SELECT statut, activite_type.nom as \"type\", resume, detail, dateDebut, dateFin\n"
+        String qProjets = "SELECT statut, activite_type.nom as \"type\", resume, detail, dateDebut, dateFin, dureePrevue\n"
                             + "FROM compose JOIN activite ON compose.activiteID = activite.ID JOIN activite_type ON activite.IDType = activite_type.ID "
                             + "WHERE projetID = " + project.getID() + " ;";
         ResultSet rSetActivities = stmt.executeQuery(qProjets);
@@ -87,26 +97,35 @@ public class ProjectDao {
         ResultSet rSetClient = stmt.executeQuery(qProjets);
         project = createProjetClient(rSetClient, project);
         
+        //Materiel
+        stmt = con.createStatement();
+        qProjets = "SELECT necessite.quantite, necessite.prixAchat, necessite.dateLivraison, necessite.dateCommande, materiel.nom, materiel_type.nom\n"
+                + "FROM necessite JOIN materiel ON necessite.materielID = materiel.ID JOIN materiel_type ON materiel.IDType = materiel_type.ID "
+                + "WHERE necessite.projetID = "+ project.getID() +" ;";
+        ResultSet rSetMaterial = stmt.executeQuery(qProjets);
+        project = createProjetMaterial(rSetMaterial, project);
+        
+        
         return project;
     }
     
     private Project createProjectOverall(ResultSet rSet, Project p) throws SQLException {
         p.setID(rSet.getInt(COL_ID));
         p.setName(rSet.getString(COL_NAME));
-        p.setStatus(stringToProjectStatus(rSet.getString(COL_STATUS)));
+        p.setStatus(Converter.stringToProjectStatus(rSet.getString(COL_STATUS)));
         p.setFinalDuration(rSet.getInt(COL_F_DURATION));
         p.setEstimatedDurationMinutes(rSet.getInt(COL_E_DURATION));
-        p.setClient(COL_ID);
         return p;
     }
 
     private Project createProjetActivities(ResultSet rSet, Project p) throws SQLException {
         while (rSet.next()){
             p.addActivity(new Activity(
-            stringToActivityStatus(rSet.getString(COL_ASTATUS)), stringToActivityType(rSet.getString(COL_TYPE)),
-            rSet.getDate(COL_STARTDATE), rSet.getDate(COL_ENDDATE), rSet.getString(COL_SUMMARY), rSet.getString(COL_DETAILS)));
+            Converter.stringToActivityStatus(rSet.getString(COL_ASTATUS)), Converter.stringToActivityType(rSet.getString(COL_TYPE)),
+            rSet.getDate(COL_STARTDATE), rSet.getDate(COL_ENDDATE), rSet.getString(COL_SUMMARY), rSet.getString(COL_DETAILS), rSet.getInt(COL_ADURATION)));
         }    
         
+
         return p;
     }
 
@@ -117,7 +136,18 @@ public class ProjectDao {
         return project;
     }    
     
-    
+    private Project createProjetMaterial(ResultSet rSet, Project project) throws SQLException {
+        while(rSet.next()){
+            project.addMaterial(new Material(
+                    rSet.getString(COL_MATNAME),
+                    Converter.StringToMaterialType(rSet.getString(COL_TYPENAME)),
+                    rSet.getInt(COL_QUANTITY),
+                    rSet.getDate(COL_ORDER),
+                    rSet.getDate(COL_DELIVERY),
+                    rSet.getFloat(COL_PRICE)));
+        }
+        return project;
+    }    
     
     
 
@@ -132,110 +162,9 @@ public class ProjectDao {
                 + " nom = '"+p.getName()+"',"
                 + " dureeEstimee = "+p.getEstimatedDurationMinutes()+","
                 + " dureeFinale = "+p.getFinalDuration()+","
-                + " statut = '"+projectStatusToString(p.getStatus())+"' "
+                + " statut = '"+Converter.projectStatusToString(p.getStatus())+"' "
                 + " WHERE id = "+p.getID()+";";
         stmt.executeUpdate(qUpdate);
         
     }
-    
-    /**
-     * Permet de permuter une String en ProjectStatus
-     * @param s la string à permuter
-     * @return l'équivalent de type ProjectStatus
-     */
-    private static ProjectStatus stringToProjectStatus(String s){
-        ProjectStatus res;
-        switch(s){
-            case "fini" : res = ProjectStatus.ENDED;
-                          break;
-                          
-            case "en attente" : res = ProjectStatus.WAITING;
-                          break;
-             
-            case "en cours" : res = ProjectStatus.WORKING;
-                          break;
-                          
-            case "annule" : res = ProjectStatus.CANCELED;
-                          break;
-                          
-            default : res = null;                
-        }
-        
-        return res;
-    }    
-    
-        /**
-     * Permet de permuter un ProjectStatus en String 
-     * @param ps le ProjectStatus à permuter
-     * @return l'équivalent de type string
-     */
-    public static String projectStatusToString(ProjectStatus ps){
-        String res;
-        switch(ps){
-            case ENDED : res = "fini";
-                          break;
-                          
-            case WAITING : res = "en attente";
-                          break;
-             
-            case WORKING : res = "en cours";
-                          break;
-                          
-            case CANCELED : res = "annule";
-                          break;
-                          
-            default : res = "";                
-        }
-        
-        return res;
-    }
-    
-    private static ActivityStatus stringToActivityStatus(String s){
-        ActivityStatus res;
-        switch(s){
-            case "prévue" : res = ActivityStatus.PLANNED;
-                          break;
-                          
-            case "terminée" : res = ActivityStatus.ENDED;
-                          break;
-             
-            case "en cours" : res = ActivityStatus.WORKING;
-                          break;
-                          
-            case "annulée" : res = ActivityStatus.CANCELED;
-                          break;
-                          
-            default : res = null;                
-        }
-        
-        return res;
-    }
-    
-        private static ActivityType stringToActivityType (String s){
-        ActivityType res;
-        switch(s){
-            case "déploiement" : res = ActivityType.IMPLEMENTATION;
-                          break;
-                          
-            case "développement" : res = ActivityType.DEVELOPMENT;
-                          break;
-             
-            case "maintenance" : res = ActivityType.MAINTENANCE;
-                          break;
-                          
-            case "migration" : res = ActivityType.MIGRATION;
-                          break;
-                          
-            case "service après vente" : res = ActivityType.AFTER_SALE;
-                          break;
-                          
-            case "solution innovante" : res = ActivityType.INNOVATION;
-                          break;                          
-                          
-            default : res = null;                
-        }
-        
-        return res;
-    }    
-    
 }
