@@ -161,6 +161,19 @@ public class Project {
         }
         return res;
     }
-    
+
+    public ArrayList<Activity> getActivities() {
+        return activities;
+    }
+
+    public int getNbActivities(ActivityStatus as){
+       int res =0;
+       for (Activity a : activities){
+           if(a.getStatus() == as){
+               res++;
+           }
+       }
+       return res;
+    }
     
 }

@@ -42,12 +42,6 @@ public class ProjectDao {
     private static final int COL_MATNAME = 5;
     private static final int COL_TYPENAME = 6;    
     
-    private static final int COL_ASTATUS = 1;
-    private static final int COL_TYPE = 2;
-    private static final int COL_SUMMARY = 3;
-    private static final int COL_DETAILS = 4;
-    private static final int COL_STARTDATE = 5;
-    private static final int COL_ENDDATE = 6;
     
     private Connection con;
     
