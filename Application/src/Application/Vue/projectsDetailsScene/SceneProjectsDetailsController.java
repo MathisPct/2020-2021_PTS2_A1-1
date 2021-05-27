@@ -68,6 +68,8 @@ public class SceneProjectsDetailsController implements Initializable {
             projet.setStatus(ProjectStatus.WORKING);
             btnStartPause.setText("Mettre en pause");
         }
+        labelStatutProjet.setText(projet.getStatusString());
+        parentController.initScrollPaneProjects();
         colorButtons();
         initButtonFields();
     }
@@ -213,17 +215,17 @@ public class SceneProjectsDetailsController implements Initializable {
     private void colorButtons(){
         MyStyle style = new MyStyleOrange("Carlito");
         if(projet.getStatus() == ProjectStatus.WORKING){         
-            btnStartPause.setStyle("-fx-background-color: #2D9BF0");
+            btnStartPause.setStyle("-fx-background-color: #2D9BF0");//bleu
         }
         else if(projet.getStatus() == ProjectStatus.WAITING) {
-            btnStartPause.setStyle("-fx-background-color: #4FB541");
-            btnValidateProject.setStyle("-fx-background-color: #CD1F35");
+            btnStartPause.setStyle("-fx-background-color: #FF8E34");
+            btnValidateProject.setStyle("-fx-background-color: #FF8E34");
         }
         else if(projet.getStatus() == ProjectStatus.CANCELED) {
-            btnValidateProject.setStyle("-fx-background-color: #4FB541");
+            btnValidateProject.setStyle("-fx-background-color: #4FB541"); //vert
         }
         else if(projet.getStatus() == ProjectStatus.ENDED) {
-            btnValidateProject.setStyle("-fx-background-color: #CD1F35");
+            btnValidateProject.setStyle("-fx-background-color: #FF8E34");
         }
     }
     
