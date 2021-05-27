@@ -176,4 +176,12 @@ public class Project {
        return res;
     }
     
+    
+    public void start(){
+        this.status = ProjectStatus.WORKING;
+    }
+    
+    public void cancel(){
+        this.status = ProjectStatus.CANCELED;
+    }
 }
