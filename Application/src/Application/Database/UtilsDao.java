@@ -35,9 +35,16 @@ public class UtilsDao {
         for (int i=0; i<chaine.length(); i++) {
             c = chaine.charAt(i);
             if(Character.isDigit(chaine.charAt(i))){
-                newChaine += c;
+                if(!(chaine.charAt(i) == '0' && i==0)) {
+                newChaine += c;            
+                }
             }
-        }      
+        }
+        if(newChaine.isEmpty()){
+            newChaine += "0";
+        }
         return newChaine;    
     }
+    
+
 }

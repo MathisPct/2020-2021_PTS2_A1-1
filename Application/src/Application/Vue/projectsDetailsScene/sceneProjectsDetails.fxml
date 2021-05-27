@@ -139,9 +139,9 @@
             <Insets left="10.0" />
          </padding>
       </HBox>
-      <HBox alignment="CENTER" spacing="25.0">
+      <HBox alignment="CENTER" spacing="50.0" VBox.vgrow="ALWAYS">
          <children>
-            <JFXButton alignment="CENTER" buttonType="RAISED" prefHeight="25.0" styleClass="btn" text="&lt;default action&gt;">
+            <JFXButton fx:id="btnStartPause" alignment="CENTER" buttonType="RAISED" onAction="#actionStartPause" styleClass="btn" text="Démarrer">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -153,7 +153,7 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton buttonType="RAISED" prefHeight="25.0" styleClass="btn" text="Valider le projet">
+            <JFXButton fx:id="btnValidateProject" buttonType="RAISED" onAction="#actionValidateUnvalidate" styleClass="btn" text="Invalider le projet">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -166,6 +166,9 @@
                </graphic>
             </JFXButton>
          </children>
+         <padding>
+            <Insets left="15.0" right="15.0" />
+         </padding>
       </HBox>
    </children>
    <padding>

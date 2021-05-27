@@ -8,7 +8,12 @@ package Application.Vue.projectsDetailsScene;
 import Application.Database.ProjectDao;
 import Application.Database.UtilsDao;
 import Application.Metier.Project;
+import Application.Metier.ProjectStatus;
+import Application.Vue.UtilsIHM;
+import Application.Vue.customBox.MyStyles.MyStyle;
+import Application.Vue.customBox.MyStyles.MyStyleOrange;
 import Application.Vue.projectsScene.SceneProjectsController;
+import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -16,6 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -45,6 +51,56 @@ public class SceneProjectsDetailsController implements Initializable {
     @FXML
     private Label labelNomProjet;
     
+     @FXML
+    private JFXButton btnStartPause;
+
+    @FXML
+    private JFXButton btnValidateProject;
+
+    @FXML
+    void actionStartPause(ActionEvent event) {
+        if(projet.getStatus() == ProjectStatus.WORKING){
+            projet.setStatus(ProjectStatus.WAITING);
+            btnStartPause.setText("Démarer");
+            
+        }
+        else if(projet.getStatus() == ProjectStatus.WAITING) {
+            projet.setStatus(ProjectStatus.WORKING);
+            btnStartPause.setText("Mettre en pause");
+        }
+        colorButtons();
+        initButtonFields();
+    }
+
+    @FXML
+    void actionValidateUnvalidate(ActionEvent event) {
+        if(projet.getStatus() == ProjectStatus.CANCELED) {
+            projet.setStatus(ProjectStatus.WAITING);
+            btnStartPause.setText("Démarrer");
+            btnValidateProject.setText("Invalider le projet");
+        }else if(projet.getStatus() == ProjectStatus.WAITING) {
+            projet.setStatus(ProjectStatus.CANCELED);
+            btnStartPause.setText("Indisponible");
+            btnValidateProject.setText("Valider le projet");
+        
+        }else if(projet.getStatus() == ProjectStatus.WORKING) {
+            projet.setStatus(ProjectStatus.CANCELED);
+            btnStartPause.setText("Indisponible");
+            btnValidateProject.setText("Valider le projet");
+        }
+                
+        try {
+            projectDao.update(projet);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            UtilsIHM.afficherErreur("Erreur de base de donnnées");
+        }
+        labelStatutProjet.setText(projet.getStatusString());
+        parentController.initScrollPaneProjects();
+        colorButtons();
+        initButtonFields();
+    }
+    
     
     public SceneProjectsDetailsController(Project p, SceneProjectsController parentController) {
         this.projet = p;
@@ -61,6 +117,8 @@ public class SceneProjectsDetailsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("SceneProjectsDetails");
         updateValuesDetailProject();
+        initButtonFields();
+        colorButtons();
         //action listeners 
         changeNameProject();
         changeEstimatedDurationProject();
@@ -70,11 +128,9 @@ public class SceneProjectsDetailsController implements Initializable {
     private void changeNameProject(){
         labelDetailNomProjet.textProperty().addListener(new ChangeListener<String>() {
         @Override
-        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-            //String newName = singleQuoteFixer(labelDetailNomProjet.getText()); 
+        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {        
             String newName = labelDetailNomProjet.getText();
             projet.setName(newName);
-            //labelDetailNomProjet.setText(newName);
             try {
                 projectDao.update(projet);
                 parentController.initScrollPaneProjects();
@@ -119,6 +175,32 @@ public class SceneProjectsDetailsController implements Initializable {
         });          
     }
     
+    private void initButtonFields() {
+        labelStatutProjet.setText(projet.getStatusString());
+        if(projet.getStatus() == ProjectStatus.WORKING){
+            btnStartPause.setText("Mettre en pause");
+            btnStartPause.setVisible(true);
+            btnValidateProject.setVisible(true);
+        }
+        else if(projet.getStatus() == ProjectStatus.WAITING) {
+            btnStartPause.setText("Démarrer");
+            btnStartPause.setVisible(true);
+            btnValidateProject.setVisible(true);
+        }
+        else if(projet.getStatus() == ProjectStatus.CANCELED) {
+            btnStartPause.setVisible(false);
+            btnValidateProject.setVisible(true);
+            btnStartPause.setText("Indisponible");
+            btnValidateProject.setText("Valider le projet");
+        }
+        else if(projet.getStatus() == ProjectStatus.ENDED) {
+            btnStartPause.setVisible(false);
+            btnValidateProject.setVisible(false);
+            btnStartPause.setText("Indisponible");
+            btnValidateProject.setText("Invalider le projet");
+        }
+    }
+    
     public void updateValuesDetailProject() {
         labelNomProjet.setText(projet.getName());
         labelDetailNomProjet.setText(projet.getName());
@@ -126,6 +208,23 @@ public class SceneProjectsDetailsController implements Initializable {
         labelFinalDuration.setText(String.valueOf(projet.getFinalDuration()));
         labelStatutProjet.setText(projet.getStatusString());
         statusColor();
+    }
+    
+    private void colorButtons(){
+        MyStyle style = new MyStyleOrange("Carlito");
+        if(projet.getStatus() == ProjectStatus.WORKING){         
+            btnStartPause.setStyle("-fx-background-color: #2D9BF0");
+        }
+        else if(projet.getStatus() == ProjectStatus.WAITING) {
+            btnStartPause.setStyle("-fx-background-color: #4FB541");
+            btnValidateProject.setStyle("-fx-background-color: #CD1F35");
+        }
+        else if(projet.getStatus() == ProjectStatus.CANCELED) {
+            btnValidateProject.setStyle("-fx-background-color: #4FB541");
+        }
+        else if(projet.getStatus() == ProjectStatus.ENDED) {
+            btnValidateProject.setStyle("-fx-background-color: #CD1F35");
+        }
     }
     
 
