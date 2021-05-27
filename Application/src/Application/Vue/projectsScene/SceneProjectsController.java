@@ -135,7 +135,7 @@ public class SceneProjectsController implements Initializable {
      * Cette méthode initialise les champs fixes de l'IHM
      */
     public void initFields() {
-        int totalProjects = this.SPprojects.getListProject().size();
+        int totalProjects = this.listProject.size();
         labelTotalProjects.setText(String.valueOf(totalProjects));
     }    
 }

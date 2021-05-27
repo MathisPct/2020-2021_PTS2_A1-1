@@ -29,6 +29,7 @@ public class SceneProjectsDetailsController implements Initializable {
     //ATTRIBUTS LOGIQUES
     private Project projet;
     private SceneProjectsController parentController;
+    private ProjectDao projectDao;
     
     
     //ATTRIBUT FXML
@@ -47,6 +48,11 @@ public class SceneProjectsDetailsController implements Initializable {
     public SceneProjectsDetailsController(Project p, SceneProjectsController parentController) {
         this.projet = p;
         this.parentController = parentController;
+        try {
+            this.projectDao = new ProjectDao();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(SceneProjectsDetailsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
        
         
@@ -54,16 +60,76 @@ public class SceneProjectsDetailsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("SceneProjectsDetails");
         updateValuesDetailProject();
+        //action listeners 
         changeNameProject();
+        changeEstimatedDurationProject();
+        changeFinalDurationProject();
+    }
+    
+    private void changeNameProject(){
+        labelDetailNomProjet.textProperty().addListener(new ChangeListener<String>() {
+        @Override
+        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            String newName = singleQuoteFixer(labelDetailNomProjet.getText()); 
+            projet.setName(newName);
+            //labelDetailNomProjet.setText(newName);
+            try {
+                projectDao.update(projet);
+                parentController.initScrollPaneProjects();
+            } catch (SQLException ex) {
+                Logger.getLogger(SceneProjectsDetailsController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        });
+    }
         
-
+    private void changeEstimatedDurationProject(){
+        labelEstimatedDuration.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            String newDuration = onlyNumbers(labelEstimatedDuration.getText());
+            projet.setEstimatedDurationMinutes(Integer.parseInt(newDuration));
+            labelEstimatedDuration.setText(newDuration);
+            try {
+                projectDao.update(projet);
+                parentController.initScrollPaneProjects();
+            } catch (SQLException ex) {
+                Logger.getLogger(SceneProjectsDetailsController.class.getName()).log(Level.SEVERE, null, ex);
+            }    
+        }
+        });          
+    }
+    
+    private void changeFinalDurationProject(){
+        labelFinalDuration.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            String newDuration = onlyNumbers(labelFinalDuration.getText());
+            projet.setFinalDuration(Integer.parseInt(newDuration));
+            labelFinalDuration.setText(newDuration);
+            try {
+                projectDao.update(projet);
+                parentController.initScrollPaneProjects();
+            } catch (SQLException ex) {
+                Logger.getLogger(SceneProjectsDetailsController.class.getName()).log(Level.SEVERE, null, ex);
+            }    
+        }
+        });          
+    }
+    
+    public void updateValuesDetailProject() {
+        labelNomProjet.setText(projet.getName());
+        labelDetailNomProjet.setText(projet.getName());
+        labelEstimatedDuration.setText(String.valueOf(projet.getEstimatedDurationMinutes()));
+        labelFinalDuration.setText(String.valueOf(projet.getFinalDuration()));
+        labelStatutProjet.setText(projet.getStatusString());
+        statusColor();
     }
     
     private String singleQuoteFixer(String chaine) {
         char c;
         String newChaine = "";
-        char singleQuote = ((char) 39);
-        
+        char singleQuote = ((char) 39);      
         for (int i=0; i<chaine.length(); i++) {
 
             c = chaine.charAt(i);
@@ -77,33 +143,16 @@ public class SceneProjectsDetailsController implements Initializable {
         return newChaine;
     }
     
-    private void changeNameProject(){
-        labelDetailNomProjet.textProperty().addListener(new ChangeListener<String>() {
-        @Override
-        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-            String newName = singleQuoteFixer(labelDetailNomProjet.getText()); 
-            projet.setName(newName);
-            //labelDetailNomProjet.setText(newName);
-            
-            try {
-                ProjectDao projectDAO = new ProjectDao();
-                projectDAO.update(projet);
-                parentController.initScrollPaneProjects();
-            } catch (ClassNotFoundException | SQLException ex) {
-                Logger.getLogger(SceneProjectsDetailsController.class.getName()).log(Level.SEVERE, null, ex);
+    private String onlyNumbers(String chaine) {
+        String newChaine = "";
+        char c;
+        for (int i=0; i<chaine.length(); i++) {
+            c = chaine.charAt(i);
+            if(Character.isDigit(chaine.charAt(i))){
+                newChaine += c;
             }
-            }
-        });
-    }
-    
-
-    public void updateValuesDetailProject() {
-        labelNomProjet.setText(projet.getName());
-        labelDetailNomProjet.setText(projet.getName());
-        labelEstimatedDuration.setText(String.valueOf(projet.getEstimatedDurationMinutes()));
-        labelFinalDuration.setText(String.valueOf(projet.getFinalDuration()));
-        labelStatutProjet.setText(projet.getStatusString());
-        statusColor();
+        }      
+        return newChaine;    
     }
     
     public void statusColor() {

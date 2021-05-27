@@ -30,7 +30,6 @@ import javafx.scene.layout.VBox;
 public class MyScrollPaneProject extends MyScrollPane{
     
     //private Project project;
-    private ArrayList<Project> listProject; // liste contenant les project récupérés depuis la dao
     private Project project;
     private SceneProjectsController parentController;
     
@@ -38,16 +37,12 @@ public class MyScrollPaneProject extends MyScrollPane{
         super(style, mainController);
         this.parentController = parentController;
         this.project = projetActif;
-        this.listProject = parentController.getListProject();
     }
     
     public MyScrollPane scrollPaneProject() {
         MyStyle style = new MyStyleOrange("Carlito");
-        //MyScrollPane scrollProject = new MyScrollPane(style, getMainController());
-        initScrollPaneProject();
-        
+        initScrollPaneProject();    
         return this;
-
     }
     
     public void initScrollPaneProject() {        
@@ -70,17 +65,10 @@ public class MyScrollPaneProject extends MyScrollPane{
         this.setContent(vboxLayout);
         this.setFitToWidth(true);
     }    
-    
-    public ArrayList<Project> getListProject(){
-        return this.listProject;     
-    }
-    
+ 
     public void setProject(Project p) {
         this.project = p;
     }
-    
-
-
     
     public MyRowBox generateMainRow(Project p) { 
         // Génération de la ligne du nom du technicien
