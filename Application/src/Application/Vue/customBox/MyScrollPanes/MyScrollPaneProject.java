@@ -34,31 +34,38 @@ public class MyScrollPaneProject extends MyScrollPane{
     private Project project;
     private SceneProjectsController parentController;
     
-    public MyScrollPaneProject(MyStyle style, SceneProjectsController parentController, MainController mainController) {
+    public MyScrollPaneProject(MyStyle style, SceneProjectsController parentController, MainController mainController, Project projetActif) {
         super(style, mainController);
         this.parentController = parentController;
+        this.project = projetActif;
+        this.listProject = parentController.getListProject();
     }
     
     public MyScrollPane scrollPaneProject() {
-        System.out.println("Affiche des projets");
         MyStyle style = new MyStyleOrange("Carlito");
         //MyScrollPane scrollProject = new MyScrollPane(style, getMainController());
         initScrollPaneProject();
+        
         return this;
 
     }
     
     public void initScrollPaneProject() {        
         VBox vboxLayout = new VBox(this.getScrollPaneStyle().getBoxSpacing());
-        for (int i = 0; i < listProject.size(); i++) {         
-            MyCustomBox boxProject = new MyCustomBoxProject(listProject.get(i), this.getScrollPaneStyle());       
-            parentController.setActionBoxProject(boxProject, listProject.get(i));//Evenement boite principale          
-            boxProject.addRowBoxListItem(this.generateMainRow(listProject.get(i))); //ajout de la bôite de titre
-            boxProject.addRowBoxListItem(this.generateItemBox(listProject.get(i))); //ajout de la boite d'item
+        for (int i = 0; i < parentController.getListProject().size(); i++) {         
+            MyCustomBox boxProject = new MyCustomBoxProject(parentController.getListProject().get(i), this.getScrollPaneStyle());       
+            parentController.setActionBoxProject(boxProject, parentController.getListProject().get(i));//Evenement boite principale          
+            boxProject.addRowBoxListItem(this.generateMainRow(parentController.getListProject().get(i))); //ajout de la bôite de titre
+            boxProject.addRowBoxListItem(this.generateItemBox(parentController.getListProject().get(i))); //ajout de la boite d'item
             boxProject.initBox();//initialisation de la boite principale
+            if(project != null && project.equals(parentController.getListProject().get(i))){
+                boxProject.openBox();
+            }
             this.getCustomBoxList().add(boxProject);//remplissage de la liste de customBox avec l'instance actuellement générée      
             MyCustomBox.setVgrow(boxProject, Priority.ALWAYS);
             vboxLayout.getChildren().add(boxProject);
+            
+
         }      
         this.setContent(vboxLayout);
         this.setFitToWidth(true);
@@ -72,11 +79,7 @@ public class MyScrollPaneProject extends MyScrollPane{
         this.project = p;
     }
     
-    public void setListProject() throws ClassNotFoundException, SQLException {
-        ProjectDao projectDAO = new ProjectDao();     
-        listProject = projectDAO.listAll();          
-        
-    }
+
 
     
     public MyRowBox generateMainRow(Project p) { 

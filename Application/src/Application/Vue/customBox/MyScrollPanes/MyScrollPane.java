@@ -28,7 +28,7 @@ public class MyScrollPane extends ScrollPane{
         this.setPadding(new Insets(10,10,10,10)); //top, right, bottom, left 
     }
   
-    public void findBox(MyCustomBox box) {
+    public void findBox() {
         for (int i = 0; i < this.listCustomBox.size(); i++) {
             this.listCustomBox.get(i).closeBox();
         }

@@ -5,9 +5,16 @@
  */
 package Application.Vue.projectsDetailsScene;
 
+import Application.Database.ProjectDao;
 import Application.Metier.Project;
+import Application.Vue.projectsScene.SceneProjectsController;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -21,6 +28,8 @@ public class SceneProjectsDetailsController implements Initializable {
     
     //ATTRIBUTS LOGIQUES
     private Project projet;
+    private SceneProjectsController parentController;
+    
     
     //ATTRIBUT FXML
     @FXML
@@ -33,17 +42,61 @@ public class SceneProjectsDetailsController implements Initializable {
     private Label labelStatutProjet;   
     @FXML
     private Label labelNomProjet;
+    
+    
+    public SceneProjectsDetailsController(Project p, SceneProjectsController parentController) {
+        this.projet = p;
+        this.parentController = parentController;
+    }
+       
         
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("SceneProjectsDetails");
         updateValuesDetailProject();
+        changeNameProject();
+        
+
     }
     
-    public SceneProjectsDetailsController(Project p) {
-        this.projet = p;
+    private String singleQuoteFixer(String chaine) {
+        char c;
+        String newChaine = "";
+        char singleQuote = ((char) 39);
+        
+        for (int i=0; i<chaine.length(); i++) {
+
+            c = chaine.charAt(i);
+            if(c == singleQuote) {
+                newChaine += singleQuote;
+                newChaine += singleQuote;
+            } else {
+                newChaine += chaine.charAt(i);
+            }
+        }
+        return newChaine;
     }
-       
+    
+    private void changeNameProject(){
+        labelDetailNomProjet.textProperty().addListener(new ChangeListener<String>() {
+        @Override
+        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            String newName = singleQuoteFixer(labelDetailNomProjet.getText()); 
+            projet.setName(newName);
+            //labelDetailNomProjet.setText(newName);
+            
+            try {
+                ProjectDao projectDAO = new ProjectDao();
+                projectDAO.update(projet);
+                parentController.initScrollPaneProjects();
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(SceneProjectsDetailsController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }
+        });
+    }
+    
+
     public void updateValuesDetailProject() {
         labelNomProjet.setText(projet.getName());
         labelDetailNomProjet.setText(projet.getName());

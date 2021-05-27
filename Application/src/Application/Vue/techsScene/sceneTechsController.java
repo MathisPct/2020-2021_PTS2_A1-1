@@ -127,7 +127,7 @@ public class sceneTechsController implements Initializable{
     public void setActionBoxTech(MyCustomBox boxTech, Tech tech) {
         boxTech.setOnMouseClicked((event) -> {
             System.out.println("Instance clicked");
-            SPtechs.findBox(boxTech);
+            SPtechs.findBox();
             boxTech.openBox();
             SPtechs.setTech(tech);
             try {

@@ -6,6 +6,7 @@
 package Application.Vue.projectsScene;
 
 
+import Application.Database.ProjectDao;
 import Application.Metier.Project;
 import Application.Vue.customBox.MyCustomBoxes.MyCustomBox;
 import Application.Vue.customBox.MyScrollPanes.MyScrollPaneProject;
@@ -18,6 +19,7 @@ import java.net.URL;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javafx.scene.image.ImageView;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -35,7 +37,9 @@ import javafx.scene.layout.VBox;
 public class SceneProjectsController implements Initializable {
     
     private MyScrollPaneProject SPprojects;
+    private ArrayList<Project> listProject;
     private MainController mainController;
+    private Project projetActif;
     
     @FXML
     private Label labelTotalProjects;
@@ -63,30 +67,44 @@ public class SceneProjectsController implements Initializable {
     public SceneProjectsController(MainController mainController) {
         this.mainController = mainController;
         this.SPprojects = null;
+        this.projetActif = null;
     }
   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        MyStyle style = new MyStyleOrange("Carlito");
-        System.out.println("SceneProjects");
-        this.SPprojects = new MyScrollPaneProject(style, this, mainController);
         try {
-            this.SPprojects.setListProject();
-            initFields();
-            containerProject.getChildren().add(this.SPprojects.scrollPaneProject());
-        } catch (ClassNotFoundException ex) {
+            setListProject();
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(SceneProjectsController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(SceneProjectsController.class.getName()).log(Level.SEVERE, null, ex);
-        }                
-    }  
+        }
+        initScrollPaneProjects();              
+    }
+
+    public ArrayList<Project> getListProject() {
+        return listProject;
+    }
+    
+    public void setListProject() throws ClassNotFoundException, SQLException {
+        ProjectDao projectDAO = new ProjectDao();     
+        listProject = projectDAO.listAll();                 
+    }
+    
+    public void initScrollPaneProjects(){
+        MyStyle style = new MyStyleOrange("Carlito");
+        containerProject.getChildren().clear();
+        this.SPprojects = new MyScrollPaneProject(style, this, mainController, projetActif);
+        initFields();
+        containerProject.getChildren().add(this.SPprojects.scrollPaneProject());
+        
+    }
        
     public void setActionBoxProject(MyCustomBox boxProject, Project p) {
         boxProject.setOnMouseClicked((event) -> {
-            System.out.println("Instance clicked");
-            SPprojects.findBox(boxProject);
-            boxProject.openBox();
+            this.projetActif = p;
             SPprojects.setProject(p);
+            SPprojects.findBox();
+            boxProject.openBox();       
+
             try {
                 this.paneDetailProject.getChildren().clear();
                 initDetailProject(p);
@@ -99,7 +117,7 @@ public class SceneProjectsController implements Initializable {
     
     public void initDetailProject(Project p) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Application/Vue/projectsDetailsScene/sceneProjectsDetails.fxml"));
-        SceneProjectsDetailsController controller = new SceneProjectsDetailsController(p);
+        SceneProjectsDetailsController controller = new SceneProjectsDetailsController(p,this);
         loader.setController(controller);
         VBox detailBox = loader.load();
         this.paneDetailProject.getChildren().add(detailBox);
