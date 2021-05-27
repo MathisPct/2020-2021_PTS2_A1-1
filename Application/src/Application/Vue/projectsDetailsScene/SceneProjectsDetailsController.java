@@ -6,6 +6,7 @@
 package Application.Vue.projectsDetailsScene;
 
 import Application.Database.ProjectDao;
+import Application.Database.UtilsDao;
 import Application.Metier.Project;
 import Application.Vue.projectsScene.SceneProjectsController;
 import java.net.URL;
@@ -70,7 +71,8 @@ public class SceneProjectsDetailsController implements Initializable {
         labelDetailNomProjet.textProperty().addListener(new ChangeListener<String>() {
         @Override
         public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-            String newName = singleQuoteFixer(labelDetailNomProjet.getText()); 
+            //String newName = singleQuoteFixer(labelDetailNomProjet.getText()); 
+            String newName = labelDetailNomProjet.getText();
             projet.setName(newName);
             //labelDetailNomProjet.setText(newName);
             try {
@@ -87,7 +89,7 @@ public class SceneProjectsDetailsController implements Initializable {
         labelEstimatedDuration.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-            String newDuration = onlyNumbers(labelEstimatedDuration.getText());
+            String newDuration = UtilsDao.onlyNumbers(labelEstimatedDuration.getText());
             projet.setEstimatedDurationMinutes(Integer.parseInt(newDuration));
             labelEstimatedDuration.setText(newDuration);
             try {
@@ -104,7 +106,7 @@ public class SceneProjectsDetailsController implements Initializable {
         labelFinalDuration.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-            String newDuration = onlyNumbers(labelFinalDuration.getText());
+            String newDuration = UtilsDao.onlyNumbers(labelFinalDuration.getText());
             projet.setFinalDuration(Integer.parseInt(newDuration));
             labelFinalDuration.setText(newDuration);
             try {
@@ -126,34 +128,7 @@ public class SceneProjectsDetailsController implements Initializable {
         statusColor();
     }
     
-    private String singleQuoteFixer(String chaine) {
-        char c;
-        String newChaine = "";
-        char singleQuote = ((char) 39);      
-        for (int i=0; i<chaine.length(); i++) {
 
-            c = chaine.charAt(i);
-            if(c == singleQuote) {
-                newChaine += singleQuote;
-                newChaine += singleQuote;
-            } else {
-                newChaine += chaine.charAt(i);
-            }
-        }
-        return newChaine;
-    }
-    
-    private String onlyNumbers(String chaine) {
-        String newChaine = "";
-        char c;
-        for (int i=0; i<chaine.length(); i++) {
-            c = chaine.charAt(i);
-            if(Character.isDigit(chaine.charAt(i))){
-                newChaine += c;
-            }
-        }      
-        return newChaine;    
-    }
     
     public void statusColor() {
         if (labelStatutProjet.getText() == "Terminé") {

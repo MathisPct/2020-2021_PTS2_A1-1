@@ -33,10 +33,9 @@ public class MyScrollPaneProject extends MyScrollPane{
     private Project project;
     private SceneProjectsController parentController;
     
-    public MyScrollPaneProject(MyStyle style, SceneProjectsController parentController, MainController mainController, Project projetActif) {
+    public MyScrollPaneProject(MyStyle style, SceneProjectsController parentController, MainController mainController) {
         super(style, mainController);
         this.parentController = parentController;
-        this.project = projetActif;
     }
     
     public MyScrollPane scrollPaneProject() {
@@ -53,21 +52,16 @@ public class MyScrollPaneProject extends MyScrollPane{
             boxProject.addRowBoxListItem(this.generateMainRow(parentController.getListProject().get(i))); //ajout de la bôite de titre
             boxProject.addRowBoxListItem(this.generateItemBox(parentController.getListProject().get(i))); //ajout de la boite d'item
             boxProject.initBox();//initialisation de la boite principale
-            if(project != null && project.equals(parentController.getListProject().get(i))){
+            if(parentController.getProjetActif() != null 
+            && parentController.getProjetActif().equals(parentController.getListProject().get(i))){
                 boxProject.openBox();
             }
             this.getCustomBoxList().add(boxProject);//remplissage de la liste de customBox avec l'instance actuellement générée      
             MyCustomBox.setVgrow(boxProject, Priority.ALWAYS);
             vboxLayout.getChildren().add(boxProject);
-            
-
         }      
         this.setContent(vboxLayout);
         this.setFitToWidth(true);
-    }    
- 
-    public void setProject(Project p) {
-        this.project = p;
     }
     
     public MyRowBox generateMainRow(Project p) { 

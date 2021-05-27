@@ -92,7 +92,7 @@ public class SceneProjectsController implements Initializable {
     public void initScrollPaneProjects(){
         MyStyle style = new MyStyleOrange("Carlito");
         containerProject.getChildren().clear();
-        this.SPprojects = new MyScrollPaneProject(style, this, mainController, projetActif);
+        this.SPprojects = new MyScrollPaneProject(style, this, mainController);
         initFields();
         containerProject.getChildren().add(this.SPprojects.scrollPaneProject());
         
@@ -101,7 +101,6 @@ public class SceneProjectsController implements Initializable {
     public void setActionBoxProject(MyCustomBox boxProject, Project p) {
         boxProject.setOnMouseClicked((event) -> {
             this.projetActif = p;
-            SPprojects.setProject(p);
             SPprojects.findBox();
             boxProject.openBox();       
 
@@ -137,5 +136,11 @@ public class SceneProjectsController implements Initializable {
     public void initFields() {
         int totalProjects = this.listProject.size();
         labelTotalProjects.setText(String.valueOf(totalProjects));
-    }    
+    }   
+
+    public Project getProjetActif() {
+        return projetActif;
+    }
+    
+    
 }

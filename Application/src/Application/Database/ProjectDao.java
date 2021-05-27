@@ -159,7 +159,7 @@ public class ProjectDao {
     public void update(Project p) throws SQLException {
         Statement stmt = con.createStatement();
         String qUpdate = "UPDATE projet SET"
-                + " nom = '"+p.getName()+"',"
+                + " nom = '"+UtilsDao.singleQuoteFixer(p.getName())+"',"
                 + " dureeEstimee = "+p.getEstimatedDurationMinutes()+","
                 + " dureeFinale = "+p.getFinalDuration()+","
                 + " statut = '"+Converter.projectStatusToString(p.getStatus())+"' "
