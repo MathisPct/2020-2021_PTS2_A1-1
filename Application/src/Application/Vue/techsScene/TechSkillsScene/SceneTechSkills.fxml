@@ -33,7 +33,7 @@
                </children>
             </HBox>
             <VBox fx:id="containerSkills" />
-            <JFXButton fx:id="addSkillButton" buttonType="RAISED" graphicTextGap="15.0" style="-fx-background-color: #BCBECE;" text="Ajouter une compétence" textFill="#3f4b6c" textOverrun="LEADING_WORD_ELLIPSIS" VBox.vgrow="NEVER">
+            <JFXButton fx:id="addSkillButton" buttonType="RAISED" graphicTextGap="15.0" onAction="#actionAddSkill" style="-fx-background-color: #BCBECE;" text="Ajouter une compétence" textFill="#3f4b6c" textOverrun="LEADING_WORD_ELLIPSIS" VBox.vgrow="NEVER">
                <font>
                   <Font size="18.0" />
                </font>

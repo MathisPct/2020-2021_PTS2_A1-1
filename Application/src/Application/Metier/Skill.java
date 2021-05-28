@@ -20,7 +20,9 @@ public class Skill {
      */
     public String getName() {
         String str = name;
-        String cap = str.substring(0, 1).toUpperCase() + str.substring(1);
+        String cap;
+        //cap = str.substring(0, 1).toUpperCase() + str.substring(1);
+        cap = str;
         return cap;
     }
 

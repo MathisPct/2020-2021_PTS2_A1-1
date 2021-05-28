@@ -7,22 +7,32 @@ package Application.Vue.techsScene.TechSkillsScene;
 
 import Application.Metier.Skill;
 import Application.Metier.Tech;
+import Application.Vue.Login.SceneLoginController;
 import Application.Vue.customBox.MyScrollPanes.MyScrollPaneSkills;
 import Application.Vue.customBox.MyStyles.MyStyle;
 import Application.Vue.customBox.MyStyles.MyStyleOrange;
 import Application.Vue.main.MainController;
+import Application.Vue.techsScene.TechSkillsScene.AddSkillScene.AddSkillWindow;
 import com.jfoenix.controls.JFXButton;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  *
@@ -46,6 +56,25 @@ public class SceneTechSkillsController implements Initializable {
     private Label GraphTechName;
     @FXML
     private AnchorPane containerTechGraph;
+    
+    @FXML
+    void actionAddSkill(ActionEvent event) {
+        try {
+            FXMLLoader FXMLLoader = new FXMLLoader(getClass().getResource("/Application/Vue/techsScene/TechSkillsScene/AddSkillScene/addSkillWindow.fxml"));
+            AddSkillWindow controller = new AddSkillWindow(tech);
+            FXMLLoader.setController(controller);
+            Parent root1 = (Parent) FXMLLoader.load();
+            Stage stage = new Stage();
+            //scene.getStylesheets().add("/Application/Vue/Style/General/general.css");
+            stage.setTitle("Choisissez une compétences");
+            stage.setScene(new Scene(root1));
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(SceneTechSkillsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    }
     
     public SceneTechSkillsController(Tech tech, MainController mainController){
         this.tech = tech;
