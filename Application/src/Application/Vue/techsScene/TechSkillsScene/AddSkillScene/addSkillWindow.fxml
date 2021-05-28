@@ -6,37 +6,31 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="305.0" prefWidth="297.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox>
+      <HBox prefHeight="36.0" prefWidth="297.0" styleClass="box-title-hbox" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <HBox styleClass="box-title-hbox">
-               <children>
-                  <Label prefHeight="33.0" styleClass="box-title" text="Ajouter une compétence" textFill="#3f4b6c">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                  </Label>
-               </children>
-            </HBox>
-            <AnchorPane maxHeight="200.0" minHeight="200.0">
-               <children>
-                  <JFXButton fx:id="btnEnregistrer" buttonType="RAISED" graphicTextGap="15.0" layoutX="64.0" layoutY="129.0" onAction="#actionAddSkill" prefHeight="39.0" prefWidth="137.0" style="-fx-background-color: #BCBECE;" text="Enregistrer" textFill="#3f4b6c" textOverrun="LEADING_WORD_ELLIPSIS">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </JFXButton>
-                  <ComboBox fx:id="boxListSkills" layoutX="15.0" layoutY="14.0" prefHeight="33.0" prefWidth="230.0" promptText="Liste des compétences" />
-               </children>
-            </AnchorPane>
+            <Label styleClass="box-title" text="Ajouter une compétence" textFill="#3f4b6c" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Label>
          </children>
-      </VBox>
+      </HBox>
+      <JFXButton fx:id="btnEnregistrer" buttonType="RAISED" graphicTextGap="15.0" layoutX="80.0" layoutY="239.0" onAction="#actionAddSkill" prefHeight="39.0" prefWidth="137.0" style="-fx-background-color: #BCBECE;" text="Enregistrer" textFill="#3f4b6c" textOverrun="LEADING_WORD_ELLIPSIS" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXButton>
+      <Label layoutX="30.0" layoutY="62.0" text="Choisissez une compétence" AnchorPane.leftAnchor="30.0" />
+      <ComboBox fx:id="boxListSkills" layoutX="30.0" layoutY="79.0" prefHeight="33.0" prefWidth="240.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="27.0" />
+      <Label layoutX="30.0" layoutY="136.0" text="Choisissez un niveau" AnchorPane.leftAnchor="30.0" />
+      <ComboBox fx:id="boxNiveau" layoutX="30.0" layoutY="153.0" prefHeight="33.0" prefWidth="240.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="27.0" />
    </children>
 </AnchorPane>

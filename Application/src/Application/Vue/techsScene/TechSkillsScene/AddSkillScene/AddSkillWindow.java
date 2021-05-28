@@ -35,10 +35,13 @@ public class AddSkillWindow implements Initializable {
     private JFXButton btnEnregistrer;
     @FXML
     private ComboBox<String> boxListSkills;
+    @FXML
+    private ComboBox<String> boxNiveau;
 
     @FXML
     void actionAddSkill(ActionEvent event) {
-
+        int idSkill = boxListSkills.getSelectionModel().getSelectedIndex();
+        String skillToAdd = boxListSkills.getItems().get(idSkill);
     }
     
     public AddSkillWindow(Tech tech){
@@ -49,14 +52,15 @@ public class AddSkillWindow implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             initData();
-            initComboBox();
+            initComboBoxSkills();
+            initComboBoxNiveau();
+            
         } catch (SQLException | ClassNotFoundException | DaoError ex) {
             Logger.getLogger(AddSkillWindow.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        }       
     }
 
-    private void initComboBox() throws SQLException, DaoError{
+    private void initComboBoxSkills() throws SQLException, DaoError{
         boxListSkills.getItems().clear();
         boxListSkills.getItems().addAll(dao.ListSkills()); 
         for (String skillFromDao : dao.ListSkills()) {  
@@ -69,11 +73,13 @@ public class AddSkillWindow implements Initializable {
             }
         }        
     }
+    private void initComboBoxNiveau(){
+        boxNiveau.getItems().addAll("simple", "intermediaire", "avancé");
+    }
     
 
     private void initData() throws SQLException, ClassNotFoundException, DaoError {
         this.dao = new UserDao();
-  
     }
 
 }
