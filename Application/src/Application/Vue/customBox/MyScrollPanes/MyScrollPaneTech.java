@@ -39,10 +39,11 @@ public class MyScrollPaneTech extends MyScrollPane {
         this.tech = null;
     }
     
-    public void scrollPaneTech() {
+    public MyScrollPaneTech scrollPaneTech() {
         System.out.println("SceneTechs");
         MyStyle style = new MyStyleOrange("Carlito");
         initScrollPaneTech();
+        return this;
     }
 
      /**
@@ -58,6 +59,10 @@ public class MyScrollPaneTech extends MyScrollPane {
             boxTech.addRowBoxListItem(generateMainTechRow(parentController.getListTechs().get(i))); //ajout de la bôite de titre
             boxTech.addRowBoxListItem(generateItemBoxTech(parentController.getListTechs().get(i))); //ajout de la boite d'item
             boxTech.initBox();//initialisation de la boite principale
+            if(parentController.getTechActif() != null 
+            && parentController.getTechActif().getID() == (parentController.getListTechs().get(i).getID())){
+                boxTech.openBox();
+            }
             this.getCustomBoxList().add(boxTech);//remplissage de la liste de customBox avec l'instance actuellement générée      
             MyCustomBox.setVgrow(boxTech, Priority.ALWAYS);
             vboxLayout.getChildren().add(boxTech);

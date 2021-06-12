@@ -71,12 +71,14 @@ public class sceneTechsController implements Initializable{
     private VBox containerGraph; 
     @FXML
     private PieChart chartSkills = new PieChart();
-
+    
+    private Tech techActif;
     
     public sceneTechsController(MainController mainController) {
         this.mainController = mainController;
         this.SPtechs = null;
         this.SPskills = null;
+        this.techActif = null;
         this.listTechs = new ArrayList<>(); 
         this.listSkills = new ArrayList<>();      
     }
@@ -84,23 +86,28 @@ public class sceneTechsController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            MyStyle style = new MyStyleOrange("Carlito");
-            this.SPtechs = new MyScrollPaneTech(style, this, this.mainController);
             initData();
             initComboBox();
         } catch (SQLException | ClassNotFoundException | DaoError ex) {
             Logger.getLogger(sceneTechsController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        initScrollPaneTechs();
+    }
+    
+    public void initScrollPaneTechs(){
+        MyStyle style = new MyStyleOrange("Carlito");
+        containerTech.getChildren().clear();
+        this.SPtechs = new MyScrollPaneTech(style, this, this.mainController);
         SPtechs.scrollPaneTech();
         containerTech.getChildren().add(SPtechs);
     }
-  
+    
     /**
      * Lance la recherche par skill lorsqu'un élément est choisi dans 
      * comboBoxSkills
      */
     @FXML
-    public void searchTechsSkill() throws SQLException, DaoError{
+    public void searchTechsSkill() throws SQLException, DaoError, IOException{
         String skillChoice = comboBoxSkills.getValue();
         //si tous les skills sont choisis
         if(comboBoxSkills.getSelectionModel().getSelectedIndex() == 0){
@@ -110,7 +117,7 @@ public class sceneTechsController implements Initializable{
         try{
             this.listTechs.clear();
             this.listTechs.addAll(dao.ListTechs(skillChoice));
-            SPtechs.scrollPaneTech();         
+            SPtechs.scrollPaneTech();  
         }catch(SQLException eSQL){
             UtilsIHM.afficherErreur(eSQL.getLocalizedMessage());
         }catch(DaoError eDao){
@@ -127,6 +134,7 @@ public class sceneTechsController implements Initializable{
     public void setActionBoxTech(MyCustomBox boxTech, Tech tech) {
         boxTech.setOnMouseClicked((event) -> {
             System.out.println("Instance clicked");
+            this.techActif = tech;
             SPtechs.findBox();
             boxTech.openBox();
             SPtechs.setTech(tech);
@@ -158,7 +166,7 @@ public class sceneTechsController implements Initializable{
      * @throws ClassNotFoundException
      * @autor Mathis Poncet
      */
-    private void initData() throws SQLException, ClassNotFoundException {
+    public void initData() throws SQLException, ClassNotFoundException {
         this.dao = new UserDao();
         this.listTechs = new ArrayList<>();
         try {
@@ -171,7 +179,7 @@ public class sceneTechsController implements Initializable{
     public void viewTechSkills() throws IOException{
         initSplitPaneContainer();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClass().getResource("/Application/Vue/techsScene/TechSkillsScene/SceneTechSkills.fxml"));
-        SceneTechSkillsController controller = new SceneTechSkillsController(SPtechs.getTech(), mainController);
+        SceneTechSkillsController controller = new SceneTechSkillsController(SPtechs.getTech(), mainController, this);
         fxmlLoader.setController(controller);
         this.splitPaneContainer.getItems().add(fxmlLoader.load());
     }
@@ -197,5 +205,9 @@ public class sceneTechsController implements Initializable{
      */
     public Label getLabelTotalTechs(){
         return this.totalTechs;
+    }
+
+    public Tech getTechActif() {
+        return techActif;
     }
 }

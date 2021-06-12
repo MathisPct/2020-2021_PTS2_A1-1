@@ -5,6 +5,7 @@
  */
 package Application.Vue.techsScene.TechSkillsScene;
 
+import Application.Database.DaoError;
 import Application.Metier.Skill;
 import Application.Metier.Tech;
 import Application.Vue.Login.SceneLoginController;
@@ -13,9 +14,11 @@ import Application.Vue.customBox.MyStyles.MyStyle;
 import Application.Vue.customBox.MyStyles.MyStyleOrange;
 import Application.Vue.main.MainController;
 import Application.Vue.techsScene.TechSkillsScene.AddSkillScene.AddSkillWindow;
+import Application.Vue.techsScene.sceneTechsController;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -44,7 +47,7 @@ public class SceneTechSkillsController implements Initializable {
     private ArrayList<Skill> listSkills;
     private MyScrollPaneSkills SPskills;
     private MainController mainController;
-    
+    private sceneTechsController techsController;
 
     @FXML
     private Label TechName;
@@ -57,29 +60,11 @@ public class SceneTechSkillsController implements Initializable {
     @FXML
     private AnchorPane containerTechGraph;
     
-    @FXML
-    void actionAddSkill(ActionEvent event) {
-        try {
-            FXMLLoader FXMLLoader = new FXMLLoader(getClass().getResource("/Application/Vue/techsScene/TechSkillsScene/AddSkillScene/addSkillWindow.fxml"));
-            AddSkillWindow controller = new AddSkillWindow(tech);
-            FXMLLoader.setController(controller);
-            Parent root1 = (Parent) FXMLLoader.load();
-            Stage stage = new Stage();
-            //scene.getStylesheets().add("/Application/Vue/Style/General/general.css");
-            stage.setTitle("Choisissez une compétences");
-            stage.setScene(new Scene(root1));
-            stage.setResizable(false);
-            stage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(SceneTechSkillsController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    
-    }
-    
-    public SceneTechSkillsController(Tech tech, MainController mainController){
+    public SceneTechSkillsController(Tech tech, MainController mainController, sceneTechsController techsController){
         this.tech = tech;
         this.listSkills = new ArrayList<>();
         this.SPskills = null;
+        this.techsController = techsController;
         this.mainController = mainController;
     }
 
@@ -88,7 +73,12 @@ public class SceneTechSkillsController implements Initializable {
         System.out.println("Initialize ScneTechSkills");
         System.out.println("Tech : " + tech.getFirstName());
         initFields();
+        initScrollPaneSkills();
+    }
+    
+    public void initScrollPaneSkills(){
         MyStyle style = new MyStyleOrange("Carlito");
+        containerSkills.getChildren().clear();
         SPskills = new MyScrollPaneSkills(style, tech, mainController);
         SPskills.scrollPaneSkill();
         containerSkills.getChildren().add(SPskills);      
@@ -123,7 +113,27 @@ public class SceneTechSkillsController implements Initializable {
     private void initChart(Tech tech){
     }
     
-        /**
+    @FXML
+    void actionAddSkill(ActionEvent event) throws SQLException, DaoError, ClassNotFoundException {
+        try {
+            FXMLLoader FXMLLoader = new FXMLLoader(getClass().getResource("/Application/Vue/techsScene/TechSkillsScene/AddSkillScene/addSkillWindow.fxml"));
+            AddSkillWindow controller = new AddSkillWindow(tech, techsController);
+            controller.setSkillsController(this);
+            FXMLLoader.setController(controller);
+            Parent root1 = (Parent) FXMLLoader.load();
+            Stage stage = new Stage();
+            //scene.getStylesheets().add("/Application/Vue/Style/General/general.css");
+            stage.setTitle("Choisissez une compétences");
+            stage.setScene(new Scene(root1));
+            stage.setResizable(false);
+            stage.show();
+            controller.setStage(stage);
+        } catch (IOException ex) {
+            Logger.getLogger(SceneTechSkillsController.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }
+    
+    /**
      * Genère les datas pour construire le graphique de skill technicien
      * @param tech
      * @return 

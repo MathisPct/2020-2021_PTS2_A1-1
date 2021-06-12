@@ -9,6 +9,7 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 
 import javax.swing.plaf.nimbus.State;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -201,5 +202,49 @@ public class UserDao {
             throw new DaoError("Aucunes compétences trouvées");
         }
         return competences;
+    }
+    
+    /**
+     * Permet d'ajouter un skill à un technicien dans la base de données
+     * @param tech à qui on ajoute le skill
+     * @param skill qu'on ajoute
+     * @throws SQLException si erreur avec la bdd
+     * @throws DaoError si erreur dans l'insertion du skill
+     */
+    public void ajoutSkill(Tech tech, Skill skill) throws SQLException, DaoError{
+        String insertSkill = "INSERT INTO possede (competenceID, technicienID, niveau) VALUES (?,?,?);";
+        try{
+            PreparedStatement pstmt = con.prepareStatement(insertSkill, Statement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1, recupIdSkill(skill));
+            pstmt.setInt(2, tech.getID());
+            pstmt.setString(3, skill.getLevel());
+            int nbAffecte = pstmt.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+            throw new DaoError("Erreur dans l'insertion du skill");
+        }
+    }
+    
+    /**
+     * Permet d'aller chercher l'id d'un skill dans la bdd
+     * @param skill dont on veut savoir l'id
+     * @return l'id du skill 
+     * @throws SQLException
+     * @throws DaoError 
+     */
+    private int recupIdSkill(Skill skill) throws SQLException, DaoError{
+        int id = 0;
+        String reqRecupId = "SELECT ID FROM competence WHERE competence.nom ='"+ skill.getName() + "';";
+        try{
+            Statement stmt = con.createStatement(); 
+            ResultSet rSet = stmt.executeQuery(reqRecupId);
+            while(rSet.next()){
+                id = rSet.getInt("ID");
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+            throw new DaoError("Impossible de récupérer l'id du skill dans la bdd");
+        }
+        return id;
     }
 }
