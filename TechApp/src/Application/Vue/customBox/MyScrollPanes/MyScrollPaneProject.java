@@ -5,7 +5,6 @@
  */
 package Application.Vue.customBox.MyScrollPanes;
 
-import Application.Database.ProjectDao;
 import Application.Metier.Project;
 import Application.Vue.customBox.MyButtons.MyButton;
 import Application.Vue.customBox.MyButtons.MyButtonProject;
@@ -18,7 +17,6 @@ import Application.Vue.customBox.MyStyles.MyStyle;
 import Application.Vue.customBox.MyStyles.MyStyleOrange;
 import Application.Vue.main.MainController;
 import Application.Vue.projectsScene.SceneProjectsController;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;

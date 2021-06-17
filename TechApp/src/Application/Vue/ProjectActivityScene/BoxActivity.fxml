@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox style="-fx-background-color: linear-gradient( to bottom, #FFE4CA, #FFD0AA);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox prefHeight="88.0" prefWidth="210.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label text="Résumé">
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </Label>
+                  <TextArea fx:id="tfResume" prefHeight="200.0" prefWidth="200.0" promptText="Ajouter un résumé">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                  </TextArea>
+               </children>
+            </VBox>
+            <GridPane HBox.hgrow="ALWAYS">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="385.0" minWidth="10.0" prefWidth="143.0" />
+                <ColumnConstraints hgrow="ALWAYS" maxWidth="259.0" minWidth="10.0" prefWidth="147.0" />
+                  <ColumnConstraints hgrow="ALWAYS" maxWidth="239.0" minWidth="10.0" prefWidth="205.0" />
+                  <ColumnConstraints hgrow="ALWAYS" maxWidth="212.0" minWidth="10.0" prefWidth="182.0" />
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Statut" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Label layoutX="44.0" layoutY="22.0" text="Type" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Label layoutX="147.0" layoutY="22.0" text="Date début" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <DatePicker fx:id="dpStart" prefHeight="25.0" prefWidth="212.0" promptText="Date de début" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </GridPane.margin>
+                  </DatePicker>
+                  <Label layoutX="230.0" layoutY="17.0" text="Date fin" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Label layoutX="339.0" layoutY="17.0" text="Durée Prévue" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <TextField fx:id="tfDuration" layoutX="303.0" layoutY="54.0" promptText="durée" GridPane.columnIndex="4" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <GridPane.margin>
+                        <Insets left="15.0" right="15.0" top="15.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <DatePicker fx:id="dpEnd" prefHeight="25.0" prefWidth="187.0" promptText="Date de fin" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </GridPane.margin>
+                  </DatePicker>
+                  <Label fx:id="lStatut" text="&lt;Statut&gt;" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <GridPane.margin>
+                        <Insets top="5.0" />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lType" layoutX="43.0" layoutY="59.0" text="&lt;Type&gt;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </GridPane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
