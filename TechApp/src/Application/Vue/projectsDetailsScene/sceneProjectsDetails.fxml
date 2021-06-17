@@ -106,7 +106,7 @@
                   </HBox>
                </children>
             </VBox>
-            <ComboBox prefHeight="36.0" prefWidth="119.0" promptText="minutes" HBox.hgrow="ALWAYS">
+            <ComboBox disable="true" prefHeight="36.0" prefWidth="119.0" promptText="minutes" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets right="20.0" />
                </HBox.margin>

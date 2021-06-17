@@ -97,6 +97,7 @@ public class sceneTechsController implements Initializable{
     
     public void initScrollPaneTechs(){
         MyStyle style = new MyStyleOrange("Carlito");
+        //containerGraph.getChildren().clear();
         containerTech.getChildren().clear();
         this.SPtechs = new MyScrollPaneTech(style, this, this.mainController);
         SPtechs.scrollPaneTech();

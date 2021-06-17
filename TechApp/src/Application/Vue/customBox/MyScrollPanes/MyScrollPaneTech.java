@@ -78,6 +78,7 @@ public class MyScrollPaneTech extends MyScrollPane {
         //Génération d'un Item Bouton
         MyButtonTech btn = new MyButtonTech("Voir détails", tech, this.getScrollPaneStyle());
         btn.addIconButton("CRAYON");
+        btn.setDisable(true);
         itemTechRow.addButtonToRowBox(btn);
         return itemTechRow;
     }
