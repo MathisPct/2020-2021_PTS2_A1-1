@@ -19,17 +19,17 @@
                   <Font name="Carlito" size="20.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" graphicTextGap="0.0" layoutX="10.0" layoutY="10.0" prefHeight="31.0" prefWidth="16.0" text="|" textFill="WHITE">
+            <Label alignment="CENTER" graphicTextGap="0.0" layoutX="10.0" layoutY="10.0" prefHeight="31.0" prefWidth="16.0" text="|" textFill="WHITE" visible="false">
                <font>
                   <Font name="Carlito" size="20.0" />
                </font>
             </Label>
-            <Label graphicTextGap="0.0" layoutX="191.0" layoutY="10.0" prefHeight="31.0" prefWidth="56.0" text="total : " textFill="WHITE">
+            <Label graphicTextGap="0.0" layoutX="191.0" layoutY="10.0" prefHeight="31.0" prefWidth="56.0" text="total : " textFill="WHITE" visible="false">
                <font>
                   <Font name="Carlito" size="20.0" />
                </font>
             </Label>
-            <Label graphicTextGap="0.0" layoutX="207.0" layoutY="10.0" prefHeight="31.0" prefWidth="51.0" text="5" textFill="WHITE">
+            <Label graphicTextGap="0.0" layoutX="207.0" layoutY="10.0" prefHeight="31.0" prefWidth="51.0" text="5" textFill="WHITE" visible="false">
                <font>
                   <Font name="Carlito" size="20.0" />
                </font>
@@ -50,7 +50,7 @@
                      </children>
                   </HBox>
                   <VBox fx:id="containerActivity" />
-                  <JFXButton buttonType="RAISED" graphicTextGap="15.0" style="-fx-background-color: #BCBECE;" text="Ajouter une activité" textFill="#3f4b6c" textOverrun="LEADING_WORD_ELLIPSIS" VBox.vgrow="NEVER">
+                  <JFXButton buttonType="RAISED" disable="true" graphicTextGap="15.0" style="-fx-background-color: #BCBECE;" text="Ajouter une activité" textFill="#3f4b6c" textOverrun="LEADING_WORD_ELLIPSIS" VBox.vgrow="NEVER">
                      <font>
                         <Font size="18.0" />
                      </font>

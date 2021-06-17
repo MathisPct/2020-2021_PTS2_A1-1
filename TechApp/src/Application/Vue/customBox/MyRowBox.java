@@ -150,32 +150,33 @@ public class MyRowBox extends HBox{
         hboxLevel.setAlignment(Pos.CENTER_LEFT);
         gridpane.add(hboxLevel, 1, 0);  // column=1 row=0
         
-        MyButtonSkill btn = new MyButtonSkill("Modifier", tech, skill, this.style);
-        btn.setButton();
-        btn.addIconButton("MODIFIER");
-        btn.setAlignment(Pos.CENTER);
-        btn.setStyle("-fx-background-color: " + this.style.getColorBaseBar());
-        GridPane.setMargin(btn, new Insets(5, 0, 5, 0));
-        GridPane.setHgrow(btn, Priority.ALWAYS);
-        gridpane.add(btn, 2, 0); // column=2 row=0
-        gridpane.setPadding(new Insets(3, 3, 3, 3));
+//        MyButtonSkill btn = new MyButtonSkill("Modifier", tech, skill, this.style);
+//        btn.setButton();
+//        btn.addIconButton("MODIFIER");
+//        btn.setAlignment(Pos.CENTER);
+//        btn.setStyle("-fx-background-color: " + this.style.getColorBaseBar());
+//        GridPane.setMargin(btn, new Insets(5, 0, 5, 0));
+//        GridPane.setHgrow(btn, Priority.ALWAYS);
+//        gridpane.add(btn, 2, 0); // column=2 row=0
+//        gridpane.setPadding(new Insets(3, 3, 3, 3));
+
         //gridpane.setHgap(25);
         //gridpane.setVgap(8);
         //gridpane.setGridLinesVisible( true );
         
         ColumnConstraints col1 = new ColumnConstraints();
         ColumnConstraints col2 = new ColumnConstraints();
-        ColumnConstraints col3 = new ColumnConstraints();
-        col1.setPrefWidth(800);     
-        col2.setPrefWidth(200);      
-        col3.setPrefWidth(200);
+//        ColumnConstraints col3 = new ColumnConstraints();
+        col1.setPrefWidth(500);     
+        col2.setPrefWidth(500);      
+//        col3.setPrefWidth(200);
         
         col1.setPercentWidth(50);     
-        col2.setPercentWidth(30);      
-        col3.setPercentWidth(20);
+        col2.setPercentWidth(50);      
+//        col3.setPercentWidth(20);
         col2.setHalignment(HPos.RIGHT);
-        col3.setHalignment(HPos.RIGHT);
-        gridpane.getColumnConstraints().addAll(col1, col2, col3);
+//        col3.setHalignment(HPos.RIGHT);
+        gridpane.getColumnConstraints().addAll(col1, col2);
 
         this.getChildren().addAll(this.boxBar, gridpane);
         this.setStyle("-fx-background-color: " + style.getColorBase());

@@ -136,6 +136,7 @@ public class SceneProjectsDetailsController implements Initializable {
             try {
                 projectDao.update(projet);
                 parentController.initScrollPaneProjects();
+                labelNomProjet.setText(projet.getName());
             } catch (SQLException ex) {
                 Logger.getLogger(SceneProjectsDetailsController.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -40,6 +40,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Path;
 import javafx.stage.Stage;
 
 /**
@@ -174,7 +175,7 @@ public class SceneTechSkillsController implements Initializable {
         NumberAxis yAxis = new NumberAxis();
         BarChart<String,Number> bc = 
             new BarChart<String,Number>(xAxis,yAxis);
-        bc.setTitle("Graphique des compétences");
+        //bc.setTitle("Graphique des compétences");
         xAxis.setLabel("Compétences");       
         yAxis.setLabel("Niveau");
  
@@ -196,7 +197,9 @@ public class SceneTechSkillsController implements Initializable {
             XYChart.Data xyChartData = new XYChart.Data(tech.GetSkills().get(i).getName(), (double)idNiveau*10);
             serie.getData().add(xyChartData);          
             bc.getData().add(serie);
-        } 
+        }
+//        bc.getXAxis().setTickLabelsVisible(false);
+        bc.getXAxis().setTickMarkVisible(false);
         bc.setLegendVisible(false);
         containerTechGraph.getChildren().add(bc);
 

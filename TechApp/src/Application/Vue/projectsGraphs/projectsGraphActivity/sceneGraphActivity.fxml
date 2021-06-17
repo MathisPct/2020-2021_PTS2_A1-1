@@ -15,7 +15,7 @@
    <children>
       <HBox styleClass="box-title-hbox" VBox.vgrow="NEVER">
          <children>
-            <Label styleClass="box-title" text="Graphique des activités |" textFill="#3f4b6c">
+            <Label styleClass="box-title" text="Graphique des activités" textFill="#3f4b6c">
                <font>
                   <Font size="18.0" />
                </font>
@@ -23,7 +23,7 @@
                   <Insets left="10.0" />
                </padding>
             </Label>
-            <Label fx:id="labelNomProjet" layoutX="10.0" layoutY="10.0" styleClass="box-title-value" text="&lt;nom du projet&gt;" textFill="#3f4b6c">
+            <Label fx:id="labelNomProjet" layoutX="10.0" layoutY="10.0" styleClass="box-title-value" text="&lt;nom du projet&gt;" textFill="#3f4b6c" visible="false">
                <font>
                   <Font size="18.0" />
                </font>

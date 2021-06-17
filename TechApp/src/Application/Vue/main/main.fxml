@@ -81,7 +81,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </JFXButton>
-                        <JFXButton fx:id="customers" alignment="BASELINE_LEFT" graphicTextGap="14.0" layoutX="10.0" layoutY="10.0" maxWidth="230.0" minWidth="100.0" onAction="#loadSceneCustomers" prefHeight="50.0" prefWidth="230.0" styleClass="menu-btn" text="Clients" textFill="WHITE" VBox.vgrow="NEVER">
+                        <JFXButton fx:id="customers" alignment="BASELINE_LEFT" disable="true" graphicTextGap="14.0" layoutX="10.0" layoutY="10.0" maxWidth="230.0" minWidth="100.0" onAction="#loadSceneCustomers" prefHeight="50.0" prefWidth="230.0" styleClass="menu-btn" text="Clients" textFill="WHITE" VBox.vgrow="NEVER">
                            <font>
                               <Font name="Carlito" size="21.0" />
                            </font>
