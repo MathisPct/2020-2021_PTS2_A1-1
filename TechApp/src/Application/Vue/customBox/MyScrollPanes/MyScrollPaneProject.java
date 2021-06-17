@@ -91,6 +91,9 @@ public class MyScrollPaneProject extends MyScrollPane{
     public ArrayList<MyPane> createItemList(Project p) {
         // Génération des Item de la boite
         String client = p.getClient();
+        if(client == null){
+            client = "non renseigné";
+        }
         String statut = p.getStatusString();
         String dateCommande = "00/00/0000";
         String totalActivite = String.valueOf(p.getActivities().size());

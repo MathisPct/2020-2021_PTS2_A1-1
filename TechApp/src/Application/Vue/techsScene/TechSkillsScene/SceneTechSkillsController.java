@@ -31,7 +31,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.Axis;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -74,6 +79,8 @@ public class SceneTechSkillsController implements Initializable {
         System.out.println("Tech : " + tech.getFirstName());
         initFields();
         initScrollPaneSkills();
+        //initChart(tech);
+        createBarChart();
     }
     
     public void initScrollPaneSkills(){
@@ -111,6 +118,8 @@ public class SceneTechSkillsController implements Initializable {
      * @param tech 
      */
     private void initChart(Tech tech){
+        
+        containerTechGraph.getChildren().add(new PieChart(createData(tech)));
     }
     
     @FXML
@@ -142,6 +151,7 @@ public class SceneTechSkillsController implements Initializable {
         ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();   
         int idNiveau = 0;
         for (int i = 0; i < tech.GetSkills().size(); i++) {
+            System.out.println("BOUCLE FOR");
             String niveau = tech.GetSkills().get(i).getLevel();
             idNiveau = 1;
             switch (niveau) {
@@ -157,6 +167,39 @@ public class SceneTechSkillsController implements Initializable {
             pieData.add(d);
         }          
         return pieData;     
+    }
+    
+    private void createBarChart(){
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
+        BarChart<String,Number> bc = 
+            new BarChart<String,Number>(xAxis,yAxis);
+        bc.setTitle("Graphique des compétences");
+        xAxis.setLabel("Compétences");       
+        yAxis.setLabel("Niveau");
+ 
+        int idNiveau = 0;
+        for (int i = 0; i < tech.GetSkills().size(); i++) {
+            //System.out.println("BOUCLE FOR");
+            String niveau = tech.GetSkills().get(i).getLevel();
+            System.out.println("NIVEAU: " + niveau);
+            idNiveau = 1;
+            switch (niveau) {
+                case "Simple" : idNiveau = 1; 
+                break;
+                case "Intermediaire" : idNiveau = 2;
+                break;
+                case "Avancé" : idNiveau = 3;
+                break;
+            }
+            XYChart.Series serie = new XYChart.Series();
+            XYChart.Data xyChartData = new XYChart.Data(tech.GetSkills().get(i).getName(), (double)idNiveau*10);
+            serie.getData().add(xyChartData);          
+            bc.getData().add(serie);
+        } 
+        bc.setLegendVisible(false);
+        containerTechGraph.getChildren().add(bc);
+
     }
     
 
