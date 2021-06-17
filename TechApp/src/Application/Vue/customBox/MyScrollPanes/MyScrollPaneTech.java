@@ -92,7 +92,7 @@ public class MyScrollPaneTech extends MyScrollPane {
         ArrayList<MyPane> itemBoxList = new ArrayList();         
         MyPane i1 = new MyPaneDuoVBox(this.getScrollPaneStyle(), "Compétences", totalSkills);
         MyPane i2 = new MyPaneDuoVBox(this.getScrollPaneStyle(), "Grade", grade);
-        MyPane i3 = new MyPaneDuoVBox(this.getScrollPaneStyle(), "cout", cout);
+        MyPane i3 = new MyPaneDuoVBox(this.getScrollPaneStyle(), "Coût", cout);
         itemBoxList.add(i1);
         itemBoxList.add(i2);
         itemBoxList.add(i3);

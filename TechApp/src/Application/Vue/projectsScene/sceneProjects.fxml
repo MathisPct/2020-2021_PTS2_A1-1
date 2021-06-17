@@ -49,17 +49,17 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <JFXCheckBox contentDisplay="RIGHT" prefHeight="33.0" prefWidth="148.0" text="En attente" textFill="#3f4b6c" unCheckedColor="#4d5394" HBox.hgrow="ALWAYS">
+                        <JFXCheckBox contentDisplay="RIGHT" prefHeight="33.0" prefWidth="148.0" text="En attente" textFill="#3f4b6c" unCheckedColor="#4d5394" visible="false" HBox.hgrow="ALWAYS">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </JFXCheckBox>
-                        <JFXCheckBox contentDisplay="RIGHT" layoutX="795.0" layoutY="10.0" prefHeight="33.0" prefWidth="144.0" text="En cours" textFill="#3f4b6c" unCheckedColor="#4d5394" HBox.hgrow="ALWAYS">
+                        <JFXCheckBox contentDisplay="RIGHT" layoutX="795.0" layoutY="10.0" prefHeight="33.0" prefWidth="144.0" text="En cours" textFill="#3f4b6c" unCheckedColor="#4d5394" visible="false" HBox.hgrow="ALWAYS">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </JFXCheckBox>
-                        <JFXCheckBox contentDisplay="RIGHT" layoutX="956.0" layoutY="10.0" prefHeight="33.0" prefWidth="137.0" text="Terminé" textFill="#3f4b6c" unCheckedColor="#4d5394" HBox.hgrow="ALWAYS">
+                        <JFXCheckBox contentDisplay="RIGHT" layoutX="956.0" layoutY="10.0" prefHeight="33.0" prefWidth="137.0" text="Terminé" textFill="#3f4b6c" unCheckedColor="#4d5394" visible="false" HBox.hgrow="ALWAYS">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -67,7 +67,7 @@
                      </children>
                   </HBox>
                   <VBox fx:id="containerProject" />
-                  <JFXButton buttonType="RAISED" graphicTextGap="15.0" style="-fx-background-color: #BCBECE;" text="Ajouter un projet" textFill="#3f4b6c" textOverrun="LEADING_WORD_ELLIPSIS" VBox.vgrow="NEVER">
+                  <JFXButton buttonType="RAISED" graphicTextGap="15.0" style="-fx-background-color: #BCBECE;" text="Ajouter un projet" textFill="#3f4b6c" textOverrun="LEADING_WORD_ELLIPSIS" visible="false" VBox.vgrow="NEVER">
                      <font>
                         <Font size="18.0" />
                      </font>

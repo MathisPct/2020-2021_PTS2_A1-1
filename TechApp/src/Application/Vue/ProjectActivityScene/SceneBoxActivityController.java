@@ -7,6 +7,7 @@ package Application.Vue.ProjectActivityScene;
 
 import Application.Metier.Activity;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.Month;
@@ -60,16 +61,11 @@ public class SceneBoxActivityController implements Initializable {
         if(activity.getType() != null) {
             lType.setText(activity.getType());
         }
-        if(activity.getStartDate()!= null) {
-            int year = activity.getStartDate().getYear();
-            int month = activity.getStartDate().getMonth();
-            int day = activity.getStartDate().getDay();
-            dpStart.setValue(LocalDate.of(year, month, day));
-            System.out.println("DATE: " + activity.getStartDate());
-        }
-
-
-        
+//        if(activity.getStartDate()!= null) {
+//            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
+//            String strDate = formatter.format(activity.getStartDate());  
+//            System.out.println("DATEeeeeeeeeeeeeeeeee :" + strDate);
+//        }  
     }
     
     private void valueIfEmpty(String string){       

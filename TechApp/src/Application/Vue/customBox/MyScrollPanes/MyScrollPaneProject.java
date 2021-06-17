@@ -90,7 +90,7 @@ public class MyScrollPaneProject extends MyScrollPane{
         
     public ArrayList<MyPane> createItemList(Project p) {
         // Génération des Item de la boite
-        String client = "<Client>";
+        String client = p.getClient();
         String statut = p.getStatusString();
         String dateCommande = "00/00/0000";
         String totalActivite = String.valueOf(p.getActivities().size());
@@ -101,7 +101,7 @@ public class MyScrollPaneProject extends MyScrollPane{
         MyPane i4 = new MyPaneDuoVBox(getScrollPaneStyle(), "Total Activités", totalActivite);
         itemBoxList.add(i1);
         itemBoxList.add(i2);
-        itemBoxList.add(i3);
+        //itemBoxList.add(i3);
         itemBoxList.add(i4);
         return itemBoxList;
     }      
