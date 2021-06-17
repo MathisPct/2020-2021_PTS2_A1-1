@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -73,7 +74,7 @@ public class sceneTechsController implements Initializable{
     private PieChart chartSkills = new PieChart();
     
     private Tech techActif;
-    
+
     public sceneTechsController(MainController mainController) {
         this.mainController = mainController;
         this.SPtechs = null;
@@ -103,12 +104,16 @@ public class sceneTechsController implements Initializable{
     }
     
     /**
-     * Lance la recherche par skill lorsqu'un élément est choisi dans 
-     * comboBoxSkills
+     * Lance la recherche par skill lorsque l'user clique sur le bouton
+     * d'application de la recherche
      */
     @FXML
-    public void searchTechsSkill() throws SQLException, DaoError, IOException{
-        String skillChoice = comboBoxSkills.getValue();
+    public void searchTechsSkill(ActionEvent event) throws SQLException, DaoError, IOException{
+        initSplitPaneContainer();
+        //réinitialisation des techniciens choisis
+        this.techActif = null;
+        this.SPtechs.setTech(null);
+        String skillChoice = comboBoxSkills.getSelectionModel().getSelectedItem();
         //si tous les skills sont choisis
         if(comboBoxSkills.getSelectionModel().getSelectedIndex() == 0){
             skillChoice = "";
@@ -117,12 +122,15 @@ public class sceneTechsController implements Initializable{
         try{
             this.listTechs.clear();
             this.listTechs.addAll(dao.ListTechs(skillChoice));
-            SPtechs.scrollPaneTech();  
+            SPtechs.scrollPaneTech();
         }catch(SQLException eSQL){
             UtilsIHM.afficherErreur(eSQL.getLocalizedMessage());
         }catch(DaoError eDao){
-            UtilsIHM.afficherErreur(eDao.getLocalizedMessage());
+            UtilsIHM.afficherErreur(eDao.getLocalizedMessage() + "\nVous allez être redirigé vers le choix de tous les techniciens");
             comboBoxSkills.getSelectionModel().select(0);
+            this.listTechs.clear();
+            this.listTechs.addAll(dao.ListTechs(""));
+            SPtechs.scrollPaneTech();
         }
     }
       

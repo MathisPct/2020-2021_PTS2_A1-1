@@ -107,7 +107,6 @@ public class AddSkillWindow implements Initializable {
             this.dao.ajoutSkill(this.tech, skill); //on ajoute à la bdd
             this.tech.AddSkill(skill); //on ajoute au modèle
             //refresh de la page
-            techsController.initData();
             techsController.initScrollPaneTechs();
             this.skillsController.initScrollPaneSkills();
             stage.close();

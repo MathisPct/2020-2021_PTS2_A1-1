@@ -56,11 +56,12 @@
                            </HBox.margin>
                         </Label>
                         <AnchorPane HBox.hgrow="ALWAYS" />
-                        <ComboBox fx:id="comboBoxSkills" onAction="#searchTechsSkill" promptText="filtre par compétences" HBox.hgrow="NEVER">
+                        <ComboBox fx:id="comboBoxSkills" promptText="filtre par compétences" HBox.hgrow="NEVER">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
                         </ComboBox>
+                        <JFXButton onAction="#searchTechsSkill" style="-fx-background-color: #343E4C;" text="Appliquer" textFill="WHITE" />
                      </children>
                   </HBox>
                   <VBox fx:id="containerTech" />
