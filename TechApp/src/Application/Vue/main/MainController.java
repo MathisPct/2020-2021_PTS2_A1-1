@@ -13,6 +13,7 @@ import Application.Metier.Project;
 import Application.Metier.User;
 import Application.Vue.Login.SceneLoginController;
 import Application.Vue.ProjectActivityScene.SceneProjectActivityController;
+import Application.Vue.ProjectMaterial.SceneProjectMaterialController;
 import Application.Vue.UtilsIHM;
 import Application.Vue.profilScene.SceneProfileController;
 import Application.Vue.projectsScene.SceneProjectsController;
@@ -206,6 +207,19 @@ public class MainController implements Initializable {
             SceneProjectActivityController controller = new SceneProjectActivityController(this, projet);
             fxmlLoader.setController(controller);
             container.setCenter(fxmlLoader.load());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    @FXML
+    public void projectMaterial(Project projet) throws IOException{
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Application/Vue/ProjectMaterial/SceneProjectMaterial.fxml"));            
+            SceneProjectMaterialController controller = new SceneProjectMaterialController(this, projet);
+            fxmlLoader.setController(controller);
+            container.setCenter(fxmlLoader.load());
+            System.out.println("PRojectMaterial OK");
         } catch (IOException e) {
             e.printStackTrace();
         }

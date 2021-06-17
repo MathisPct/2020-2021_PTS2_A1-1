@@ -43,6 +43,14 @@ public class Material {
     public Date getDeliveryDate() {
         return DeliveryDate;
     }
+
+    public MaterialType getType() {
+        return type;
+    }
+
+    public Date getOrderDate() {
+        return OrderDate;
+    }
     
     
     

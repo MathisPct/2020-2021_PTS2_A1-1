@@ -184,4 +184,10 @@ public class Project {
     public void cancel(){
         this.status = ProjectStatus.CANCELED;
     }
+
+    public ArrayList<Material> getMaterials() {
+        return materials;
+    }
+    
+    
 }

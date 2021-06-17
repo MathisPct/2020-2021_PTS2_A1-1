@@ -48,7 +48,7 @@ public class MyButtonProject extends MyButton{
                 case "MATERIEL" : 
                                
                     try {
-                        mainController.projectActivities(this.project);
+                        mainController.projectMaterial(this.project);
                         System.out.println("[OPEN MATERIEL: " + this.project.getName() + "]");
                     } catch (IOException ex) {
                         Logger.getLogger(MyButtonProject.class.getName()).log(Level.SEVERE, null, ex);
