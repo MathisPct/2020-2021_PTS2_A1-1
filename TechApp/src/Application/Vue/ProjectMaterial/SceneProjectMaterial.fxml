@@ -19,7 +19,7 @@
                   <Font name="Carlito" size="20.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" graphicTextGap="0.0" layoutX="10.0" layoutY="10.0" prefHeight="31.0" prefWidth="16.0" text="|" textFill="WHITE">
+            <Label alignment="CENTER" graphicTextGap="0.0" layoutX="10.0" layoutY="10.0" prefHeight="31.0" prefWidth="16.0" text="|" textFill="WHITE" visible="false">
                <font>
                   <Font name="Carlito" size="20.0" />
                </font>
