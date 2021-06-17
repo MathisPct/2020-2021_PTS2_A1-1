@@ -41,6 +41,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Path;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
@@ -85,11 +86,13 @@ public class SceneTechSkillsController implements Initializable {
     }
     
     public void initScrollPaneSkills(){
+        containerTechGraph.getChildren().clear();
         MyStyle style = new MyStyleOrange("Carlito");
         containerSkills.getChildren().clear();
         SPskills = new MyScrollPaneSkills(style, tech, mainController);
         SPskills.scrollPaneSkill();
-        containerSkills.getChildren().add(SPskills);      
+        containerSkills.getChildren().add(SPskills);
+        createBarChart();
     }
     
     /**
@@ -137,7 +140,7 @@ public class SceneTechSkillsController implements Initializable {
             stage.setScene(new Scene(root1));
             stage.setResizable(false);
             stage.show();
-            controller.setStage(stage);
+            controller.setStage(stage);           
         } catch (IOException ex) {
             Logger.getLogger(SceneTechSkillsController.class.getName()).log(Level.SEVERE, null, ex);
         } 
@@ -171,19 +174,19 @@ public class SceneTechSkillsController implements Initializable {
     }
     
     private void createBarChart(){
-        CategoryAxis xAxis = new CategoryAxis();
-        NumberAxis yAxis = new NumberAxis();
-        BarChart<String,Number> bc = 
+        final CategoryAxis xAxis = new CategoryAxis();
+        final NumberAxis yAxis = new NumberAxis();
+        final BarChart<String,Number> bc = 
             new BarChart<String,Number>(xAxis,yAxis);
-        //bc.setTitle("Graphique des compétences");
-        xAxis.setLabel("Compétences");       
+        //xAxis.setLabel("Compétences");   
+        bc.setVerticalGridLinesVisible(false);
+        bc.setHorizontalGridLinesVisible(false);
+        xAxis.tickLabelFontProperty().set(Font.font(15));
         yAxis.setLabel("Niveau");
  
         int idNiveau = 0;
         for (int i = 0; i < tech.GetSkills().size(); i++) {
-            //System.out.println("BOUCLE FOR");
             String niveau = tech.GetSkills().get(i).getLevel();
-            System.out.println("NIVEAU: " + niveau);
             idNiveau = 1;
             switch (niveau) {
                 case "Simple" : idNiveau = 1; 
@@ -194,16 +197,19 @@ public class SceneTechSkillsController implements Initializable {
                 break;
             }
             XYChart.Series serie = new XYChart.Series();
-            XYChart.Data xyChartData = new XYChart.Data(tech.GetSkills().get(i).getName(), (double)idNiveau*10);
+            XYChart.Data xyChartData = new XYChart.Data(tech.GetSkills().get(i).getName(), (double)idNiveau);
             serie.getData().add(xyChartData);          
             bc.getData().add(serie);
         }
-//        bc.getXAxis().setTickLabelsVisible(false);
-        bc.getXAxis().setTickMarkVisible(false);
+        bc.getYAxis().setTickLabelsVisible(false);
+        bc.getYAxis().setTickMarkVisible(false);
+        
+        bc.setMaxHeight(300);
         bc.setLegendVisible(false);
         containerTechGraph.getChildren().add(bc);
-
     }
+    
+    
     
 
     
