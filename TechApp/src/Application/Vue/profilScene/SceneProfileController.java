@@ -20,9 +20,6 @@ import javafx.scene.control.TextField;
 import Application.Vue.UtilsIHM;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import java.io.IOException;
-import javafx.scene.control.PasswordField;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 
 /**
  *
@@ -59,14 +56,7 @@ public class SceneProfileController implements Initializable {
      * Attribut chaine de caractère qui correspond au label "Mot de passe (2)" dans la scène
      */
     @FXML
-    private PasswordField passwordVerifLabel;
-    
-    
-    @FXML
-    private PasswordField unvisiblePasswordLabel;
-    
-    @FXML
-    private ImageView visibilityIcon;
+    private TextField passwordVerifLabel;
     
 
     private UserDao dao;
@@ -82,22 +72,6 @@ public class SceneProfileController implements Initializable {
      * de celui-ci
      */
     private MainController mainController;
-    
-    @FXML
-    void checkVisibility(MouseEvent event) {
-        System.out.println("VISIBILITY CLICKED");
-        if(!passwordLabel.isVisible()) {
-            passwordLabel.setText(unvisiblePasswordLabel.getText());
-            passwordLabel.setVisible(true);
-            unvisiblePasswordLabel.setVisible(false);
-            visibilityIcon.setVisible(false);
-        } else {
-            unvisiblePasswordLabel.setText(passwordLabel.getText());
-            unvisiblePasswordLabel.setVisible(true);
-            passwordLabel.setVisible(false);
-            visibilityIcon.setVisible(true);
-        }   
-    }
     
     public SceneProfileController(User user, MainController mainController) throws ClassNotFoundException, SQLException{
         this.userConnected = user;
